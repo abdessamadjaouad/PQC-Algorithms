@@ -1,0 +1,15 @@
+https://arxiv.org/abs/1801.00862
+https://arxiv.org/abs/2509.13348
+https://cims.nyu.edu/~regev/papers/lwesurvey.pdf
+https://cims.nyu.edu/~regev/papers/qcrypto.pdf
+https://csrc.nist.gov/Projects/migration-to-post-quantum-cryptography-nccoe
+https://csrc.nist.gov/projects/post-quantum-cryptography
+https://csrc.nist.gov/Projects/post-quantum-cryptography/faqs
+https://csrc.nist.gov/projects/post-quantum-cryptography/pqc-standardization/selected-algorithms
+https://csrc.nist.gov/projects/post-quantum-cryptography/pqc-standards
+https://csrc.nist.gov/pubs/ir/8413/upd1/final
+https://csrc.nist.gov/pubs/ir/8545/final
+https://falcon-sign.info
+https://pq-crystals.org/dilithium
+https://pq-crystals.org/kyber
+https://web.eecs.umich.edu/~cpeikert/pubs/lattice-survey.pdf
