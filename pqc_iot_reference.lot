@@ -1,0 +1,138 @@
+\babel@toc {english}{}\relax 
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {1.1}{\ignorespaces Complexity comparison: Classical vs. Quantum algorithms}}{19}{table.caption.7}%
+\contentsline {table}{\numberline {1.2}{\ignorespaces IoT device categories and their characteristics}}{21}{table.caption.9}%
+\contentsline {table}{\numberline {1.3}{\ignorespaces Comparison of post-quantum cryptography families}}{23}{table.caption.16}%
+\contentsline {table}{\numberline {1.4}{\ignorespaces NIST PQC Standardization timeline}}{24}{table.caption.17}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {2.1}{\ignorespaces Complexity comparison of polynomial multiplication methods}}{29}{table.caption.18}%
+\contentsline {table}{\numberline {2.2}{\ignorespaces LWE parameters in NIST standards}}{34}{table.caption.24}%
+\contentsline {table}{\numberline {2.3}{\ignorespaces Comparison of lattice reduction algorithms}}{36}{table.caption.25}%
+\contentsline {table}{\numberline {2.4}{\ignorespaces Estimated security levels for NIST PQC standards}}{36}{table.caption.26}%
+\contentsline {table}{\numberline {2.5}{\ignorespaces Hash functions used in NIST PQC standards}}{37}{table.caption.27}%
+\contentsline {table}{\numberline {2.6}{\ignorespaces Keccak/SHA-3 performance on ARM Cortex-M4 (cycles per byte)}}{37}{table.caption.28}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {3.1}{\ignorespaces ML-KEM parameter sets (FIPS 203)}}{41}{table.caption.31}%
+\contentsline {table}{\numberline {3.2}{\ignorespaces ML-KEM security estimates (Core-SVP model)}}{45}{table.caption.35}%
+\contentsline {table}{\numberline {3.3}{\ignorespaces ML-KEM-768 memory requirements}}{46}{table.caption.39}%
+\contentsline {table}{\numberline {3.4}{\ignorespaces Implementation variants and their tradeoffs}}{47}{table.caption.42}%
+\contentsline {table}{\numberline {3.5}{\ignorespaces ML-KEM performance on ARM Cortex-M4 (cycles)}}{48}{table.caption.43}%
+\contentsline {table}{\numberline {3.6}{\ignorespaces ML-KEM stack usage on ARM Cortex-M4 (bytes)}}{48}{table.caption.44}%
+\contentsline {table}{\numberline {3.7}{\ignorespaces ML-KEM vs. classical algorithms on Cortex-M4}}{48}{table.caption.45}%
+\contentsline {table}{\numberline {3.8}{\ignorespaces ML-KEM performance on x86-64 with AVX2 (cycles)}}{49}{table.caption.46}%
+\contentsline {table}{\numberline {3.9}{\ignorespaces Percentage of cycles spent in SHA-3/SHAKE (Cortex-M4)}}{49}{table.caption.47}%
+\contentsline {table}{\numberline {3.10}{\ignorespaces Hybrid scheme sizes}}{53}{table.caption.48}%
+\contentsline {table}{\numberline {3.11}{\ignorespaces ML-KEM suitability by IoT device class}}{53}{table.caption.49}%
+\contentsline {table}{\numberline {3.12}{\ignorespaces Transmission time comparison (LoRaWAN SF7, 125 kHz)}}{54}{table.caption.50}%
+\contentsline {table}{\numberline {3.13}{\ignorespaces Estimated energy consumption on Cortex-M4 @ 3.3V, 80 MHz}}{54}{table.caption.51}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {4.1}{\ignorespaces NIST post-quantum signature schemes comparison}}{56}{table.caption.53}%
+\contentsline {table}{\numberline {4.2}{\ignorespaces ML-DSA parameter sets (FIPS 204)}}{57}{table.caption.55}%
+\contentsline {table}{\numberline {4.3}{\ignorespaces ML-DSA performance on ARM Cortex-M4 (cycles)}}{60}{table.caption.59}%
+\contentsline {table}{\numberline {4.4}{\ignorespaces ML-DSA stack usage on ARM Cortex-M4 (bytes)}}{60}{table.caption.60}%
+\contentsline {table}{\numberline {4.5}{\ignorespaces Selected SLH-DSA parameter sets (FIPS 205)}}{62}{table.caption.63}%
+\contentsline {table}{\numberline {4.6}{\ignorespaces SLH-DSA performance on ARM Cortex-M4 (cycles, millions)}}{63}{table.caption.67}%
+\contentsline {table}{\numberline {4.7}{\ignorespaces SLH-DSA vs. ML-DSA: Size and speed tradeoffs (Level 1)}}{63}{table.caption.68}%
+\contentsline {table}{\numberline {4.8}{\ignorespaces Falcon parameter sets}}{64}{table.caption.69}%
+\contentsline {table}{\numberline {4.9}{\ignorespaces Falcon performance on ARM Cortex-M4 (cycles)}}{65}{table.caption.73}%
+\contentsline {table}{\numberline {4.10}{\ignorespaces Falcon RAM requirements}}{65}{table.caption.74}%
+\contentsline {table}{\numberline {4.11}{\ignorespaces Falcon vs. ML-DSA comparison}}{65}{table.caption.75}%
+\contentsline {table}{\numberline {4.12}{\ignorespaces Complete size comparison of PQ signature schemes}}{66}{table.caption.76}%
+\contentsline {table}{\numberline {4.13}{\ignorespaces Signature scheme performance summary (Cortex-M4, Level 1)}}{67}{table.caption.78}%
+\contentsline {table}{\numberline {4.14}{\ignorespaces Signature scheme selection by use case}}{67}{table.caption.79}%
+\contentsline {table}{\numberline {4.15}{\ignorespaces Deterministic vs. randomized signing}}{70}{table.caption.80}%
+\contentsline {table}{\numberline {4.16}{\ignorespaces Side-channel vulnerability by scheme}}{71}{table.caption.81}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {5.1}{\ignorespaces HQC parameter sets}}{73}{table.caption.84}%
+\contentsline {table}{\numberline {5.2}{\ignorespaces HQC performance on Intel Core i7-11850H (AVX2)}}{73}{table.caption.86}%
+\contentsline {table}{\numberline {5.3}{\ignorespaces HQC vs. ML-KEM comparison (Level 1)}}{74}{table.caption.88}%
+\contentsline {table}{\numberline {5.4}{\ignorespaces BIKE parameter sets}}{74}{table.caption.91}%
+\contentsline {table}{\numberline {5.5}{\ignorespaces BIKE decoding failure rates}}{75}{table.caption.93}%
+\contentsline {table}{\numberline {5.6}{\ignorespaces Classic McEliece parameter sets}}{75}{table.caption.96}%
+\contentsline {table}{\numberline {5.7}{\ignorespaces Code-based schemes comparison (Level 1)}}{76}{table.caption.98}%
+\contentsline {table}{\numberline {5.8}{\ignorespaces SIKE parameters (before break)}}{77}{table.caption.100}%
+\contentsline {table}{\numberline {5.9}{\ignorespaces Rainbow parameters (before break)}}{78}{table.caption.103}%
+\contentsline {table}{\numberline {5.10}{\ignorespaces Multivariate schemes IoT assessment}}{79}{table.caption.105}%
+\contentsline {table}{\numberline {5.11}{\ignorespaces LMS parameter examples}}{79}{table.caption.108}%
+\contentsline {table}{\numberline {5.12}{\ignorespaces XMSS vs. LMS comparison}}{80}{table.caption.110}%
+\contentsline {table}{\numberline {5.13}{\ignorespaces State management strategies for IoT}}{81}{table.caption.112}%
+\contentsline {table}{\numberline {5.14}{\ignorespaces Stateful (LMS) vs. Stateless (SLH-DSA) signatures}}{81}{table.caption.113}%
+\contentsline {table}{\numberline {5.15}{\ignorespaces Hybrid schemes in deployment}}{82}{table.caption.114}%
+\contentsline {table}{\numberline {5.16}{\ignorespaces PQC algorithm families comparison}}{83}{table.caption.115}%
+\contentsline {table}{\numberline {5.17}{\ignorespaces Scheme suitability by IoT device class}}{84}{table.caption.116}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {6.1}{\ignorespaces Common IoT processor families}}{86}{table.caption.117}%
+\contentsline {table}{\numberline {6.2}{\ignorespaces ARM Cortex-M feature comparison for cryptography}}{87}{table.caption.118}%
+\contentsline {table}{\numberline {6.3}{\ignorespaces Typical memory organization in IoT MCUs}}{88}{table.caption.120}%
+\contentsline {table}{\numberline {6.4}{\ignorespaces Detailed stack usage on ARM Cortex-M4 (bytes)}}{89}{table.caption.122}%
+\contentsline {table}{\numberline {6.5}{\ignorespaces Code size (.text section) on ARM Cortex-M4 (bytes)}}{91}{table.caption.125}%
+\contentsline {table}{\numberline {6.6}{\ignorespaces SHA-3 Keccak-f[1600] performance on various platforms}}{94}{table.caption.130}%
+\contentsline {table}{\numberline {6.7}{\ignorespaces Power analysis countermeasures}}{98}{table.caption.137}%
+\contentsline {table}{\numberline {6.8}{\ignorespaces Hardware crypto support in popular IoT MCUs}}{100}{table.caption.139}%
+\contentsline {table}{\numberline {6.9}{\ignorespaces PQC on FPGA: Performance examples}}{101}{table.caption.141}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {7.1}{\ignorespaces Major PQC libraries comparison}}{108}{table.caption.142}%
+\contentsline {table}{\numberline {7.2}{\ignorespaces pqm4 supported development boards}}{116}{table.caption.143}%
+\contentsline {table}{\numberline {7.3}{\ignorespaces pqm4 implementation variants}}{117}{table.caption.144}%
+\contentsline {table}{\numberline {7.4}{\ignorespaces Complete pqm4 benchmarks (STM32L4R5ZI @ 80 MHz)}}{117}{table.caption.145}%
+\contentsline {table}{\numberline {7.5}{\ignorespaces wolfSSL PQC support}}{119}{table.caption.146}%
+\contentsline {table}{\numberline {7.6}{\ignorespaces PQC testing and analysis tools}}{125}{table.caption.147}%
+\contentsline {table}{\numberline {7.7}{\ignorespaces Side-channel analysis tools}}{125}{table.caption.148}%
+\contentsline {table}{\numberline {7.8}{\ignorespaces Formal verification for cryptography}}{125}{table.caption.149}%
+\contentsline {table}{\numberline {7.9}{\ignorespaces Library selection by use case}}{126}{table.caption.150}%
+\contentsline {table}{\numberline {7.10}{\ignorespaces Recommended libraries by platform}}{126}{table.caption.151}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {8.1}{\ignorespaces TLS named groups for PQC (draft registrations)}}{129}{table.caption.155}%
+\contentsline {table}{\numberline {8.2}{\ignorespaces Certificate chain size comparison}}{130}{table.caption.157}%
+\contentsline {table}{\numberline {8.3}{\ignorespaces TLS 1.3 handshake size comparison}}{131}{table.caption.159}%
+\contentsline {table}{\numberline {8.4}{\ignorespaces TLS 1.3 handshake time on ARM Cortex-M4 @ 80 MHz}}{131}{table.caption.160}%
+\contentsline {table}{\numberline {8.5}{\ignorespaces DTLS vs TLS comparison for IoT}}{134}{table.caption.161}%
+\contentsline {table}{\numberline {8.6}{\ignorespaces DTLS fragmentation impact}}{134}{table.caption.162}%
+\contentsline {table}{\numberline {8.7}{\ignorespaces MQTT vs MQTT-SN for PQC}}{137}{table.caption.164}%
+\contentsline {table}{\numberline {8.8}{\ignorespaces CoAP security modes}}{138}{table.caption.165}%
+\contentsline {table}{\numberline {8.9}{\ignorespaces EDHOC vs DTLS handshake comparison}}{139}{table.caption.166}%
+\contentsline {table}{\numberline {8.10}{\ignorespaces Matter security layers}}{140}{table.caption.167}%
+\contentsline {table}{\numberline {8.11}{\ignorespaces LoRaWAN data rate limitations}}{142}{table.caption.168}%
+\contentsline {table}{\numberline {8.12}{\ignorespaces Thread security with PQC considerations}}{144}{table.caption.172}%
+\contentsline {table}{\numberline {8.13}{\ignorespaces Recommended PQC protocol migration phases}}{145}{table.caption.173}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {9.1}{\ignorespaces STRIDE-PQ: Extended Threat Model for Post-Quantum IoT}}{148}{table.caption.174}%
+\contentsline {table}{\numberline {9.2}{\ignorespaces Threat Actor Capabilities for PQC-IoT Attacks}}{151}{table.caption.176}%
+\contentsline {table}{\numberline {9.3}{\ignorespaces ML-KEM Side-Channel Vulnerability Assessment}}{152}{table.caption.178}%
+\contentsline {table}{\numberline {9.4}{\ignorespaces Falcon Floating-Point Side-Channel Risks}}{156}{table.caption.181}%
+\contentsline {table}{\numberline {9.5}{\ignorespaces NIST Security Levels and Equivalent Strength}}{166}{table.caption.184}%
+\contentsline {table}{\numberline {9.6}{\ignorespaces Recommended Security Levels by IoT Application}}{166}{table.caption.185}%
+\contentsline {table}{\numberline {9.7}{\ignorespaces Parameter Selection Philosophy Comparison}}{174}{table.caption.186}%
+\contentsline {table}{\numberline {9.8}{\ignorespaces Key Storage Options for IoT Devices}}{179}{table.caption.188}%
+\contentsline {table}{\numberline {9.9}{\ignorespaces Key Distribution Methods for PQC IoT}}{188}{table.caption.189}%
+\contentsline {table}{\numberline {9.10}{\ignorespaces PQC Signature Algorithms for Secure Boot}}{189}{table.caption.191}%
+\contentsline {table}{\numberline {9.11}{\ignorespaces Secure Boot Time Breakdown (Cortex-M4 @ 168 MHz)}}{197}{table.caption.192}%
+\contentsline {table}{\numberline {9.12}{\ignorespaces Update Overhead Comparison}}{204}{table.caption.194}%
+\contentsline {table}{\numberline {9.13}{\ignorespaces Update Security Checklist}}{216}{table.caption.195}%
+\contentsline {table}{\numberline {9.14}{\ignorespaces X.509 Certificate Size Comparison}}{217}{table.caption.196}%
+\contentsline {table}{\numberline {9.15}{\ignorespaces Revocation Methods for IoT Devices}}{227}{table.caption.197}%
+\contentsline {table}{\numberline {9.16}{\ignorespaces Certificate Lifecycle Best Practices Summary}}{235}{table.caption.198}%
+\contentsline {table}{\numberline {9.17}{\ignorespaces CNSA 2.0 Algorithm Requirements}}{236}{table.caption.199}%
+\contentsline {table}{\numberline {9.18}{\ignorespaces NIST PQC Standards (August 2024)}}{241}{table.caption.200}%
+\contentsline {table}{\numberline {9.19}{\ignorespaces PQC Considerations for Healthcare IoT}}{241}{table.caption.202}%
+\contentsline {table}{\numberline {9.20}{\ignorespaces Automotive Cybersecurity PQC Requirements}}{245}{table.caption.205}%
+\contentsline {table}{\numberline {9.21}{\ignorespaces FIPS 140-3 PQC Validation Status (December 2024)}}{245}{table.caption.206}%
+\contentsline {table}{\numberline {9.22}{\ignorespaces European PQC Regulatory Landscape}}{249}{table.caption.207}%
+\contentsline {table}{\numberline {9.23}{\ignorespaces PQC Compliance Implementation Checklist}}{250}{table.caption.208}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {10.1}{\ignorespaces Migration Phase Definitions}}{254}{table.caption.210}%
+\contentsline {table}{\numberline {10.2}{\ignorespaces IoT Migration Challenges vs. Enterprise IT}}{254}{table.caption.211}%
+\contentsline {table}{\numberline {10.3}{\ignorespaces Phased Hybrid Deployment Plan}}{259}{table.caption.212}%
+\contentsline {table}{\numberline {10.4}{\ignorespaces PQC Migration Cost Categories}}{266}{table.caption.213}%
+\contentsline {table}{\numberline {10.5}{\ignorespaces PQC Migration Cost vs. Risk of Inaction}}{275}{table.caption.214}%
+\contentsline {table}{\numberline {10.6}{\ignorespaces PQC Migration Implementation Checklist}}{276}{table.caption.215}%
+\contentsline {table}{\numberline {10.7}{\ignorespaces Common PQC Migration Pitfalls}}{277}{table.caption.216}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {A.1}{\ignorespaces Complete ML-KEM Parameter Sets (FIPS 203)}}{285}{table.caption.220}%
+\contentsline {table}{\numberline {A.2}{\ignorespaces Complete ML-DSA Parameter Sets (FIPS 204)}}{286}{table.caption.221}%
+\contentsline {table}{\numberline {A.3}{\ignorespaces SLH-DSA Parameter Sets (FIPS 205) --- SHA-2 Variants}}{286}{table.caption.222}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {B.1}{\ignorespaces Complete pqm4 Benchmark Results (CPU Cycles)}}{287}{table.caption.223}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {C.1}{\ignorespaces Code Examples by Chapter}}{288}{table.caption.224}%
+\addvspace {10\p@ }

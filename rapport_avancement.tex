@@ -1,0 +1,443 @@
+\documentclass[12pt,a4paper]{article}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{caption}
+\usepackage{float}
+
+% Page geometry
+\geometry{margin=2.5cm}
+
+% Header/Footer
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Progress Report - December 2025}
+\lhead{Lightweight PQC for IoT}
+\rfoot{Page \thepage}
+
+% Colors
+\definecolor{ensamblue}{RGB}{0,51,102}
+
+% Hyperref setup
+\hypersetup{
+    colorlinks=true,
+    linkcolor=ensamblue,
+    filecolor=magenta,
+    urlcolor=blue,
+    citecolor=ensamblue
+}
+
+\begin{document}
+
+% ============================================
+% TITLE PAGE
+% ============================================
+\begin{titlepage}
+    \centering
+    
+    % Logo ENSAM
+    \includegraphics[width=6cm]{ensam_logo.png}
+    
+    \vspace{1.5cm}
+    
+    {\large \textbf{Master's Degree - 2nd Year}}\\[0.2cm]
+    {\large Big Data and Internet of Things}\\[0.2cm]
+    {\large Academic Year 2024-2025}
+    
+    \vspace{2cm}
+    
+    \rule{\textwidth}{1.5pt}\\[0.5cm]
+    {\LARGE \textbf{Progress Report}}\\[0.3cm]
+    {\Large \textbf{Optimization of IoT Communications through Compression and Lightweight Post-Quantum Cryptography}}\\[0.5cm]
+    \rule{\textwidth}{1.5pt}
+    
+    \vspace{2cm}
+    
+    \begin{minipage}{0.45\textwidth}
+        \begin{flushleft}
+            \textbf{Student:}\\
+            Abdessamad JAOUAD\\
+            M2 Big Data \& IoT
+        \end{flushleft}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \begin{flushright}
+            \textbf{Supervisor:}\\
+            Prof. Ibrahim GUELZIM\\
+            ENSAM Casablanca
+        \end{flushright}
+    \end{minipage}
+    
+    \vfill
+    
+    {\large December 2025}
+    
+\end{titlepage}
+
+% ============================================
+% TABLE OF CONTENTS
+% ============================================
+\tableofcontents
+\newpage
+
+% ============================================
+% INTRODUCTION
+% ============================================
+\section{Introduction}
+
+This progress report presents the current state of my research project titled \textbf{"Optimization of IoT Communications through Compression and Lightweight Post-Quantum Cryptography"}. The project aims to address one of the most critical challenges in modern IoT security: how to protect constrained devices against future quantum computing threats while maintaining acceptable performance levels.
+
+The Internet of Things (IoT) ecosystem is expanding rapidly, with billions of devices deployed across various sectors including healthcare, smart cities, industrial automation, and agriculture. These devices often have severe resource constraints (limited CPU, RAM, flash memory, and battery) yet need to communicate securely over potentially hostile networks. With the advent of quantum computing, current cryptographic standards like RSA and ECC will become vulnerable, making the migration to Post-Quantum Cryptography (PQC) essential.
+
+My work focuses on understanding, analyzing, and proposing optimizations to make PQC algorithms practical for resource-constrained IoT devices, combining cryptographic security with data compression techniques to reduce the communication overhead.
+
+% ============================================
+% RESEARCH OBJECTIVES
+% ============================================
+\section{Research Objectives}
+
+The main objectives of this research project are:
+
+\begin{enumerate}[label=\textbf{\arabic*.}]
+    \item \textbf{Understand the quantum threat}: Study how quantum algorithms (Shor's, Grover's) break current cryptographic systems and why PQC is needed.
+    
+    \item \textbf{Master PQC algorithms}: Deep dive into the three main NIST-standardized lattice-based algorithms:
+    \begin{itemize}
+        \item ML-KEM (CRYSTALS-Kyber) for key encapsulation
+        \item ML-DSA (CRYSTALS-Dilithium) for digital signatures
+        \item Falcon for compact signatures
+    \end{itemize}
+    
+    \item \textbf{Analyze IoT constraints}: Identify the specific resource limitations of typical IoT devices (MCUs like ARM Cortex-M, RISC-V) and how they impact PQC deployment.
+    
+    \item \textbf{Propose optimization strategies}: Develop and evaluate techniques to reduce the computational and memory footprint of PQC on constrained devices.
+    
+    \item \textbf{Integrate compression}: Explore how data compression can complement PQC to reduce overall communication overhead in IoT networks.
+\end{enumerate}
+
+% ============================================
+% WORK COMPLETED
+% ============================================
+\section{Work Completed So Far}
+
+\subsection{Literature Review and Documentation}
+
+I have conducted an extensive literature review covering the following areas:
+
+\subsubsection{Post-Quantum Cryptography Fundamentals}
+
+I studied the mathematical foundations of lattice-based cryptography, which forms the basis of the main NIST PQC standards. Key concepts I have understood include:
+
+\begin{itemize}
+    \item \textbf{Lattices}: High-dimensional discrete structures defined as integer combinations of basis vectors. The security of PQC relies on hard problems over these structures.
+    
+    \item \textbf{Learning With Errors (LWE)}: A problem where we try to recover a secret vector $s$ from noisy linear equations:
+    \[
+    b_i = \langle a_i, s \rangle + e_i \pmod{q}
+    \]
+    The noise term $e_i$ makes the problem computationally hard, even for quantum computers.
+    
+    \item \textbf{Short Integer Solution (SIS)}: Finding a short nonzero vector $x$ such that $Ax \equiv 0 \pmod{q}$.
+    
+    \item \textbf{Module-LWE and Module-SIS}: Structured variants over polynomial rings $R_q = \mathbb{Z}_q[x]/(x^n + 1)$ that provide better efficiency while maintaining security.
+\end{itemize}
+
+\subsubsection{NIST Standardization Process}
+
+I reviewed the NIST Post-Quantum Cryptography standardization process and the resulting standards:
+
+\begin{table}[H]
+\centering
+\caption{NIST PQC Standards Overview}
+\begin{tabular}{@{}llll@{}}
+\toprule
+\textbf{Standard} & \textbf{Algorithm} & \textbf{Type} & \textbf{Based On} \\
+\midrule
+FIPS 203 & ML-KEM (Kyber) & Key Encapsulation & Module-LWE \\
+FIPS 204 & ML-DSA (Dilithium) & Digital Signature & Module-LWE/SIS \\
+FIPS 205 & SLH-DSA (SPHINCS+) & Digital Signature & Hash-based \\
+(Upcoming) & Falcon & Digital Signature & NTRU lattices \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsubsection{Resources Collected and Studied}
+
+I have gathered and studied the following key documents:
+
+\begin{enumerate}
+    \item \textbf{NIST FIPS 203} - ML-KEM (Module-Lattice-Based Key-Encapsulation Mechanism) official specification
+    \item \textbf{NIST FIPS 204} - ML-DSA (Module-Lattice-Based Digital Signature Algorithm) official specification
+    \item \textbf{Peikert's "A Decade of Lattice Cryptography"} - Comprehensive survey on lattice-based cryptography foundations
+    \item \textbf{Regev's LWE papers} - Original theoretical foundations of the Learning With Errors problem
+    \item \textbf{NIST PQC Migration Project} - Guidelines for transitioning to post-quantum cryptography
+    \item \textbf{Preskill's "Quantum Computing in the NISQ era"} - Context on quantum computing capabilities and timeline
+\end{enumerate}
+
+\subsection{Understanding the Three Main PQC Algorithms}
+
+\subsubsection{ML-KEM (CRYSTALS-Kyber)}
+
+ML-KEM is the primary standard for key establishment. I have studied its design and operation:
+
+\begin{itemize}
+    \item \textbf{Purpose}: Securely establish a shared secret key between two parties (replaces Diffie-Hellman/RSA key exchange)
+    
+    \item \textbf{Key Generation}: 
+    \begin{itemize}
+        \item Sample small secret vector $s$ and error vector $e$
+        \item Compute public key: $t = As + e$ (a noisy linear function)
+    \end{itemize}
+    
+    \item \textbf{Encapsulation}: Sender creates ciphertext $(u, v)$ using fresh randomness
+    
+    \item \textbf{Decapsulation}: Receiver recovers the shared secret using private key $s$
+    
+    \item \textbf{Security}: Based on the hardness of Module-LWE problem
+\end{itemize}
+
+\subsubsection{ML-DSA (CRYSTALS-Dilithium)}
+
+ML-DSA is the primary standard for digital signatures:
+
+\begin{itemize}
+    \item \textbf{Purpose}: Authenticate messages, verify identity, ensure integrity (replaces RSA/ECDSA signatures)
+    
+    \item \textbf{Design}: "Fiat-Shamir with aborts" approach
+    
+    \item \textbf{Signing Process}:
+    \begin{itemize}
+        \item Sample random vector $y$, compute $w = Ay$
+        \item Hash message with commitment to get challenge $c$
+        \item Compute response $z = y + cs_1$
+        \item Reject and resample if $z$ is too large (prevents secret leakage)
+    \end{itemize}
+    
+    \item \textbf{Security}: Based on Module-SIS hardness
+\end{itemize}
+
+\subsubsection{Falcon}
+
+Falcon offers an alternative signature scheme with different trade-offs:
+
+\begin{itemize}
+    \item \textbf{Advantages}: Smaller signatures and faster verification than Dilithium
+    \item \textbf{Disadvantages}: More complex implementation, requires discrete Gaussian sampling
+    \item \textbf{Based on}: NTRU lattices and GPV framework
+    \item \textbf{Best suited for}: Bandwidth-constrained scenarios
+\end{itemize}
+
+\subsection{IoT Constraints Analysis}
+
+I have analyzed the typical resource constraints of IoT devices and their implications for PQC deployment:
+
+\begin{table}[H]
+\centering
+\caption{Typical IoT Device Constraints}
+\begin{tabular}{@{}ll@{}}
+\toprule
+\textbf{Resource} & \textbf{Typical Range} \\
+\midrule
+CPU & ARM Cortex-M0/M3/M4, RISC-V (16-168 MHz) \\
+Flash (code storage) & 64 KB -- 512 KB \\
+RAM (working memory) & 8 KB -- 64 KB \\
+Network bandwidth & Low (LPWAN, BLE, constrained Wi-Fi) \\
+Power & Battery-operated, energy harvesting \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Key challenges identified}:
+\begin{enumerate}
+    \item PQC algorithms have larger key and signature sizes than classical algorithms
+    \item Polynomial arithmetic (NTT) requires significant computational resources
+    \item Memory footprint during cryptographic operations can exceed available RAM
+    \item Side-channel resistance adds additional overhead
+\end{enumerate}
+
+\subsection{Optimization Strategies Identified}
+
+Based on my research, I have identified several optimization strategies applicable to lightweight PQC:
+
+\subsubsection{Algorithm-Level Optimizations}
+
+\begin{itemize}
+    \item \textbf{Parameter selection}: Use lower NIST security levels (Level 1) when appropriate to reduce sizes and computation
+    \item \textbf{Polynomial arithmetic}: Choose between NTT (faster, more code) vs. schoolbook multiplication (slower, less code) based on device constraints
+\end{itemize}
+
+\subsubsection{Implementation-Level Optimizations}
+
+\begin{itemize}
+    \item \textbf{Memory management}: In-place operations, buffer reuse, streaming hashing
+    \item \textbf{Code sharing}: Common routines (NTT, sampling, hashing) shared between Kyber and Dilithium
+    \item \textbf{Compile-time optimization}: LTO, size optimization flags (-Os), removal of unused code
+    \item \textbf{Hardware acceleration}: Leverage AES/SHA accelerators and DSP instructions when available
+\end{itemize}
+
+\subsubsection{Protocol-Level Optimizations}
+
+\begin{itemize}
+    \item \textbf{Role separation}: Devices only verify signatures (signing done by servers)
+    \item \textbf{Session resumption}: Avoid repeated key exchanges using tickets
+    \item \textbf{Gateway offloading}: Powerful local gateways handle PQC-heavy operations
+    \item \textbf{One-time onboarding}: Perform expensive operations only during provisioning
+\end{itemize}
+
+\subsubsection{Security Considerations}
+
+\begin{itemize}
+    \item \textbf{Constant-time implementations}: Remove branches on secret data
+    \item \textbf{Masking}: Protect against power analysis attacks
+    \item \textbf{Careful RNG}: Ensure high-quality randomness for cryptographic operations
+\end{itemize}
+
+% ============================================
+% KEY FINDINGS
+% ============================================
+\section{Key Findings}
+
+\subsection{The Quantum Threat is Real and Imminent}
+
+\begin{itemize}
+    \item \textbf{Shor's algorithm} can break RSA and ECC in polynomial time on a quantum computer
+    \item \textbf{"Harvest now, decrypt later"} attacks mean adversaries are already collecting encrypted data to decrypt later
+    \item Migration to PQC must begin now, especially for long-lived IoT deployments
+\end{itemize}
+
+\subsection{Lattice-Based Cryptography is the Leading Approach}
+
+\begin{itemize}
+    \item Three of the four NIST standards are lattice-based (ML-KEM, ML-DSA, Falcon)
+    \item The underlying problems (LWE, SIS) have been studied extensively and are believed to be quantum-resistant
+    \item Lattice schemes offer good performance compared to other PQC families
+\end{itemize}
+
+\subsection{PQC on IoT is Challenging but Feasible}
+
+\begin{itemize}
+    \item PQC algorithms have larger footprints than classical algorithms
+    \item With proper optimization, they can run on Cortex-M class devices
+    \item Role-based design (verify-only devices) significantly reduces requirements
+    \item Existing optimized implementations (e.g., pqm4 project) demonstrate feasibility
+\end{itemize}
+
+\subsection{Compression Can Help}
+
+\begin{itemize}
+    \item Larger PQC keys and signatures increase bandwidth requirements
+    \item Data compression before encryption can offset some of this overhead
+    \item Need to balance compression ratio vs. computational cost on constrained devices
+\end{itemize}
+
+% ============================================
+% NEXT STEPS
+% ============================================
+\section{Next Steps and Planning}
+
+\subsection{Short-Term (Next 4-6 weeks)}
+
+\begin{enumerate}
+    \item \textbf{Benchmark analysis}: Study existing PQC benchmarks on microcontrollers (pqm4 project results)
+    \item \textbf{Implementation setup}: Set up development environment for ARM Cortex-M or RISC-V simulation
+    \item \textbf{Compression research}: Survey lightweight compression algorithms suitable for IoT (LZ4, Snappy, specialized schemes)
+\end{enumerate}
+
+\subsection{Medium-Term (2-3 months)}
+
+\begin{enumerate}
+    \item \textbf{Prototype development}: Implement a minimal PQC communication stack for a target IoT platform
+    \item \textbf{Optimization experiments}: Apply identified optimization techniques and measure impact
+    \item \textbf{Compression integration}: Combine compression with PQC and evaluate trade-offs
+\end{enumerate}
+
+\subsection{Long-Term (Final phase)}
+
+\begin{enumerate}
+    \item \textbf{Performance evaluation}: Comprehensive benchmarking of the optimized solution
+    \item \textbf{Security analysis}: Verify that optimizations do not compromise security
+    \item \textbf{Documentation}: Final thesis writing and defense preparation
+\end{enumerate}
+
+% ============================================
+% CHALLENGES
+% ============================================
+\section{Challenges and Risks}
+
+\begin{enumerate}
+    \item \textbf{Hardware access}: May need physical IoT devices for realistic benchmarking (currently using simulation/emulation)
+    
+    \item \textbf{Implementation complexity}: PQC implementations require careful attention to avoid security vulnerabilities
+    
+    \item \textbf{Rapidly evolving field}: PQC standards and best practices are still maturing
+    
+    \item \textbf{Trade-off balance}: Finding the right balance between security, performance, and resource usage is non-trivial
+\end{enumerate}
+
+% ============================================
+% CONCLUSION
+% ============================================
+\section{Conclusion}
+
+This progress report summarizes the work I have completed so far on the optimization of IoT communications through compression and lightweight post-quantum cryptography. I have:
+
+\begin{itemize}
+    \item Established a solid understanding of the quantum threat and why PQC is necessary
+    \item Studied the mathematical foundations (lattices, LWE, SIS) underlying the main PQC algorithms
+    \item Analyzed the three key NIST-standardized algorithms: ML-KEM (Kyber), ML-DSA (Dilithium), and Falcon
+    \item Identified the specific constraints of IoT devices and their implications for PQC deployment
+    \item Catalogued multiple optimization strategies at algorithm, implementation, and protocol levels
+    \item Collected and studied key reference documents and specifications
+\end{itemize}
+
+The next phase of my work will focus on practical implementation and experimentation, moving from theoretical understanding to hands-on benchmarking and optimization of PQC for constrained IoT environments.
+
+\vspace{1cm}
+
+\noindent\textbf{Submitted by:} Abdessamad JAOUAD\\
+\textbf{Date:} December 11, 2025\\
+\textbf{Supervisor:} Prof. Ibrahim GUELZIM
+
+% ============================================
+% REFERENCES
+% ============================================
+\newpage
+\section*{References}
+
+\begin{enumerate}
+    \item NIST, "FIPS 203: Module-Lattice-Based Key-Encapsulation Mechanism Standard," 2024.
+    
+    \item NIST, "FIPS 204: Module-Lattice-Based Digital Signature Standard," 2024.
+    
+    \item C. Peikert, "A Decade of Lattice Cryptography," Foundations and Trends in Theoretical Computer Science, 2016.
+    
+    \item O. Regev, "On Lattices, Learning with Errors, Random Linear Codes, and Cryptography," Journal of the ACM, 2009.
+    
+    \item NIST, "Post-Quantum Cryptography Standardization Process," \url{https://csrc.nist.gov/projects/post-quantum-cryptography}.
+    
+    \item J. Preskill, "Quantum Computing in the NISQ era and beyond," Quantum, 2018.
+    
+    \item CRYSTALS-Kyber Team, "CRYSTALS-Kyber Algorithm Specifications," \url{https://pq-crystals.org/kyber}.
+    
+    \item CRYSTALS-Dilithium Team, "CRYSTALS-Dilithium Algorithm Specifications," \url{https://pq-crystals.org/dilithium}.
+    
+    \item Falcon Team, "Falcon: Fast-Fourier Lattice-based Compact Signatures over NTRU," \url{https://falcon-sign.info}.
+    
+    \item pqm4 Project, "Post-quantum crypto library for the ARM Cortex-M4," \url{https://github.com/mupq/pqm4}.
+\end{enumerate}
+
+\end{document}

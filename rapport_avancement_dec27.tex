@@ -1,0 +1,231 @@
+\documentclass[12pt,a4paper]{article}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{xcolor}
+\usepackage{array}
+
+% Page geometry
+\geometry{margin=2.5cm}
+
+% Header/Footer
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Progress Report - December 2025}
+\lhead{Lightweight PQC for IoT}
+\rfoot{Page \thepage}
+
+% Colors
+\definecolor{ensamblue}{RGB}{0,51,102}
+
+% Hyperref setup
+\hypersetup{
+    colorlinks=true,
+    linkcolor=ensamblue,
+    filecolor=magenta,
+    urlcolor=blue,
+    citecolor=ensamblue
+}
+
+\begin{document}
+
+% ============================================
+% TITLE PAGE
+% ============================================
+\begin{titlepage}
+    \centering
+    
+    % Logo ENSAM
+    \includegraphics[width=6cm]{ensam_logo.png}
+    
+    \vspace{1.5cm}
+    
+    {\large \textbf{Master's Degree - 2nd Year}}\\[0.2cm]
+    {\large Big Data and Internet of Things}\\[0.2cm]
+    {\large Academic Year 2024-2025}
+    
+    \vspace{2cm}
+    
+    \rule{\textwidth}{1.5pt}\\[0.4cm]
+    {\LARGE \textbf{Progress Report \#2}}\\[0.3cm]
+    {\Large \textbf{Optimization of IoT Communications through Compression and Lightweight Post-Quantum Cryptography}}\\[0.4cm]
+    \rule{\textwidth}{1.5pt}
+    
+    \vspace{8cm}
+    
+    \begin{minipage}{0.45\textwidth}
+        \begin{flushleft}
+            \textbf{Student:}\\
+            Abdessamad JAOUAD\\
+            M2 Big Data \& IoT
+        \end{flushleft}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \begin{flushright}
+            \textbf{Supervisor:}\\
+            Prof. Ibrahim GUELZIM\\
+            ENSAM Casablanca
+        \end{flushright}
+    \end{minipage}
+    
+    \vfill
+    
+    {\large December 2025}
+    
+\end{titlepage}
+
+% ============================================
+% INTRODUCTION
+% ============================================
+\section{Introduction}
+
+This is the second progress report for my research project on \textbf{``Optimization of IoT Communications through Compression and Lightweight Post-Quantum Cryptography''}. This report covers the period from December 11 to December 27, 2025.
+
+The project focuses on investigating how Post-Quantum Cryptography (PQC) algorithms have been adapted for resource-constrained IoT devices. The goal is to produce a concise, accessible research survey that explains PQC for IoT without excessive mathematical complexity.
+
+% ============================================
+% WORK COMPLETED
+% ============================================
+\section{Work Completed}
+
+\subsection{Research on NIST-Standardized PQC Algorithms}
+
+I conducted in-depth research on the four main NIST-standardized post-quantum algorithms:
+
+\begin{itemize}[nosep]
+    \item \textbf{ML-KEM (Kyber)}: Key Encapsulation Mechanism based on Module-LWE, standardized as FIPS 203
+    \item \textbf{ML-DSA (Dilithium)}: Digital Signature Algorithm based on Module-LWE/SIS, standardized as FIPS 204
+    \item \textbf{SLH-DSA (SPHINCS+)}: Hash-based signature scheme, standardized as FIPS 205
+    \item \textbf{Falcon}: Compact NTRU-lattice-based signatures (upcoming standard)
+\end{itemize}
+
+I focused particularly on \textbf{lattice-based algorithms} (Kyber, Dilithium, Falcon) as they offer the best balance of security and performance for IoT applications.
+
+\subsection{Key Insights Gained}
+
+\subsubsection{Algorithm Characteristics}
+
+I learned the key differences between the algorithms, including their key sizes, signature sizes, and performance trade-offs:
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{@{}lccc@{}}
+\toprule
+\textbf{Algorithm} & \textbf{Type} & \textbf{Public Key} & \textbf{Signature/Ciphertext} \\
+\midrule
+ML-KEM-768 & KEM & 1,184 B & 1,088 B \\
+ML-DSA-65 & Signature & 1,952 B & 3,293 B \\
+Falcon-512 & Signature & 897 B & 666 B \\
+SLH-DSA-128s & Signature & 32 B & 7,856 B \\
+\bottomrule
+\end{tabular}
+\caption{Comparison of PQC algorithm sizes (NIST Level 2/3)}
+\end{table}
+
+\subsubsection{Why Lattice-Based Algorithms are Preferred for IoT}
+
+I understood why lattice-based schemes are the leading choice for IoT:
+\begin{itemize}[nosep]
+    \item Efficient polynomial operations via Number Theoretic Transform (NTT)
+    \item Reasonable key and signature sizes (compared to code-based or hash-based)
+    \item Good performance on ARM Cortex-M class microcontrollers
+    \item Well-studied security foundations (LWE, SIS problems)
+\end{itemize}
+
+\subsection{Lightweight Optimization Techniques}
+
+I researched how PQC algorithms are optimized for constrained IoT devices:
+
+\begin{itemize}[nosep]
+    \item \textbf{NTT optimization}: Fast polynomial multiplication reducing complexity from $O(n^2)$ to $O(n \log n)$
+    \item \textbf{Memory management}: In-place operations, buffer reuse, streaming hash computation
+    \item \textbf{Role-based design}: IoT devices only verify signatures; servers handle signing
+    \item \textbf{Hardware acceleration}: Leveraging AES-NI and SHA accelerators when available
+    \item \textbf{Parameter selection}: Using lower security levels (NIST Level 1) when appropriate
+\end{itemize}
+
+\subsection{IoT Constraints Analysis}
+
+I studied the specific constraints of IoT devices and their implications for PQC:
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{@{}lcc@{}}
+\toprule
+\textbf{Device Class} & \textbf{RAM} & \textbf{PQC Feasibility} \\
+\midrule
+Class 0 (Sensor nodes) & $<$10 KB & Very limited \\
+Class 1 (Smart meters) & $\sim$10 KB & Limited (verify only) \\
+Class 2 (Wearables) & $\sim$50 KB & Feasible with optimization \\
+Class 3 (Gateways) & $>$256 KB & Full PQC support \\
+\bottomrule
+\end{tabular}
+\caption{IoT device classes and PQC compatibility}
+\end{table}
+
+\subsection{Document Writing Progress}
+
+I made significant progress on writing my research survey:
+
+\begin{itemize}[nosep]
+    \item Created the \textbf{document outline and structure}
+    \item Wrote \textbf{introduction and overview sections}
+    \item Drafted sections for all four main algorithms (Kyber, Dilithium, SPHINCS+, Falcon)
+    \item Wrote about \textbf{IoT constraints} and how PQC addresses them
+\end{itemize}
+
+The document is designed to be concise and accessible, focusing on practical insights rather than heavy mathematical details.
+
+% ============================================
+% CHALLENGES
+% ============================================
+\section{Challenges Encountered}
+
+\begin{enumerate}[nosep]
+    \item \textbf{Mathematical complexity}: Understanding the underlying mathematical concepts (lattices, LWE, SIS, polynomial rings) required significant effort
+    \item \textbf{Algorithm derivation}: Connecting the abstract mathematical problems to the concrete algorithm implementations was challenging
+    \item \textbf{Balancing depth vs. accessibility}: Finding the right level of detail for a practical survey without oversimplifying, or overwhelming the reader with the mathematical details
+\end{enumerate}
+
+% ============================================
+% NEXT STEPS
+% ============================================
+\section{Next Steps}
+
+The final report is due on the week of \textbf{January 5, 2026}. The remaining tasks are:
+
+\begin{enumerate}[nosep]
+    \item \textbf{Benchmark research}: Study real performance data from pqm4 project and academic papers
+    \item \textbf{Library exploration}: Document available PQC libraries (liboqs, PQClean, pqm4, wolfSSL)
+    \item \textbf{Comparison tables}: Create comprehensive comparison tables for the survey
+    \item \textbf{Document completion}: Finalize all sections and polish the writing
+    \item \textbf{Final review}: Proofread and prepare for submission
+\end{enumerate}
+
+% ============================================
+% CONCLUSION
+% ============================================
+\section{Conclusion}
+
+During this reporting period, I have made substantial progress on both the research and writing aspects of my project. I now have a solid understanding of the main NIST-standardized PQC algorithms, their optimization techniques for IoT, and the constraints of embedded devices.
+
+The next phase will focus on incorporating real benchmark data and completing the final version of my research survey before the January 5th deadline.
+
+\vspace{5cm}
+
+\noindent\textbf{Submitted by:} Abdessamad JAOUAD\\
+\textbf{Date:} December 27, 2025\\
+\textbf{Supervisor:} Prof. Ibrahim GUELZIM
+
+\end{document}

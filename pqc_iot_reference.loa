@@ -1,0 +1,10 @@
+\contentsline {algorithm}{\numberline {1}{\ignorespaces Cooley-Tukey NTT (In-place, Iterative)}}{30}{algorithm.1}%
+\contentsline {algorithm}{\numberline {2}{\ignorespaces ML-KEM.KeyGen()}}{41}{algorithm.2}%
+\contentsline {algorithm}{\numberline {3}{\ignorespaces ML-KEM.Encaps($pk$)}}{42}{algorithm.3}%
+\contentsline {algorithm}{\numberline {4}{\ignorespaces ML-KEM.Decaps($sk$, $ct$)}}{43}{algorithm.4}%
+\contentsline {algorithm}{\numberline {5}{\ignorespaces CBD$_\eta $(bytes)}}{44}{algorithm.5}%
+\contentsline {algorithm}{\numberline {6}{\ignorespaces Hybrid X25519-ML-KEM Key Exchange}}{53}{algorithm.6}%
+\contentsline {algorithm}{\numberline {7}{\ignorespaces ML-DSA.KeyGen()}}{58}{algorithm.7}%
+\contentsline {algorithm}{\numberline {8}{\ignorespaces ML-DSA.Sign($sk$, $M$)}}{59}{algorithm.8}%
+\contentsline {algorithm}{\numberline {9}{\ignorespaces ML-DSA.Verify($pk$, $M$, $\sigma $)}}{60}{algorithm.9}%
+\contentsline {algorithm}{\numberline {10}{\ignorespaces Generic Hybrid KEM}}{82}{algorithm.10}%

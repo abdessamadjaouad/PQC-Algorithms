@@ -1,0 +1,386 @@
+\babel@toc {english}{}\relax 
+\contentsline {chapter}{Abstract}{2}{chapter*.1}%
+\contentsline {chapter}{Acknowledgments}{3}{chapter*.2}%
+\contentsline {chapter}{List of Figures}{13}{chapter*.4}%
+\contentsline {chapter}{List of Tables}{17}{chapter*.5}%
+\contentsline {chapter}{List of Algorithms}{18}{chapter*.6}%
+\contentsline {chapter}{List of Acronyms}{18}{chapter*.6}%
+\contentsline {chapter}{\numberline {1}Introduction}{19}{chapter.1}%
+\contentsline {section}{\numberline {1.1}The Quantum Threat to Modern Cryptography}{19}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}Current State of Quantum Computing}{20}{subsection.1.1.1}%
+\contentsline {subsection}{\numberline {1.1.2}Impact on IoT Security}{20}{subsection.1.1.2}%
+\contentsline {section}{\numberline {1.2}Post-Quantum Cryptography: An Overview}{21}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}Mathematical Foundations}{21}{subsection.1.2.1}%
+\contentsline {subsubsection}{Lattice-Based Cryptography}{21}{section*.10}%
+\contentsline {subsubsection}{Hash-Based Signatures}{22}{section*.12}%
+\contentsline {subsubsection}{Code-Based Cryptography}{23}{section*.13}%
+\contentsline {subsubsection}{Multivariate Cryptography}{23}{section*.14}%
+\contentsline {subsubsection}{Isogeny-Based Cryptography}{23}{section*.15}%
+\contentsline {subsection}{\numberline {1.2.2}Comparison of PQC Families}{23}{subsection.1.2.2}%
+\contentsline {section}{\numberline {1.3}NIST Post-Quantum Standardization}{24}{section.1.3}%
+\contentsline {subsection}{\numberline {1.3.1}Timeline and Process}{24}{subsection.1.3.1}%
+\contentsline {subsection}{\numberline {1.3.2}Standardized Algorithms (August 2024)}{24}{subsection.1.3.2}%
+\contentsline {subsection}{\numberline {1.3.3}Algorithms Under Standardization}{25}{subsection.1.3.3}%
+\contentsline {section}{\numberline {1.4}Scope and Organization of This Document}{25}{section.1.4}%
+\contentsline {section}{\numberline {1.5}How to Use This Reference}{26}{section.1.5}%
+\contentsline {section}{\numberline {1.6}Chapter Summary}{26}{section.1.6}%
+\contentsline {chapter}{\numberline {2}Mathematical Foundations}{27}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Algebraic Preliminaries}{27}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Groups, Rings, and Fields}{27}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Polynomial Rings}{28}{subsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.1.3}The Number Theoretic Transform (NTT)}{29}{subsection.2.1.3}%
+\contentsline {section}{\numberline {2.2}Lattice Theory}{30}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Basic Definitions}{30}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Successive Minima and the Gaussian Heuristic}{31}{subsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.2.3}Important Lattice Constructions}{32}{subsection.2.2.3}%
+\contentsline {subsubsection}{$q$-ary Lattices}{32}{section*.20}%
+\contentsline {subsubsection}{Ideal Lattices}{32}{section*.21}%
+\contentsline {subsubsection}{Module Lattices}{32}{section*.22}%
+\contentsline {section}{\numberline {2.3}Computational Lattice Problems}{32}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}The Shortest Vector Problem (SVP)}{32}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}The Closest Vector Problem (CVP)}{33}{subsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.3.3}Learning With Errors (LWE)}{33}{subsection.2.3.3}%
+\contentsline {subsubsection}{Error Distributions}{33}{section*.23}%
+\contentsline {subsection}{\numberline {2.3.4}Ring-LWE and Module-LWE}{34}{subsection.2.3.4}%
+\contentsline {subsection}{\numberline {2.3.5}Short Integer Solution (SIS)}{35}{subsection.2.3.5}%
+\contentsline {section}{\numberline {2.4}Algorithms for Lattice Problems}{35}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}Lattice Reduction}{35}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.4.2}Sieving Algorithms}{36}{subsection.2.4.2}%
+\contentsline {subsection}{\numberline {2.4.3}Security Estimation}{36}{subsection.2.4.3}%
+\contentsline {section}{\numberline {2.5}Hash Functions in PQC}{36}{section.2.5}%
+\contentsline {subsection}{\numberline {2.5.1}SHA-3 and SHAKE}{36}{subsection.2.5.1}%
+\contentsline {subsection}{\numberline {2.5.2}Hashing in Embedded Systems}{37}{subsection.2.5.2}%
+\contentsline {section}{\numberline {2.6}Chapter Summary}{37}{section.2.6}%
+\contentsline {chapter}{\numberline {3}Key Encapsulation Mechanisms: ML-KEM (Kyber)}{39}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Introduction to Key Encapsulation}{39}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}From Key Exchange to Key Encapsulation}{39}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}KEMs vs. Public-Key Encryption}{40}{subsection.3.1.2}%
+\contentsline {section}{\numberline {3.2}ML-KEM Overview}{40}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Design Philosophy}{40}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Parameter Sets}{41}{subsection.3.2.2}%
+\contentsline {section}{\numberline {3.3}ML-KEM Algorithms in Detail}{41}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Key Generation}{41}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Encapsulation}{42}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}Decapsulation}{43}{subsection.3.3.3}%
+\contentsline {subsection}{\numberline {3.3.4}Core Operations}{43}{subsection.3.3.4}%
+\contentsline {subsubsection}{Compression and Decompression}{43}{section*.32}%
+\contentsline {subsubsection}{Centered Binomial Distribution Sampling}{44}{section*.33}%
+\contentsline {subsubsection}{Matrix Generation from Seed}{44}{section*.34}%
+\contentsline {section}{\numberline {3.4}Security Analysis}{44}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}Hardness Assumptions}{44}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}Concrete Security Estimates}{45}{subsection.3.4.2}%
+\contentsline {subsection}{\numberline {3.4.3}Known Attack Vectors}{45}{subsection.3.4.3}%
+\contentsline {subsubsection}{Lattice Attacks}{45}{section*.36}%
+\contentsline {subsubsection}{Side-Channel Attacks}{45}{section*.37}%
+\contentsline {subsubsection}{Multi-Target Attacks}{45}{section*.38}%
+\contentsline {section}{\numberline {3.5}Implementation Considerations}{45}{section.3.5}%
+\contentsline {subsection}{\numberline {3.5.1}Memory Layout}{45}{subsection.3.5.1}%
+\contentsline {subsection}{\numberline {3.5.2}Optimization Strategies}{46}{subsection.3.5.2}%
+\contentsline {subsubsection}{NTT Optimization}{46}{section*.40}%
+\contentsline {subsubsection}{Memory-Time Tradeoffs}{47}{section*.41}%
+\contentsline {subsection}{\numberline {3.5.3}Constant-Time Implementation}{47}{subsection.3.5.3}%
+\contentsline {section}{\numberline {3.6}Performance Benchmarks}{47}{section.3.6}%
+\contentsline {subsection}{\numberline {3.6.1}ARM Cortex-M4 Benchmarks}{47}{subsection.3.6.1}%
+\contentsline {subsection}{\numberline {3.6.2}Comparison with Classical Algorithms}{48}{subsection.3.6.2}%
+\contentsline {subsection}{\numberline {3.6.3}Desktop/Server Benchmarks}{49}{subsection.3.6.3}%
+\contentsline {subsection}{\numberline {3.6.4}Hashing Overhead}{49}{subsection.3.6.4}%
+\contentsline {section}{\numberline {3.7}Code Examples}{49}{section.3.7}%
+\contentsline {subsection}{\numberline {3.7.1}Using liboqs (C)}{49}{subsection.3.7.1}%
+\contentsline {subsection}{\numberline {3.7.2}Using pqcrypto (Rust)}{50}{subsection.3.7.2}%
+\contentsline {subsection}{\numberline {3.7.3}Using liboqs-python}{51}{subsection.3.7.3}%
+\contentsline {section}{\numberline {3.8}Hybrid Key Exchange}{52}{section.3.8}%
+\contentsline {subsection}{\numberline {3.8.1}X25519-ML-KEM Hybrid}{52}{subsection.3.8.1}%
+\contentsline {section}{\numberline {3.9}IoT Deployment Considerations}{53}{section.3.9}%
+\contentsline {subsection}{\numberline {3.9.1}Device Class Recommendations}{53}{subsection.3.9.1}%
+\contentsline {subsection}{\numberline {3.9.2}Bandwidth Impact}{53}{subsection.3.9.2}%
+\contentsline {subsection}{\numberline {3.9.3}Energy Consumption}{54}{subsection.3.9.3}%
+\contentsline {section}{\numberline {3.10}Chapter Summary}{54}{section.3.10}%
+\contentsline {chapter}{\numberline {4}Digital Signature Schemes}{55}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Introduction to Digital Signatures}{55}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Signatures in IoT}{55}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}Comparison Overview}{56}{subsection.4.1.2}%
+\contentsline {section}{\numberline {4.2}ML-DSA (Dilithium)}{56}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Design Overview}{56}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Parameters}{57}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Algorithms}{58}{subsection.4.2.3}%
+\contentsline {subsubsection}{Key Generation}{58}{section*.56}%
+\contentsline {subsubsection}{Signing}{59}{section*.57}%
+\contentsline {subsubsection}{Verification}{60}{section*.58}%
+\contentsline {subsection}{\numberline {4.2.4}Performance}{60}{subsection.4.2.4}%
+\contentsline {section}{\numberline {4.3}SLH-DSA (SPHINCS+)}{61}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Design Philosophy}{61}{subsection.4.3.1}%
+\contentsline {subsubsection}{Hypertree Structure}{61}{section*.61}%
+\contentsline {subsection}{\numberline {4.3.2}Parameters}{61}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3}Algorithm Sketch}{62}{subsection.4.3.3}%
+\contentsline {subsubsection}{Key Generation}{62}{section*.64}%
+\contentsline {subsubsection}{Signing}{62}{section*.65}%
+\contentsline {subsubsection}{Verification}{62}{section*.66}%
+\contentsline {subsection}{\numberline {4.3.4}Performance}{63}{subsection.4.3.4}%
+\contentsline {subsection}{\numberline {4.3.5}Use Cases}{63}{subsection.4.3.5}%
+\contentsline {section}{\numberline {4.4}Falcon}{63}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Design Overview}{64}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}Parameters}{64}{subsection.4.4.2}%
+\contentsline {subsection}{\numberline {4.4.3}Algorithm Highlights}{64}{subsection.4.4.3}%
+\contentsline {subsubsection}{Key Generation}{64}{section*.70}%
+\contentsline {subsubsection}{Signing (Simplified)}{64}{section*.71}%
+\contentsline {subsubsection}{Verification}{65}{section*.72}%
+\contentsline {subsection}{\numberline {4.4.4}Performance}{65}{subsection.4.4.4}%
+\contentsline {subsection}{\numberline {4.4.5}Falcon vs. ML-DSA}{65}{subsection.4.4.5}%
+\contentsline {section}{\numberline {4.5}Comparative Analysis}{66}{section.4.5}%
+\contentsline {subsection}{\numberline {4.5.1}Size Comparison}{66}{subsection.4.5.1}%
+\contentsline {subsection}{\numberline {4.5.2}Performance Comparison}{67}{subsection.4.5.2}%
+\contentsline {subsection}{\numberline {4.5.3}Selection Guidelines}{67}{subsection.4.5.3}%
+\contentsline {section}{\numberline {4.6}Code Examples}{67}{section.4.6}%
+\contentsline {subsection}{\numberline {4.6.1}ML-DSA with liboqs}{67}{subsection.4.6.1}%
+\contentsline {subsection}{\numberline {4.6.2}SPHINCS+ with PQClean}{68}{subsection.4.6.2}%
+\contentsline {subsection}{\numberline {4.6.3}Python Example}{69}{subsection.4.6.3}%
+\contentsline {section}{\numberline {4.7}Implementation Considerations}{70}{section.4.7}%
+\contentsline {subsection}{\numberline {4.7.1}Deterministic vs. Randomized Signing}{70}{subsection.4.7.1}%
+\contentsline {subsection}{\numberline {4.7.2}Batch Verification}{70}{subsection.4.7.2}%
+\contentsline {subsection}{\numberline {4.7.3}Side-Channel Considerations}{71}{subsection.4.7.3}%
+\contentsline {section}{\numberline {4.8}Chapter Summary}{71}{section.4.8}%
+\contentsline {chapter}{\numberline {5}Alternative and Emerging Schemes}{72}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Code-Based Cryptography}{72}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}Theoretical Foundation}{72}{subsection.5.1.1}%
+\contentsline {subsection}{\numberline {5.1.2}HQC (Hamming Quasi-Cyclic)}{73}{subsection.5.1.2}%
+\contentsline {subsubsection}{Design}{73}{section*.82}%
+\contentsline {subsubsection}{Parameters}{73}{section*.83}%
+\contentsline {subsubsection}{Performance}{73}{section*.85}%
+\contentsline {subsubsection}{HQC vs. ML-KEM}{74}{section*.87}%
+\contentsline {subsection}{\numberline {5.1.3}BIKE (Bit Flipping Key Encapsulation)}{74}{subsection.5.1.3}%
+\contentsline {subsubsection}{Design}{74}{section*.89}%
+\contentsline {subsubsection}{Parameters}{74}{section*.90}%
+\contentsline {subsubsection}{Decoding Failure Rate}{74}{section*.92}%
+\contentsline {subsection}{\numberline {5.1.4}Classic McEliece}{75}{subsection.5.1.4}%
+\contentsline {subsubsection}{Design Philosophy}{75}{section*.94}%
+\contentsline {subsubsection}{Parameters}{75}{section*.95}%
+\contentsline {subsubsection}{IoT Applicability}{75}{section*.97}%
+\contentsline {subsection}{\numberline {5.1.5}Code-Based Schemes Summary}{76}{subsection.5.1.5}%
+\contentsline {section}{\numberline {5.2}Isogeny-Based Cryptography}{76}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Mathematical Background}{76}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}SIDH/SIKE: A Cautionary Tale}{77}{subsection.5.2.2}%
+\contentsline {subsubsection}{Lessons Learned}{77}{section*.101}%
+\contentsline {subsection}{\numberline {5.2.3}Post-SIKE Isogeny Research}{77}{subsection.5.2.3}%
+\contentsline {section}{\numberline {5.3}Multivariate Cryptography}{77}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Theoretical Foundation}{78}{subsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.3.2}Signature Schemes}{78}{subsection.5.3.2}%
+\contentsline {subsubsection}{Rainbow (Broken)}{78}{section*.102}%
+\contentsline {subsubsection}{Surviving Multivariate Schemes}{78}{section*.104}%
+\contentsline {subsection}{\numberline {5.3.3}Multivariate for IoT}{79}{subsection.5.3.3}%
+\contentsline {section}{\numberline {5.4}Stateful Hash-Based Signatures}{79}{section.5.4}%
+\contentsline {subsection}{\numberline {5.4.1}LMS (Leighton-Micali Signatures)}{79}{subsection.5.4.1}%
+\contentsline {subsubsection}{Design}{79}{section*.106}%
+\contentsline {subsubsection}{Parameters}{79}{section*.107}%
+\contentsline {subsubsection}{HSS (Hierarchical Signature System)}{79}{section*.109}%
+\contentsline {subsection}{\numberline {5.4.2}XMSS (eXtended Merkle Signature Scheme)}{80}{subsection.5.4.2}%
+\contentsline {subsection}{\numberline {5.4.3}State Management Challenges}{80}{subsection.5.4.3}%
+\contentsline {subsubsection}{IoT State Management Approaches}{81}{section*.111}%
+\contentsline {subsection}{\numberline {5.4.4}Stateful vs. Stateless Comparison}{81}{subsection.5.4.4}%
+\contentsline {section}{\numberline {5.5}Hybrid Schemes}{81}{section.5.5}%
+\contentsline {subsection}{\numberline {5.5.1}Motivation}{81}{subsection.5.5.1}%
+\contentsline {subsection}{\numberline {5.5.2}Hybrid KEM Construction}{82}{subsection.5.5.2}%
+\contentsline {subsection}{\numberline {5.5.3}Deployed Hybrid Schemes}{82}{subsection.5.5.3}%
+\contentsline {subsection}{\numberline {5.5.4}Hybrid Signatures}{82}{subsection.5.5.4}%
+\contentsline {section}{\numberline {5.6}Comparative Analysis}{83}{section.5.6}%
+\contentsline {subsection}{\numberline {5.6.1}Algorithm Family Summary}{83}{subsection.5.6.1}%
+\contentsline {subsection}{\numberline {5.6.2}IoT Suitability Matrix}{84}{subsection.5.6.2}%
+\contentsline {section}{\numberline {5.7}Chapter Summary}{84}{section.5.7}%
+\contentsline {chapter}{\numberline {6}Implementation for IoT Devices}{86}{chapter.6}%
+\contentsline {section}{\numberline {6.1}IoT Hardware Landscape}{86}{section.6.1}%
+\contentsline {subsection}{\numberline {6.1.1}Processor Architectures}{86}{subsection.6.1.1}%
+\contentsline {subsection}{\numberline {6.1.2}ARM Cortex-M Series Deep Dive}{86}{subsection.6.1.2}%
+\contentsline {subsubsection}{DSP Instructions for PQC}{87}{section*.119}%
+\contentsline {subsection}{\numberline {6.1.3}Memory Hierarchy}{88}{subsection.6.1.3}%
+\contentsline {section}{\numberline {6.2}Memory Optimization}{88}{section.6.2}%
+\contentsline {subsection}{\numberline {6.2.1}Stack Usage Analysis}{88}{subsection.6.2.1}%
+\contentsline {subsection}{\numberline {6.2.2}Stack Reduction Techniques}{89}{subsection.6.2.2}%
+\contentsline {subsubsection}{On-the-Fly Matrix Generation}{89}{section*.123}%
+\contentsline {subsubsection}{Streaming Hash Computation}{90}{section*.124}%
+\contentsline {subsection}{\numberline {6.2.3}Code Size Optimization}{91}{subsection.6.2.3}%
+\contentsline {subsubsection}{Code Size Reduction Strategies}{91}{section*.126}%
+\contentsline {section}{\numberline {6.3}Performance Optimization}{92}{section.6.3}%
+\contentsline {subsection}{\numberline {6.3.1}NTT Optimization}{92}{subsection.6.3.1}%
+\contentsline {subsubsection}{Montgomery Arithmetic}{92}{section*.127}%
+\contentsline {subsubsection}{Optimized NTT Butterfly}{92}{section*.128}%
+\contentsline {subsubsection}{Assembly Optimization}{93}{section*.129}%
+\contentsline {subsection}{\numberline {6.3.2}Hash Function Optimization}{94}{subsection.6.3.2}%
+\contentsline {subsubsection}{Platform-Specific Keccak}{94}{section*.131}%
+\contentsline {subsection}{\numberline {6.3.3}Parallelism and Pipelining}{95}{subsection.6.3.3}%
+\contentsline {subsubsection}{Instruction-Level Parallelism}{95}{section*.132}%
+\contentsline {subsubsection}{SIMD on Cortex-M4}{95}{section*.133}%
+\contentsline {section}{\numberline {6.4}Side-Channel Countermeasures}{96}{section.6.4}%
+\contentsline {subsection}{\numberline {6.4.1}Timing Attacks}{96}{subsection.6.4.1}%
+\contentsline {subsubsection}{Constant-Time Principles}{96}{section*.134}%
+\contentsline {subsubsection}{Verifying Constant-Time Execution}{97}{section*.135}%
+\contentsline {subsection}{\numberline {6.4.2}Power Analysis}{97}{subsection.6.4.2}%
+\contentsline {subsubsection}{Countermeasures}{98}{section*.136}%
+\contentsline {subsection}{\numberline {6.4.3}Fault Attacks}{98}{subsection.6.4.3}%
+\contentsline {subsubsection}{Countermeasures}{98}{section*.138}%
+\contentsline {section}{\numberline {6.5}Hardware Acceleration}{99}{section.6.5}%
+\contentsline {subsection}{\numberline {6.5.1}Cryptographic Accelerators}{99}{subsection.6.5.1}%
+\contentsline {subsubsection}{Using Hardware SHA-3 (STM32U5)}{100}{section*.140}%
+\contentsline {subsection}{\numberline {6.5.2}FPGA and Custom Hardware}{101}{subsection.6.5.2}%
+\contentsline {section}{\numberline {6.6}Random Number Generation}{101}{section.6.6}%
+\contentsline {subsection}{\numberline {6.6.1}Importance in PQC}{101}{subsection.6.6.1}%
+\contentsline {subsection}{\numberline {6.6.2}Hardware RNG}{102}{subsection.6.6.2}%
+\contentsline {subsection}{\numberline {6.6.3}DRBG Seeding}{103}{subsection.6.6.3}%
+\contentsline {section}{\numberline {6.7}Testing and Validation}{104}{section.6.7}%
+\contentsline {subsection}{\numberline {6.7.1}Known Answer Tests (KAT)}{104}{subsection.6.7.1}%
+\contentsline {subsection}{\numberline {6.7.2}Benchmark Framework}{105}{subsection.6.7.2}%
+\contentsline {section}{\numberline {6.8}Chapter Summary}{107}{section.6.8}%
+\contentsline {chapter}{\numberline {7}Libraries and Tools}{108}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Overview of PQC Libraries}{108}{section.7.1}%
+\contentsline {section}{\numberline {7.2}liboqs (Open Quantum Safe)}{108}{section.7.2}%
+\contentsline {subsection}{\numberline {7.2.1}Features}{108}{subsection.7.2.1}%
+\contentsline {subsection}{\numberline {7.2.2}Installation}{109}{subsection.7.2.2}%
+\contentsline {subsection}{\numberline {7.2.3}API Reference}{109}{subsection.7.2.3}%
+\contentsline {subsection}{\numberline {7.2.4}Python Bindings}{111}{subsection.7.2.4}%
+\contentsline {section}{\numberline {7.3}PQClean}{112}{section.7.3}%
+\contentsline {subsection}{\numberline {7.3.1}Design Philosophy}{113}{subsection.7.3.1}%
+\contentsline {subsection}{\numberline {7.3.2}Structure}{113}{subsection.7.3.2}%
+\contentsline {subsection}{\numberline {7.3.3}API}{114}{subsection.7.3.3}%
+\contentsline {subsection}{\numberline {7.3.4}Integration Example}{114}{subsection.7.3.4}%
+\contentsline {section}{\numberline {7.4}pqm4: PQC for ARM Cortex-M4}{115}{section.7.4}%
+\contentsline {subsection}{\numberline {7.4.1}Supported Platforms}{116}{subsection.7.4.1}%
+\contentsline {subsection}{\numberline {7.4.2}Building and Running}{116}{subsection.7.4.2}%
+\contentsline {subsection}{\numberline {7.4.3}Implementation Variants}{117}{subsection.7.4.3}%
+\contentsline {subsection}{\numberline {7.4.4}Benchmark Results}{117}{subsection.7.4.4}%
+\contentsline {subsection}{\numberline {7.4.5}Using pqm4 in Your Project}{117}{subsection.7.4.5}%
+\contentsline {section}{\numberline {7.5}wolfSSL / wolfCrypt}{118}{section.7.5}%
+\contentsline {subsection}{\numberline {7.5.1}Features}{118}{subsection.7.5.1}%
+\contentsline {subsection}{\numberline {7.5.2}PQC Algorithms}{119}{subsection.7.5.2}%
+\contentsline {subsection}{\numberline {7.5.3}Building with PQC}{119}{subsection.7.5.3}%
+\contentsline {subsection}{\numberline {7.5.4}API Usage}{119}{subsection.7.5.4}%
+\contentsline {subsection}{\numberline {7.5.5}TLS 1.3 with Hybrid PQC}{121}{subsection.7.5.5}%
+\contentsline {section}{\numberline {7.6}Rust Libraries}{122}{section.7.6}%
+\contentsline {subsection}{\numberline {7.6.1}pqcrypto Crate}{122}{subsection.7.6.1}%
+\contentsline {subsection}{\numberline {7.6.2}RustCrypto PQC}{124}{subsection.7.6.2}%
+\contentsline {section}{\numberline {7.7}Development Tools}{125}{section.7.7}%
+\contentsline {subsection}{\numberline {7.7.1}Testing Tools}{125}{subsection.7.7.1}%
+\contentsline {subsection}{\numberline {7.7.2}Side-Channel Analysis}{125}{subsection.7.7.2}%
+\contentsline {subsection}{\numberline {7.7.3}Formal Verification}{125}{subsection.7.7.3}%
+\contentsline {section}{\numberline {7.8}Library Selection Guide}{126}{section.7.8}%
+\contentsline {subsection}{\numberline {7.8.1}Decision Matrix}{126}{subsection.7.8.1}%
+\contentsline {subsection}{\numberline {7.8.2}Recommendations by Platform}{126}{subsection.7.8.2}%
+\contentsline {section}{\numberline {7.9}Chapter Summary}{126}{section.7.9}%
+\contentsline {chapter}{\numberline {8}Protocol Integration}{128}{chapter.8}%
+\contentsline {section}{\numberline {8.1}TLS 1.3 with Post-Quantum Cryptography}{128}{section.8.1}%
+\contentsline {subsection}{\numberline {8.1.1}TLS 1.3 Handshake Overview}{128}{subsection.8.1.1}%
+\contentsline {subsection}{\numberline {8.1.2}Key Exchange Integration}{129}{subsection.8.1.2}%
+\contentsline {subsubsection}{Hybrid Key Exchange}{129}{section*.153}%
+\contentsline {subsubsection}{IANA Registered Groups}{129}{section*.154}%
+\contentsline {subsection}{\numberline {8.1.3}Authentication Integration}{130}{subsection.8.1.3}%
+\contentsline {subsubsection}{Certificate Chain Impact}{130}{section*.156}%
+\contentsline {subsubsection}{Hybrid Certificates}{130}{section*.158}%
+\contentsline {subsection}{\numberline {8.1.4}Handshake Size Analysis}{131}{subsection.8.1.4}%
+\contentsline {subsection}{\numberline {8.1.5}Performance Impact}{131}{subsection.8.1.5}%
+\contentsline {subsection}{\numberline {8.1.6}Implementation with wolfSSL}{131}{subsection.8.1.6}%
+\contentsline {section}{\numberline {8.2}DTLS 1.3 for Constrained IoT}{133}{section.8.2}%
+\contentsline {subsection}{\numberline {8.2.1}DTLS vs TLS for IoT}{134}{subsection.8.2.1}%
+\contentsline {subsection}{\numberline {8.2.2}DTLS Fragmentation with PQC}{134}{subsection.8.2.2}%
+\contentsline {subsection}{\numberline {8.2.3}Connection ID for IoT}{134}{subsection.8.2.3}%
+\contentsline {section}{\numberline {8.3}MQTT with PQC}{135}{section.8.3}%
+\contentsline {subsection}{\numberline {8.3.1}MQTT Architecture}{135}{subsection.8.3.1}%
+\contentsline {subsection}{\numberline {8.3.2}MQTT over TLS with PQC}{135}{subsection.8.3.2}%
+\contentsline {subsection}{\numberline {8.3.3}MQTT-SN for Constrained Devices}{137}{subsection.8.3.3}%
+\contentsline {section}{\numberline {8.4}CoAP with PQC}{137}{section.8.4}%
+\contentsline {subsection}{\numberline {8.4.1}CoAP Security Options}{138}{subsection.8.4.1}%
+\contentsline {subsection}{\numberline {8.4.2}OSCORE: Object Security for CoAP}{138}{subsection.8.4.2}%
+\contentsline {subsection}{\numberline {8.4.3}EDHOC: Lightweight Key Exchange}{139}{subsection.8.4.3}%
+\contentsline {section}{\numberline {8.5}Matter Protocol}{140}{section.8.5}%
+\contentsline {subsection}{\numberline {8.5.1}Matter Security Architecture}{140}{subsection.8.5.1}%
+\contentsline {subsection}{\numberline {8.5.2}Matter Commissioning with PQC}{141}{subsection.8.5.2}%
+\contentsline {section}{\numberline {8.6}LoRaWAN Security}{142}{section.8.6}%
+\contentsline {subsection}{\numberline {8.6.1}LoRaWAN Constraints}{142}{subsection.8.6.1}%
+\contentsline {subsection}{\numberline {8.6.2}PQC Strategies for LoRaWAN}{143}{subsection.8.6.2}%
+\contentsline {subsubsection}{Option 1: Pre-Provisioned Keys}{143}{section*.169}%
+\contentsline {subsubsection}{Option 2: Out-of-Band Key Exchange}{143}{section*.170}%
+\contentsline {subsubsection}{Option 3: Lightweight PQC Research}{144}{section*.171}%
+\contentsline {section}{\numberline {8.7}Zigbee and Thread}{144}{section.8.7}%
+\contentsline {subsection}{\numberline {8.7.1}Zigbee Security}{144}{subsection.8.7.1}%
+\contentsline {subsection}{\numberline {8.7.2}Thread Security}{144}{subsection.8.7.2}%
+\contentsline {section}{\numberline {8.8}Protocol Migration Strategy}{145}{section.8.8}%
+\contentsline {subsection}{\numberline {8.8.1}Phased Approach}{145}{subsection.8.8.1}%
+\contentsline {subsection}{\numberline {8.8.2}Backward Compatibility}{145}{subsection.8.8.2}%
+\contentsline {section}{\numberline {8.9}Chapter Summary}{146}{section.8.9}%
+\contentsline {chapter}{\numberline {9}Security Analysis and Best Practices}{148}{chapter.9}%
+\contentsline {section}{\numberline {9.1}Threat Modeling for PQC-IoT Systems}{148}{section.9.1}%
+\contentsline {subsection}{\numberline {9.1.1}The STRIDE-PQ Framework}{148}{subsection.9.1.1}%
+\contentsline {subsection}{\numberline {9.1.2}Harvest-Now-Decrypt-Later (HNDL) Risk Assessment}{149}{subsection.9.1.2}%
+\contentsline {subsection}{\numberline {9.1.3}IoT-Specific Attack Surfaces}{149}{subsection.9.1.3}%
+\contentsline {subsection}{\numberline {9.1.4}Threat Actor Profiling}{151}{subsection.9.1.4}%
+\contentsline {section}{\numberline {9.2}Side-Channel Vulnerability Analysis}{151}{section.9.2}%
+\contentsline {subsection}{\numberline {9.2.1}Algorithm-Specific Vulnerabilities}{151}{subsection.9.2.1}%
+\contentsline {subsubsection}{ML-KEM Side-Channel Profile}{151}{section*.177}%
+\contentsline {subsubsection}{ML-DSA Side-Channel Profile}{154}{section*.179}%
+\contentsline {subsubsection}{Falcon Side-Channel Profile}{156}{section*.180}%
+\contentsline {subsection}{\numberline {9.2.2}Power Analysis Countermeasures}{158}{subsection.9.2.2}%
+\contentsline {subsubsection}{Masking Techniques}{158}{section*.182}%
+\contentsline {subsubsection}{Shuffling Countermeasures}{160}{section*.183}%
+\contentsline {subsection}{\numberline {9.2.3}Fault Injection Countermeasures}{162}{subsection.9.2.3}%
+\contentsline {section}{\numberline {9.3}Security Parameter Selection}{165}{section.9.3}%
+\contentsline {subsection}{\numberline {9.3.1}NIST Security Levels Explained}{165}{subsection.9.3.1}%
+\contentsline {subsection}{\numberline {9.3.2}Parameter Selection by Application Domain}{165}{subsection.9.3.2}%
+\contentsline {subsection}{\numberline {9.3.3}Conservative vs. Aggressive Parameter Choices}{173}{subsection.9.3.3}%
+\contentsline {section}{\numberline {9.4}Key Management Best Practices}{174}{section.9.4}%
+\contentsline {subsection}{\numberline {9.4.1}Key Lifecycle Management}{174}{subsection.9.4.1}%
+\contentsline {subsection}{\numberline {9.4.2}Key Generation Requirements}{174}{subsection.9.4.2}%
+\contentsline {subsection}{\numberline {9.4.3}Secure Key Storage}{179}{subsection.9.4.3}%
+\contentsline {subsection}{\numberline {9.4.4}Key Rotation Strategies}{182}{subsection.9.4.4}%
+\contentsline {subsection}{\numberline {9.4.5}Key Distribution for IoT Networks}{187}{subsection.9.4.5}%
+\contentsline {section}{\numberline {9.5}Secure Boot with Post-Quantum Signatures}{187}{section.9.5}%
+\contentsline {subsection}{\numberline {9.5.1}Secure Boot Architecture}{189}{subsection.9.5.1}%
+\contentsline {subsection}{\numberline {9.5.2}Algorithm Selection for Secure Boot}{189}{subsection.9.5.2}%
+\contentsline {subsection}{\numberline {9.5.3}PQC Secure Boot Implementation}{189}{subsection.9.5.3}%
+\contentsline {subsection}{\numberline {9.5.4}Boot Time Analysis}{196}{subsection.9.5.4}%
+\contentsline {subsection}{\numberline {9.5.5}Hardware Root of Trust Considerations}{197}{subsection.9.5.5}%
+\contentsline {section}{\numberline {9.6}Secure Firmware Updates with PQC}{200}{section.9.6}%
+\contentsline {subsection}{\numberline {9.6.1}OTA Update Architecture}{200}{subsection.9.6.1}%
+\contentsline {subsection}{\numberline {9.6.2}Update Package Format}{200}{subsection.9.6.2}%
+\contentsline {subsection}{\numberline {9.6.3}Bandwidth-Efficient Update Strategies}{203}{subsection.9.6.3}%
+\contentsline {subsection}{\numberline {9.6.4}A/B Update Scheme with Rollback}{207}{subsection.9.6.4}%
+\contentsline {subsection}{\numberline {9.6.5}Update Verification Pipeline}{213}{subsection.9.6.5}%
+\contentsline {section}{\numberline {9.7}Certificate Lifecycle Management}{216}{section.9.7}%
+\contentsline {subsection}{\numberline {9.7.1}PQC Certificate Formats}{216}{subsection.9.7.1}%
+\contentsline {subsection}{\numberline {9.7.2}Certificate Provisioning Strategies}{216}{subsection.9.7.2}%
+\contentsline {subsection}{\numberline {9.7.3}Certificate Renewal and Rotation}{221}{subsection.9.7.3}%
+\contentsline {subsection}{\numberline {9.7.4}Certificate Revocation for IoT}{226}{subsection.9.7.4}%
+\contentsline {subsection}{\numberline {9.7.5}Certificate Chain Optimization}{230}{subsection.9.7.5}%
+\contentsline {section}{\numberline {9.8}Compliance Frameworks and Standards}{235}{section.9.8}%
+\contentsline {subsection}{\numberline {9.8.1}CNSA 2.0 (Commercial National Security Algorithm Suite)}{236}{subsection.9.8.1}%
+\contentsline {subsection}{\numberline {9.8.2}NIST Post-Quantum Cryptography Standards}{240}{subsection.9.8.2}%
+\contentsline {subsection}{\numberline {9.8.3}Industry-Specific Compliance}{240}{subsection.9.8.3}%
+\contentsline {subsubsection}{Healthcare (HIPAA/HITECH)}{240}{section*.201}%
+\contentsline {subsubsection}{Financial Services (PCI DSS)}{240}{section*.203}%
+\contentsline {subsubsection}{Automotive (ISO/SAE 21434)}{245}{section*.204}%
+\contentsline {subsection}{\numberline {9.8.4}FIPS 140-3 Validation}{245}{subsection.9.8.4}%
+\contentsline {subsection}{\numberline {9.8.5}European Regulations (eIDAS 2.0, Cyber Resilience Act)}{249}{subsection.9.8.5}%
+\contentsline {subsection}{\numberline {9.8.6}Compliance Implementation Checklist}{249}{subsection.9.8.6}%
+\contentsline {section}{\numberline {9.9}Chapter Summary}{249}{section.9.9}%
+\contentsline {chapter}{\numberline {10}Migration Roadmaps and Cost Analysis}{253}{chapter.10}%
+\contentsline {section}{\numberline {10.1}Migration Timeline Overview}{253}{section.10.1}%
+\contentsline {subsection}{\numberline {10.1.1}Industry Consensus Timeline}{253}{subsection.10.1.1}%
+\contentsline {subsection}{\numberline {10.1.2}IoT-Specific Migration Challenges}{254}{subsection.10.1.2}%
+\contentsline {section}{\numberline {10.2}Migration Strategies}{254}{section.10.2}%
+\contentsline {subsection}{\numberline {10.2.1}Strategy 1: Crypto-Agility First}{254}{subsection.10.2.1}%
+\contentsline {subsection}{\numberline {10.2.2}Strategy 2: Phased Hybrid Deployment}{259}{subsection.10.2.2}%
+\contentsline {subsection}{\numberline {10.2.3}Strategy 3: Risk-Based Prioritization}{259}{subsection.10.2.3}%
+\contentsline {section}{\numberline {10.3}Cost Analysis Framework}{266}{section.10.3}%
+\contentsline {subsection}{\numberline {10.3.1}Total Cost of Migration}{266}{subsection.10.3.1}%
+\contentsline {subsection}{\numberline {10.3.2}Cost-Benefit Analysis}{275}{subsection.10.3.2}%
+\contentsline {section}{\numberline {10.4}Implementation Checklist}{276}{section.10.4}%
+\contentsline {section}{\numberline {10.5}Lessons Learned and Recommendations}{276}{section.10.5}%
+\contentsline {subsection}{\numberline {10.5.1}Key Success Factors}{276}{subsection.10.5.1}%
+\contentsline {subsection}{\numberline {10.5.2}Common Pitfalls to Avoid}{277}{subsection.10.5.2}%
+\contentsline {subsection}{\numberline {10.5.3}Final Recommendations}{277}{subsection.10.5.3}%
+\contentsline {section}{\numberline {10.6}Chapter Summary}{278}{section.10.6}%
+\contentsline {chapter}{Conclusion}{280}{chapter*.217}%
+\contentsline {chapter}{References}{282}{chapter*.218}%
+\contentsline {chapter}{\numberline {A}Algorithm Parameter Reference}{285}{appendix.A}%
+\contentsline {section}{\numberline {A.1}ML-KEM Parameters}{285}{section.A.1}%
+\contentsline {section}{\numberline {A.2}ML-DSA Parameters}{285}{section.A.2}%
+\contentsline {section}{\numberline {A.3}SLH-DSA Parameters}{285}{section.A.3}%
+\contentsline {chapter}{\numberline {B}Benchmark Data}{287}{appendix.B}%
+\contentsline {section}{\numberline {B.1}pqm4 Benchmarks (STM32F4 @ 168 MHz)}{287}{section.B.1}%
+\contentsline {chapter}{\numberline {C}Code Examples Index}{288}{appendix.C}%
+\contentsline {chapter}{\numberline {D}Glossary of Terms}{289}{appendix.D}%

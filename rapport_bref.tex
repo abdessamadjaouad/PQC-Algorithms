@@ -1,0 +1,282 @@
+\documentclass[12pt,a4paper]{article}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{xcolor}
+\usepackage{longtable}
+
+% Page geometry
+\geometry{margin=2.5cm}
+
+% Header/Footer
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Research Progress Report - December 2025}
+\lhead{PQC Technologies Survey}
+\rfoot{Page \thepage}
+
+% Colors
+\definecolor{ensamblue}{RGB}{0,51,102}
+
+% Hyperref setup
+\hypersetup{
+    colorlinks=true,
+    linkcolor=ensamblue,
+    urlcolor=blue
+}
+
+\begin{document}
+
+% ============================================
+% TITLE PAGE
+% ============================================
+\begin{titlepage}
+    \centering
+    
+    \includegraphics[width=6cm]{ensam_logo.png}
+    
+    \vspace{1cm}
+    
+    {\large \textbf{Master 2 - Big Data and IoT}}\\[0.2cm]
+    {\large ENSAM Casablanca | 2025-2026}
+    
+    \vspace{3cm}
+    
+    \rule{\textwidth}{1.5pt}\\[0.5cm]
+    {\LARGE \textbf{Research Progress Report}}\\[0.3cm]
+    {\Large Post-Quantum Cryptography Technologies for IoT Devices}\\[0.5cm]
+    \rule{\textwidth}{1.5pt}
+    
+    \vspace{2.5cm}
+    
+    % PQC Image
+    \includegraphics[width=0.7\textwidth]{pqc.png}
+    
+    \vspace{2.5cm}
+    
+    \begin{minipage}{0.45\textwidth}
+        \begin{flushleft}
+            \textbf{Student:} Abdessamad JAOUAD
+        \end{flushleft}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \begin{flushright}
+            \textbf{Supervisor:} Prof. Ibrahim GUELZIM
+        \end{flushright}
+    \end{minipage}
+    
+    \vfill
+    
+    {\large December 2025}
+    
+\end{titlepage}
+
+% ============================================
+% MAIN CONTENT
+% ============================================
+
+\section{Research Objective}
+
+This research project aims to \textbf{survey, catalog, and analyze} the latest Post-Quantum Cryptography (PQC) technologies available for resource-constrained IoT devices. The goal is to produce a comprehensive reference document that:
+
+\begin{itemize}[leftmargin=*]
+    \item Identifies all viable PQC algorithms standardized or proposed for IoT
+    \item Documents available libraries and tools for implementation
+    \item Compares their characteristics, trade-offs, and suitability for small devices
+    \item Provides a structured resource for researchers and developers entering this field
+\end{itemize}
+
+\textbf{Note:} This is a \textit{survey/research} project --- the deliverable is a well-structured report documenting findings, not a software implementation.
+
+\section{PQC Technologies Identified}
+
+\subsection{NIST-Standardized Algorithms (August 2024)}
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{llll}
+\toprule
+\textbf{Algorithm} & \textbf{Type} & \textbf{Standard} & \textbf{IoT Suitability} \\
+\midrule
+ML-KEM (Kyber) & Key Encapsulation & FIPS 203 & \textcolor{green!60!black}{High} \\
+ML-DSA (Dilithium) & Digital Signature & FIPS 204 & \textcolor{orange}{Medium} \\
+SLH-DSA (SPHINCS+) & Digital Signature & FIPS 205 & \textcolor{red}{Low} (large signatures) \\
+\bottomrule
+\end{tabular}
+\caption{NIST PQC standards finalized in 2024}
+\end{table}
+
+\subsection{Additional Candidates Under Evaluation}
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Falcon} -- Compact signatures, but requires floating-point (challenging for MCUs)
+    \item \textbf{BIKE, HQC, Classic McEliece} -- Code-based alternatives (Round 4 candidates)
+    \item \textbf{FrodoKEM} -- Conservative LWE-based, larger keys but simpler assumptions
+\end{itemize}
+
+\section{Programming Languages Used by PQC Community}
+
+Based on analysis of major PQC projects, the cryptographic community predominantly uses:
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{lll}
+\toprule
+\textbf{Project} & \textbf{Primary Languages} & \textbf{Purpose} \\
+\midrule
+\texttt{liboqs} & C (67.9\%), Assembly (30.7\%) & Reference library \\
+\texttt{PQClean} & C (51.1\%), Assembly (48.3\%) & Clean implementations \\
+\texttt{pqm4} & C (64.4\%), Assembly (34.1\%) & ARM Cortex-M4 optimized \\
+\bottomrule
+\end{tabular}
+\caption{Language breakdown of major PQC projects (from GitHub)}
+\end{table}
+
+\textbf{Key observation:} PQC engineers chose \textbf{C and Assembly} as primary languages for performance-critical cryptographic code. Higher-level language bindings (Python, Rust, Go, Java) are provided as wrappers.
+
+\section{Reference Libraries \& Implementations}
+
+\subsection{Core C Libraries (Industry Standard)}
+
+\begin{table}[h]
+\centering
+\footnotesize
+\begin{tabular}{lp{5.5cm}l}
+\toprule
+\textbf{Library} & \textbf{Description} & \textbf{Algorithms} \\
+\midrule
+\texttt{liboqs} & Open Quantum Safe C library; 117 contributors, Linux Foundation backed & ML-KEM, ML-DSA, Falcon, SPHINCS+, HQC, BIKE \\
+\texttt{PQClean} & Clean, portable C99 implementations for integration & Kyber, Dilithium, Falcon, SPHINCS+ \\
+\texttt{pqm4} & ARM Cortex-M4 optimized (EU PQCRYPTO project) & All NIST finalists \\
+\texttt{pq-crystals} & Official Kyber/Dilithium reference code & ML-KEM, ML-DSA \\
+\bottomrule
+\end{tabular}
+\caption{Core C libraries used by PQC institutions}
+\end{table}
+
+\subsection{Language Bindings \& Wrappers}
+
+\begin{table}[h]
+\centering
+\footnotesize
+\begin{tabular}{llp{6cm}}
+\toprule
+\textbf{Language} & \textbf{Library} & \textbf{Notes} \\
+\midrule
+Rust & \texttt{pqcrypto}, \texttt{liboqs-rust} & Auto-generated wrappers from PQClean; memory-safe \\
+Python & \texttt{liboqs-python} & Bindings to liboqs C library \\
+Go & \texttt{liboqs-go} & Go bindings for liboqs \\
+Java & \texttt{liboqs-java} & JNI bindings for liboqs \\
+C++ & \texttt{liboqs-cpp} & C++ wrapper for liboqs \\
+C\#/.NET & \texttt{liboqs-dotnet} & .NET bindings \\
+JavaScript & \texttt{node-pqclean} & Node.js/WebAssembly interface \\
+\bottomrule
+\end{tabular}
+\caption{Language bindings provided by Open Quantum Safe project}
+\end{table}
+
+\subsection{Embedded/IoT-Specific Libraries}
+
+\begin{table}[h]
+\centering
+\footnotesize
+\begin{tabular}{lp{4cm}p{5cm}}
+\toprule
+\textbf{Library} & \textbf{Target Platform} & \textbf{Features} \\
+\midrule
+\texttt{pqm4} & ARM Cortex-M4 (STM32) & Assembly-optimized NTT, benchmarking framework \\
+\texttt{wolfSSL} & Embedded/IoT & TLS 1.3 with Kyber/Dilithium support \\
+\texttt{mbed TLS} & ARM Cortex-M & Experimental PQC branch \\
+\texttt{liboqs + Zephyr} & Zephyr RTOS & Cross-compilation support \\
+\bottomrule
+\end{tabular}
+\caption{Libraries targeting constrained IoT devices}
+\end{table}
+
+\section{Key Findings from Literature Review}
+
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{ML-KEM-512} is the most IoT-friendly: 800B public key, 768B ciphertext, fast NTT-based operations
+    
+    \item \textbf{Memory constraints} are the primary barrier: Kyber requires ~2KB RAM minimum; Dilithium needs ~4KB
+    
+    \item \textbf{Hybrid schemes} (classical + PQC) are recommended during the transition period for backward compatibility
+    
+    \item \textbf{Hardware acceleration} (e.g., NTT coprocessors) significantly improves performance on Cortex-M4+
+    
+    \item \textbf{Side-channel resistance} is critical: constant-time implementations are mandatory for IoT deployments
+\end{enumerate}
+
+\section{Resources Collected}
+
+\subsection{NIST Official Documents}
+\begin{itemize}[leftmargin=*]
+    \item FIPS 203 -- ML-KEM Standard \hfill \textit{resources/nist-fips-203-ml-kem.pdf}
+    \item FIPS 204 -- ML-DSA Standard \hfill \textit{resources/nist-fips-204-ml-dsa.pdf}
+    \item PQC Migration Guidelines \hfill \textit{resources/pqc-migration-project-description-final.pdf}
+\end{itemize}
+
+\subsection{Academic Surveys \& Foundational Papers}
+\begin{itemize}[leftmargin=*]
+    \item Peikert -- ``A Decade of Lattice Cryptography'' \hfill \textit{resources/lattice-survey.pdf}
+    \item Regev -- ``The Learning with Errors Problem'' \hfill \textit{resources/lwesurvey.pdf}
+    \item Bernstein \& Lange -- ``Post-Quantum Cryptography'' \hfill \textit{resources/qcrypto.pdf}
+    \item Preskill -- ``Quantum Computing in the NISQ Era'' \hfill \textit{resources/arxiv-1801.00862-preskill-nisq.pdf}
+\end{itemize}
+
+\subsection{Online References}
+\begin{itemize}[leftmargin=*]
+    \item NIST PQC Project: \url{https://csrc.nist.gov/projects/post-quantum-cryptography}
+    \item Open Quantum Safe: \url{https://openquantumsafe.org}
+    \item pqm4 Benchmarks: \url{https://github.com/mupq/pqm4}
+    \item PQClean: \url{https://github.com/PQClean/PQClean}
+\end{itemize}
+
+\section{Next Steps}
+
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Expand Technology Survey}
+    \begin{itemize}
+        \item Research NIST Round 4 candidates (BIKE, HQC, Classic McEliece)
+        \item Investigate hardware-accelerated PQC solutions (FPGA, ASIC)
+        \item Survey commercial IoT products with PQC support
+    \end{itemize}
+    
+    \item \textbf{Benchmark Data Collection}
+    \begin{itemize}
+        \item Gather published benchmarks from pqm4, liboqs for comparison tables
+        \item Document memory/speed trade-offs per algorithm per platform
+    \end{itemize}
+    
+    \item \textbf{Report Structuring}
+    \begin{itemize}
+        \item Organize findings into a comprehensive reference document
+        \item Create decision flowcharts for algorithm selection
+        \item Write practical guidelines for IoT developers
+    \end{itemize}
+    
+    \item \textbf{Final Deliverable}
+    \begin{itemize}
+        \item Complete survey report with all technologies, libraries, and recommendations
+        \item Include comparison tables, references, and getting-started guides
+    \end{itemize}
+\end{enumerate}
+
+
+\noindent\rule{\textwidth}{0.4pt}
+\small
+\textbf{Repository:} \url{https://github.com/abdessamadjaouad/PQC-Algorithms}
+
+\end{document}
