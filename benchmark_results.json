@@ -1,0 +1,152 @@
+{
+  "compression": {
+    "iot_small": [
+      {
+        "algorithm": "zlib",
+        "original_size": 1024,
+        "compressed_size": 201,
+        "compression_time": 7.76980014052242e-05,
+        "decompression_time": 8.84600740391761e-06,
+        "compression_ratio": 5.0945273631840795,
+        "throughput_mbps": 11.283998897643436,
+        "success": true
+      }
+    ],
+    "iot_medium": [
+      {
+        "algorithm": "zlib",
+        "original_size": 10240,
+        "compressed_size": 256,
+        "compression_time": 8.225299825426191e-05,
+        "decompression_time": 1.1801996151916683e-05,
+        "compression_ratio": 40.0,
+        "throughput_mbps": 103.82888289618019,
+        "success": true
+      }
+    ],
+    "iot_large": [
+      {
+        "algorithm": "zlib",
+        "original_size": 102400,
+        "compressed_size": 667,
+        "compression_time": 0.000464115000795573,
+        "decompression_time": 9.070200030691922e-05,
+        "compression_ratio": 153.5232383808096,
+        "throughput_mbps": 176.01524431649457,
+        "success": true
+      }
+    ],
+    "repetitive": [
+      {
+        "algorithm": "zlib",
+        "original_size": 10000,
+        "compressed_size": 35,
+        "compression_time": 5.333199806045741e-05,
+        "decompression_time": 1.6453996067866683e-05,
+        "compression_ratio": 285.7142857142857,
+        "throughput_mbps": 136.656979429513,
+        "success": true
+      }
+    ],
+    "random": [
+      {
+        "algorithm": "zlib",
+        "original_size": 10240,
+        "compressed_size": 372,
+        "compression_time": 7.976200140547007e-05,
+        "decompression_time": 7.809998351149261e-06,
+        "compression_ratio": 27.526881720430108,
+        "throughput_mbps": 111.5153819387554,
+        "success": true
+      }
+    ]
+  },
+  "pqc": [
+    {
+      "algorithm": "Kyber512",
+      "pk_size": 800,
+      "sk_size": 1632,
+      "ct_size": 768,
+      "keygen_time": 0.001,
+      "encap_time": 0.0015,
+      "decap_time": 0.0015,
+      "success": true,
+      "simulated": true
+    },
+    {
+      "algorithm": "Kyber768",
+      "pk_size": 1184,
+      "sk_size": 2400,
+      "ct_size": 1088,
+      "keygen_time": 0.001,
+      "encap_time": 0.0015,
+      "decap_time": 0.0015,
+      "success": true,
+      "simulated": true
+    },
+    {
+      "algorithm": "Kyber1024",
+      "pk_size": 1568,
+      "sk_size": 3168,
+      "ct_size": 1568,
+      "keygen_time": 0.001,
+      "encap_time": 0.0015,
+      "decap_time": 0.0015,
+      "success": true,
+      "simulated": true
+    }
+  ],
+  "combined": [
+    {
+      "pqc_algorithm": "Kyber512",
+      "compression": "zlib",
+      "original_size": 10240,
+      "success": true,
+      "compressed_size": 256,
+      "compression_time": 4.348999937064946e-05,
+      "decompression_time": 1.0774005204439163e-05,
+      "compression_ratio": 40.0,
+      "pqc_overhead": 768,
+      "keygen_time": 0.001,
+      "encap_time": 0.0015,
+      "decap_time": 0.0015,
+      "total_transmission": 1024,
+      "total_time": 0.004054264004575089,
+      "bandwidth_savings": 90.0
+    },
+    {
+      "pqc_algorithm": "Kyber768",
+      "compression": "zlib",
+      "original_size": 10240,
+      "success": true,
+      "compressed_size": 256,
+      "compression_time": 4.1143997805193067e-05,
+      "decompression_time": 1.008900289889425e-05,
+      "compression_ratio": 40.0,
+      "pqc_overhead": 1088,
+      "keygen_time": 0.001,
+      "encap_time": 0.0015,
+      "decap_time": 0.0015,
+      "total_transmission": 1344,
+      "total_time": 0.004051233000704087,
+      "bandwidth_savings": 86.875
+    },
+    {
+      "pqc_algorithm": "Kyber1024",
+      "compression": "zlib",
+      "original_size": 10240,
+      "success": true,
+      "compressed_size": 256,
+      "compression_time": 3.9395003113895655e-05,
+      "decompression_time": 9.700001101009548e-06,
+      "compression_ratio": 40.0,
+      "pqc_overhead": 1568,
+      "keygen_time": 0.001,
+      "encap_time": 0.0015,
+      "decap_time": 0.0015,
+      "total_transmission": 1824,
+      "total_time": 0.004049095004214905,
+      "bandwidth_savings": 82.1875
+    }
+  ]
+}

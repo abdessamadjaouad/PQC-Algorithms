@@ -1,0 +1,31 @@
+% Benchmark Results - Generated 2026-01-04 05:35
+
+\begin{table}[h]
+\centering
+\caption{Compression Algorithm Performance}
+\begin{tabular}{lccccc}
+\hline
+Algorithm & Size (KB) & Compressed & Ratio & Time (ms) & Throughput \\
+\hline
+zlib & 1.0 & 0.2 & 5.09x & 0.08 & 11.3 MB/s \\
+zlib & 10.0 & 0.2 & 40.00x & 0.08 & 103.8 MB/s \\
+zlib & 100.0 & 0.7 & 153.52x & 0.46 & 176.0 MB/s \\
+zlib & 9.8 & 0.0 & 285.71x & 0.05 & 136.7 MB/s \\
+zlib & 10.0 & 0.4 & 27.53x & 0.08 & 111.5 MB/s \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{Post-Quantum Cryptography Performance}
+\begin{tabular}{lcccccc}
+\hline
+Algorithm & PK (B) & CT (B) & KeyGen (ms) & Encap (ms) & Decap (ms) \\
+\hline
+Kyber512 & 800 & 768 & 1.00 & 1.50 & 1.50 \\
+Kyber768 & 1184 & 1088 & 1.00 & 1.50 & 1.50 \\
+Kyber1024 & 1568 & 1568 & 1.00 & 1.50 & 1.50 \\
+\hline
+\end{tabular}
+\end{table}
