@@ -1,0 +1,49 @@
+This is BibTeX, Version 0.99d (TeX Live 2026/dev/Arch Linux)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: main.aux
+The style file: plainnat.bst
+Database file #1: references.bib
+Warning--empty booktitle in collet2013lz4
+Warning--empty journal in shor1994algorithms
+You've used 13 entries,
+            2773 wiz_defined-function locations,
+            666 strings with 6778 characters,
+and the built_in function-call counts, 5544 in all, are:
+= -- 495
+> -- 277
+< -- 12
++ -- 97
+- -- 84
+* -- 392
+:= -- 845
+add.period$ -- 39
+call.type$ -- 13
+change.case$ -- 65
+chr.to.int$ -- 13
+cite$ -- 28
+duplicate$ -- 267
+empty$ -- 491
+format.name$ -- 105
+if$ -- 1173
+int.to.chr$ -- 1
+int.to.str$ -- 1
+missing$ -- 10
+newline$ -- 73
+num.names$ -- 52
+pop$ -- 145
+preamble$ -- 1
+purify$ -- 52
+quote$ -- 0
+skip$ -- 215
+stack$ -- 0
+substring$ -- 200
+swap$ -- 29
+text.length$ -- 2
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 143
+warning$ -- 2
+while$ -- 54
+width$ -- 0
+write$ -- 168
+(There were 2 warnings)

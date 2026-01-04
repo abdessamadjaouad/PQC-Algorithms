@@ -1,0 +1,496 @@
+% ============================================================================
+% CHAPTER 4: COMBINED APPROACH
+% ============================================================================
+
+\chapter{Combined Approach: PQC with Compression}
+\label{chap:combined}
+
+\section{Introduction}
+
+In the previous chapters, we studied Post-Quantum Cryptography (Chapter 2) and compression algorithms (Chapter 3) separately. Now we bring these two domains together into a combined approach that addresses the main challenge of this thesis: how to enable secure, efficient IoT communications in the post-quantum era.
+
+The key insight is simple but powerful: \textbf{compress data before encrypting it}. This approach can significantly reduce the bandwidth overhead caused by PQC, making quantum-resistant security practical for resource-constrained IoT devices.
+
+In this chapter, we present our proposed architecture, explain the theoretical foundations, justify our algorithm choices, and analyze the expected performance gains.
+
+\section{Why Compress Before Encrypting}
+
+The order of operations matters significantly. We must compress \textit{before} encrypting, not after. This section explains why.
+
+\subsection{Theoretical Foundation}
+
+Encryption transforms plaintext into ciphertext that appears random. A good encryption algorithm produces output that is indistinguishable from random noise. This has an important consequence for compression:
+
+\begin{itemize}
+    \item \textbf{Plaintext}: Has patterns, redundancy, and structure → \textbf{compressible}
+    \item \textbf{Ciphertext}: Appears random, no patterns → \textbf{incompressible}
+\end{itemize}
+
+Therefore, we must follow this order:
+
+\begin{equation}
+\text{Plaintext} \xrightarrow{\text{Compress}} \text{Compressed} \xrightarrow{\text{Encrypt}} \text{Ciphertext}
+\end{equation}
+
+If we encrypt first, the data becomes random-looking and compression becomes ineffective.
+
+\subsection{Entropy and Encryption}
+
+From information theory, we know that compression works by reducing redundancy. The entropy $H$ of a message represents its minimum possible compressed size. For a source with symbol probabilities $p_i$:
+
+\begin{equation}
+H = -\sum_{i} p_i \log_2(p_i)
+\end{equation}
+
+After encryption, the ciphertext has maximum entropy (appears uniformly random). For a binary string of length $n$:
+\begin{equation}
+H_{encrypted} \approx n \text{ bits}
+\end{equation}
+
+This means encrypted data cannot be compressed further without the decryption key. Compressing after encryption yields essentially zero benefit.
+
+\subsection{Security Considerations}
+
+A natural question arises: does compressing before encrypting affect security?
+
+\textbf{Answer}: In most cases, no. The security of modern encryption algorithms (including Kyber) does not depend on the statistical properties of the plaintext. Kyber's security is based on the hardness of the Module-LWE problem, not on the entropy of the input.
+
+However, there is one caveat: \textbf{compression can leak information about plaintext length}. If an attacker can observe the compressed size, they may infer something about the content. For most IoT applications, this is not a concern because:
+\begin{enumerate}
+    \item IoT messages are typically small and similar in size
+    \item The attacker already knows the general type of data (sensor readings, etc.)
+    \item Padding can be added if length confidentiality is required
+\end{enumerate}
+
+\section{Proposed Architecture}
+
+We now present our architecture for combining PQC with compression in IoT communications.
+
+\subsection{System Overview}
+
+Figure \ref{fig:system_architecture} shows the high-level architecture of our proposed system.
+
+\begin{figure}[H]
+\centering
+\begin{tabular}{|c|}
+\hline
+\\[0.2cm]
+\textbf{IoT Device (Sender)} \\[0.3cm]
+\framebox[0.8\textwidth]{
+\begin{minipage}{0.75\textwidth}
+\centering
+Sensor Data → \textbf{Compress} → \textbf{Encrypt (Kyber)} → Transmit
+\end{minipage}
+} \\[0.5cm]
+$\downarrow$ \textit{Wireless Channel (LoRa, NB-IoT, etc.)} $\downarrow$ \\[0.5cm]
+\textbf{Gateway/Server (Receiver)} \\[0.3cm]
+\framebox[0.8\textwidth]{
+\begin{minipage}{0.75\textwidth}
+\centering
+Receive → \textbf{Decrypt (Kyber)} → \textbf{Decompress} → Process Data
+\end{minipage}
+} \\[0.2cm]
+\\
+\hline
+\end{tabular}
+\caption{High-level system architecture}
+\label{fig:system_architecture}
+\end{figure}
+
+The architecture consists of two main components:
+
+\begin{enumerate}
+    \item \textbf{IoT Device (Sender)}: Collects sensor data, compresses it, encrypts with Kyber, and transmits over a low-power wireless network.
+    
+    \item \textbf{Gateway/Server (Receiver)}: Receives the data, decrypts with Kyber, decompresses, and processes the original sensor data.
+\end{enumerate}
+
+\subsection{Workflow: Compress → Encrypt → Transmit}
+
+The detailed workflow is shown in Algorithm \ref{alg:send_workflow}.
+
+\begin{algorithm}[H]
+\caption{Sender Workflow: Compress and Encrypt}
+\label{alg:send_workflow}
+\begin{algorithmic}[1]
+\Require Sensor data $D$, Receiver's public key $pk$
+\Ensure Transmitted message $M$
+\State \Comment{Step 1: Compress the data}
+\State $D_{compressed} \gets \Call{Compress}{D}$ \Comment{Using ZLIB or Zstd}
+\State \Comment{Step 2: Generate shared secret using Kyber}
+\State $(ciphertext, sharedSecret) \gets \Call{KyberEncapsulate}{pk}$
+\State \Comment{Step 3: Derive symmetric key from shared secret}
+\State $symmetricKey \gets \Call{KDF}{sharedSecret}$ \Comment{e.g., HKDF-SHA256}
+\State \Comment{Step 4: Encrypt compressed data with symmetric cipher}
+\State $D_{encrypted} \gets \Call{AES-GCM-Encrypt}{symmetricKey, D_{compressed}}$
+\State \Comment{Step 5: Construct message}
+\State $M \gets ciphertext \| D_{encrypted}$
+\State \Call{Transmit}{$M$}
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[H]
+\caption{Receiver Workflow: Decrypt and Decompress}
+\label{alg:receive_workflow}
+\begin{algorithmic}[1]
+\Require Received message $M$, Private key $sk$
+\Ensure Original sensor data $D$
+\State \Comment{Step 1: Parse the message}
+\State $(ciphertext, D_{encrypted}) \gets \Call{Parse}{M}$
+\State \Comment{Step 2: Recover shared secret using Kyber}
+\State $sharedSecret \gets \Call{KyberDecapsulate}{sk, ciphertext}$
+\State \Comment{Step 3: Derive symmetric key}
+\State $symmetricKey \gets \Call{KDF}{sharedSecret}$
+\State \Comment{Step 4: Decrypt to get compressed data}
+\State $D_{compressed} \gets \Call{AES-GCM-Decrypt}{symmetricKey, D_{encrypted}}$
+\State \Comment{Step 5: Decompress to get original data}
+\State $D \gets \Call{Decompress}{D_{compressed}}$
+\State \Return $D$
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{Why Hybrid Encryption?}
+
+Our architecture uses \textbf{hybrid encryption}:
+\begin{itemize}
+    \item Kyber (asymmetric) to establish a shared secret
+    \item AES-GCM (symmetric) to encrypt the actual data
+\end{itemize}
+
+This is the standard approach for several reasons:
+
+\begin{enumerate}
+    \item \textbf{Efficiency}: Symmetric encryption is much faster than asymmetric
+    \item \textbf{Flexibility}: Can encrypt arbitrary-length messages
+    \item \textbf{Authentication}: AES-GCM provides both encryption and authentication
+    \item \textbf{Standard practice}: This is how TLS and other protocols work
+\end{enumerate}
+
+\subsection{Message Format}
+
+Table \ref{tab:message_format} shows the structure of a transmitted message.
+
+\begin{table}[H]
+\centering
+\caption{Message format structure}
+\label{tab:message_format}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Component} & \textbf{Size (Kyber768)} & \textbf{Description} \\
+\midrule
+Kyber ciphertext & 1,088 bytes & Encapsulated shared secret \\
+AES-GCM nonce & 12 bytes & Unique per message \\
+Encrypted data & Variable & Compressed + encrypted payload \\
+AES-GCM tag & 16 bytes & Authentication tag \\
+\midrule
+\textbf{Overhead} & \textbf{1,116 bytes} & Fixed per message \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The key observation is that the fixed overhead (1,116 bytes) is constant regardless of payload size. For larger payloads, the relative overhead decreases.
+
+\section{Algorithm Selection and Justification}
+
+Our implementation uses Kyber768 for key exchange and ZLIB for compression. This section justifies these choices.
+
+\subsection{Choice of Kyber768}
+
+We selected \textbf{Kyber768} (NIST Security Level 3) for the following reasons:
+
+\begin{enumerate}
+    \item \textbf{NIST Standard}: Kyber is the primary NIST-selected algorithm for key encapsulation (FIPS 203: ML-KEM).
+    
+    \item \textbf{Security Level}: Level 3 provides security equivalent to AES-192, which is appropriate for data that needs to remain secure for 10-20 years.
+    
+    \item \textbf{Balanced Parameters}: Kyber768 offers a good balance between security and efficiency:
+    \begin{itemize}
+        \item Public key: 1,184 bytes (smaller than Kyber1024)
+        \item Ciphertext: 1,088 bytes
+        \item Operations: Fast on constrained devices
+    \end{itemize}
+    
+    \item \textbf{Proven Security}: Kyber has been extensively analyzed during the NIST competition with no significant weaknesses found.
+    
+    \item \textbf{Implementation Availability}: High-quality implementations exist (liboqs, pqcrypto, etc.)
+\end{enumerate}
+
+Table \ref{tab:kyber_choice} compares the three Kyber variants.
+
+\begin{table}[H]
+\centering
+\caption{Comparison of Kyber variants for IoT}
+\label{tab:kyber_choice}
+\begin{tabular}{lcccl}
+\toprule
+\textbf{Variant} & \textbf{Security} & \textbf{PK + CT} & \textbf{Speed} & \textbf{Recommendation} \\
+\midrule
+Kyber512 & Level 1 & 1,568 B & Fastest & Short-term security \\
+\rowcolor{green!10}
+Kyber768 & Level 3 & 2,272 B & Fast & \textbf{Best for most IoT} \\
+Kyber1024 & Level 5 & 3,136 B & Slower & High-security only \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Choice of ZLIB}
+
+We selected \textbf{ZLIB} (DEFLATE algorithm) as our primary compression algorithm for the following reasons:
+
+\begin{enumerate}
+    \item \textbf{Universal Support}: ZLIB is available on virtually every platform, from microcontrollers to servers.
+    
+    \item \textbf{Proven Reliability}: ZLIB has been used for 30+ years with no known issues.
+    
+    \item \textbf{Good Compression}: Achieves 60-80\% compression on typical data.
+    
+    \item \textbf{Moderate Resources}: Works well with 32KB of RAM.
+    
+    \item \textbf{Balanced Performance}: Neither the fastest nor the best compression, but excellent at both.
+\end{enumerate}
+
+For specific use cases, alternatives may be better:
+
+\begin{table}[H]
+\centering
+\caption{Compression algorithm recommendations}
+\label{tab:compression_choice}
+\begin{tabular}{ll}
+\toprule
+\textbf{Use Case} & \textbf{Recommended Algorithm} \\
+\midrule
+General purpose, maximum compatibility & ZLIB \\
+Real-time, speed critical & LZ4 \\
+Maximum compression, more resources & Zstandard \\
+Small, repetitive messages & Zstandard with dictionary \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Theoretical Analysis of Expected Gains}
+
+Before implementing our system, we analyze the expected bandwidth savings.
+
+\subsection{Bandwidth Model}
+
+Let us define:
+\begin{itemize}
+    \item $D$: Original data size (bytes)
+    \item $r$: Compression ratio (compressed/original)
+    \item $O$: Fixed overhead (1,116 bytes for Kyber768 + AES-GCM)
+\end{itemize}
+
+\textbf{Without compression}:
+\begin{equation}
+\text{Transmitted}_{\text{no compression}} = D + O
+\end{equation}
+
+\textbf{With compression}:
+\begin{equation}
+\text{Transmitted}_{\text{with compression}} = r \cdot D + O
+\end{equation}
+
+\textbf{Bandwidth savings}:
+\begin{equation}
+\text{Savings} = \frac{(D + O) - (r \cdot D + O)}{D + O} = \frac{(1-r) \cdot D}{D + O}
+\end{equation}
+
+\subsection{Analysis by Data Size}
+
+Table \ref{tab:theoretical_savings} shows theoretical savings for different data sizes, assuming a compression ratio $r = 0.35$ (65\% reduction, typical for sensor data).
+
+\begin{table}[H]
+\centering
+\caption{Theoretical bandwidth savings by data size}
+\label{tab:theoretical_savings}
+\begin{tabular}{rrrrc}
+\toprule
+\textbf{Original} & \textbf{No Compress} & \textbf{With Compress} & \textbf{Savings} & \textbf{Note} \\
+\midrule
+100 B & 1,216 B & 1,151 B & 5.3\% & Small payloads \\
+500 B & 1,616 B & 1,291 B & 20.1\% & Typical sensor \\
+1,000 B & 2,116 B & 1,466 B & 30.7\% & Medium payload \\
+2,000 B & 3,116 B & 1,816 B & 41.7\% & Larger payload \\
+5,000 B & 6,116 B & 2,866 B & 53.1\% & Batch data \\
+10,000 B & 11,116 B & 4,616 B & 58.5\% & Large batch \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Key observations:
+
+\begin{enumerate}
+    \item \textbf{Small payloads} ($<$200 B): Limited benefit due to fixed overhead dominating
+    \item \textbf{Medium payloads} (500-2000 B): Significant savings (20-40\%)
+    \item \textbf{Large payloads} ($>$5000 B): Excellent savings ($>$50\%)
+\end{enumerate}
+
+\subsection{Break-Even Analysis}
+
+Compression has computational cost. When is it worth compressing?
+
+For compression to be beneficial:
+\begin{equation}
+\text{Energy}_{\text{compress}} + \text{Energy}_{\text{transmit compressed}} < \text{Energy}_{\text{transmit uncompressed}}
+\end{equation}
+
+Since transmission energy dominates for wireless IoT devices, compression is almost always beneficial when:
+\begin{equation}
+(1 - r) \cdot D > \text{Minimum threshold}
+\end{equation}
+
+For typical IoT scenarios, compression is beneficial when the original data is at least 200-300 bytes.
+
+\subsection{Comparison with Classical Cryptography}
+
+How does our approach compare to classical cryptography (e.g., ECDH + AES)?
+
+\begin{table}[H]
+\centering
+\caption{Comparison: Classical vs PQC with compression}
+\label{tab:classical_vs_pqc}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Approach} & \textbf{Overhead} & \textbf{1KB Payload} & \textbf{Security} \\
+\midrule
+ECDH + AES (no compression) & 92 B & 1,092 B & Quantum-vulnerable \\
+Kyber768 + AES (no compression) & 1,116 B & 2,116 B & Quantum-resistant \\
+\rowcolor{green!10}
+Kyber768 + AES + ZLIB & 1,116 B & 1,466 B & Quantum-resistant \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+With compression, the PQC approach is only about 34\% larger than classical cryptography, while providing quantum resistance. Without compression, it would be 94\% larger.
+
+\section{Optimization Strategies}
+
+Several strategies can further improve performance.
+
+\subsection{Session Keys}
+
+For devices that communicate frequently, we can establish a \textbf{session key}:
+
+\begin{enumerate}
+    \item First message: Full Kyber key exchange (1,088 B ciphertext)
+    \item Subsequent messages: Use derived session key (0 B overhead)
+\end{enumerate}
+
+This amortizes the Kyber overhead across multiple messages.
+
+\begin{algorithm}[H]
+\caption{Session Key Optimization}
+\label{alg:session_key}
+\begin{algorithmic}[1]
+\Require Session duration $T$, Message interval $\Delta t$
+\State \Comment{Initial key exchange}
+\State $(sessionKey, ciphertext) \gets \Call{KyberKeyExchange}{}$
+\State $messageCount \gets 0$
+\While{$time < T$}
+    \State $data \gets \Call{CollectSensorData}{}$
+    \State $compressed \gets \Call{Compress}{data}$
+    \State $encrypted \gets \Call{AES-GCM}{sessionKey, compressed}$
+    \If{$messageCount = 0$}
+        \State \Call{Transmit}{$ciphertext \| encrypted$} \Comment{Include Kyber CT}
+    \Else
+        \State \Call{Transmit}{$encrypted$} \Comment{Session key only}
+    \EndIf
+    \State $messageCount \gets messageCount + 1$
+    \State \Call{Wait}{$\Delta t$}
+\EndWhile
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{Dictionary-Based Compression}
+
+For IoT applications with repetitive data patterns, a pre-shared compression dictionary can significantly improve compression:
+
+\begin{enumerate}
+    \item Train dictionary on representative IoT data
+    \item Deploy dictionary to both device and server
+    \item Use dictionary for all compression/decompression
+\end{enumerate}
+
+Zstandard supports this natively. Our experiments show 20-30\% additional compression for small payloads.
+
+\subsection{Batching}
+
+Instead of sending each sensor reading individually, batch multiple readings:
+
+\begin{table}[H]
+\centering
+\caption{Effect of batching on efficiency}
+\label{tab:batching}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Strategy} & \textbf{Messages/hour} & \textbf{Bytes/hour} & \textbf{Efficiency} \\
+\midrule
+Individual (100 B each) & 60 & 69,060 B & Low \\
+Batch of 10 (1 KB) & 6 & 8,796 B & High \\
+Batch of 60 (6 KB) & 1 & 3,216 B & Very High \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Batching dramatically reduces overhead because the fixed Kyber cost is incurred fewer times.
+
+\section{Security Analysis}
+
+Our combined approach maintains strong security properties.
+
+\subsection{Cryptographic Security}
+
+\begin{itemize}
+    \item \textbf{Key Exchange}: Kyber768 provides IND-CCA2 security against quantum adversaries
+    \item \textbf{Data Encryption}: AES-256-GCM provides authenticated encryption
+    \item \textbf{Key Derivation}: HKDF-SHA256 derives keys securely from shared secret
+\end{itemize}
+
+\subsection{Compression Security}
+
+Compression does not weaken cryptographic security because:
+\begin{enumerate}
+    \item The compression algorithm is deterministic and public
+    \item Kyber's security does not depend on plaintext entropy
+    \item AES-GCM authenticates the ciphertext, preventing tampering
+\end{enumerate}
+
+\subsection{Potential Attacks and Mitigations}
+
+\begin{table}[H]
+\centering
+\caption{Security considerations}
+\label{tab:security}
+\begin{tabular}{p{3cm}p{4cm}p{5cm}}
+\toprule
+\textbf{Attack} & \textbf{Description} & \textbf{Mitigation} \\
+\midrule
+Compression oracle & Attacker observes compressed size & Pad to fixed size if needed \\
+Side-channel & Timing/power analysis & Constant-time implementations \\
+Key reuse & Same key for many messages & Proper nonce management \\
+Replay attack & Resend old messages & Include timestamp/sequence number \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Chapter Conclusion}
+
+In this chapter, we presented a combined approach that integrates Post-Quantum Cryptography with data compression for IoT communications.
+
+\textbf{Key contributions of this chapter}:
+
+\begin{enumerate}
+    \item \textbf{Architecture}: We proposed a practical architecture that compresses data before encrypting with Kyber768 and AES-GCM.
+    
+    \item \textbf{Algorithm Selection}: We justified the choice of Kyber768 (security, standardization, efficiency) and ZLIB (compatibility, reliability, performance).
+    
+    \item \textbf{Theoretical Analysis}: We showed that compression can reduce bandwidth by 20-60\% depending on payload size, making PQC practical for IoT.
+    
+    \item \textbf{Optimizations}: We presented session keys, dictionary compression, and batching as strategies to further improve efficiency.
+    
+    \item \textbf{Security Analysis}: We confirmed that compression does not weaken cryptographic security when applied correctly.
+\end{enumerate}
+
+\textbf{Main finding}: With compression, PQC-protected IoT communications require only 30-40\% more bandwidth than classical (quantum-vulnerable) approaches, rather than 100\%+ without compression. This makes the transition to post-quantum security practical and achievable.
+
+In the next chapter, we will implement this architecture and present experimental results that validate our theoretical analysis.

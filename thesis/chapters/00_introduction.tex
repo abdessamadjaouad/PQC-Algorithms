@@ -1,0 +1,68 @@
+% ============================================================================
+% GENERAL INTRODUCTION
+% ============================================================================
+
+\chapter*{General Introduction}
+\addcontentsline{toc}{chapter}{General Introduction}
+
+\section*{Context and Motivation}
+
+The Internet of Things (IoT) has become one of the most important technologies of our time. It connects billions of devices, from simple temperature sensors to complex industrial machines. By 2025, experts estimate that over 75 billion IoT devices will be in use around the world. These devices are used in many areas: smart homes, healthcare, agriculture, and factories.
+
+However, connecting so many devices creates serious security problems. IoT devices are small and have limited resources. They cannot store much data, they have weak processors, and they must save energy because many run on batteries. These limitations make it hard to use strong security methods.
+
+There is also a new threat on the horizon: quantum computers. Today's encryption methods, like RSA and ECC (Elliptic Curve Cryptography), are considered secure. But quantum computers will be able to break them easily. A quantum algorithm called Shor's algorithm can solve the mathematical problems that protect RSA and ECC in a very short time. This means that when powerful quantum computers exist, most of today's secure communications will become vulnerable.
+
+\section*{Problem Statement}
+
+The solution to the quantum threat is Post-Quantum Cryptography (PQC). These are new encryption methods designed to resist attacks from quantum computers. In 2024, NIST (the American standards organization) selected several PQC algorithms as new standards, including Kyber for key exchange and Dilithium for digital signatures.
+
+But there is a problem: PQC algorithms need more space. Their keys and encrypted messages (ciphertexts) are much larger than those of classical cryptography. For example, a Kyber768 public key is 1,184 bytes, while an RSA-2048 public key is only 256 bytes. This is a serious issue for IoT devices that have limited bandwidth.
+
+This thesis addresses the following research question:
+
+\begin{center}
+\textit{\textbf{How can we secure IoT communications against quantum threats while respecting bandwidth constraints?}}
+\end{center}
+
+\section*{Research Objectives}
+
+This research has five main objectives:
+
+\begin{enumerate}
+    \item Analyze the constraints of IoT devices and their security challenges
+    \item Study Post-Quantum Cryptography algorithms and evaluate which ones are suitable for IoT
+    \item Investigate compression techniques that can reduce data size before encryption
+    \item Design a combined approach that uses both PQC and compression together
+    \item Implement and test this approach to measure its real performance
+\end{enumerate}
+
+\section*{Contributions}
+
+This thesis makes the following contributions:
+
+\begin{itemize}
+    \item A clear analysis of PQC algorithms and their suitability for IoT environments
+    \item A study of compression algorithms and how they work with IoT data (like sensor readings in JSON format)
+    \item A new architecture that compresses data before applying PQC encryption
+    \item A working implementation with benchmarks showing 86.9\% bandwidth savings
+    \item Practical recommendations for using PQC in IoT systems
+\end{itemize}
+
+\section*{Thesis Organization}
+
+This thesis is organized into five chapters:
+
+\textbf{Chapter 1: IoT and Security Challenges} explains the limitations of IoT devices (energy, memory, bandwidth) and describes how quantum computers threaten current security methods.
+
+\textbf{Chapter 2: Post-Quantum Cryptography} presents the different families of PQC algorithms, with a focus on lattice-based cryptography. It explains the NIST standards Kyber and Dilithium in detail.
+
+\textbf{Chapter 3: Compression Algorithms} covers both classical algorithms (like Huffman coding) and modern ones (like ZLIB and LZ4). Each algorithm is explained with its implementation.
+
+\textbf{Chapter 4: Combined Approach} presents our solution. It explains why we compress before encrypting, describes the architecture, and justifies our choice of Kyber768 with ZLIB.
+
+\textbf{Chapter 5: Implementation and Benchmarks} shows the practical implementation in Python, describes the test methodology, and presents the results with analysis.
+
+Finally, the \textbf{General Conclusion} summarizes what we achieved, discusses the limitations, and suggests directions for future work.
+
+\newpage

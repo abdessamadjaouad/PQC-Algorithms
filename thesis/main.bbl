@@ -1,0 +1,83 @@
+\begin{thebibliography}{13}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Avanzi et~al.(2022)Avanzi, Bos, Ducas, et~al.]{avanzi2022crystals}
+Roberto Avanzi, Joppe Bos, L{\'e}o Ducas, et~al.
+\newblock Crystals-kyber: Algorithm specifications and supporting
+  documentation.
+\newblock \emph{NIST PQC Round 3 Submission}, 2022.
+
+\bibitem[Collet(2013)]{collet2013lz4}
+Yann Collet.
+\newblock Lz4-extremely fast compression.
+\newblock 2013.
+
+\bibitem[Collet and Kucherawy(2018)]{collet2016zstandard}
+Yann Collet and Murray Kucherawy.
+\newblock Zstandard compression and the application/zstd media type.
+\newblock RFC 8478, 2018.
+
+\bibitem[Deutsch and Gailly(1996)]{deutsch1996zlib}
+Peter Deutsch and Jean-Loup Gailly.
+\newblock Zlib compressed data format specification version 3.3.
+\newblock RFC 1950, 1996.
+
+\bibitem[Ducas et~al.(2022)Ducas, Kiltz, Lepoint, et~al.]{ducas2022crystals}
+L{\'e}o Ducas, Eike Kiltz, Tancr{\`e}de Lepoint, et~al.
+\newblock Crystals-dilithium: Algorithm specifications and supporting
+  documentation.
+\newblock \emph{NIST PQC Round 3 Submission}, 2022.
+
+\bibitem[Huffman(1952)]{huffman1952method}
+David~A Huffman.
+\newblock A method for the construction of minimum-redundancy codes.
+\newblock \emph{Proceedings of the IRE}, 40\penalty0 (9):\penalty0 1098--1101,
+  1952.
+
+\bibitem[Lin et~al.(2017)Lin, Yu, Zhang, Yang, Zhang, and Zhao]{lin2017survey}
+Jie Lin, Wei Yu, Nan Zhang, Xinyu Yang, Hanlin Zhang, and Wei Zhao.
+\newblock A survey on internet of things: Architecture, enabling technologies,
+  security and privacy, and applications.
+\newblock \emph{IEEE Internet of Things Journal}, 4\penalty0 (5):\penalty0
+  1125--1142, 2017.
+
+\bibitem[{National Institute of Standards and Technology}(2024)]{nist2024pqc}
+{National Institute of Standards and Technology}.
+\newblock Post-quantum cryptography standardization.
+\newblock \url{https://csrc.nist.gov/projects/post-quantum-cryptography}, 2024.
+
+\bibitem[Preskill(2018)]{preskill2018quantum}
+John Preskill.
+\newblock Quantum computing in the nisq era and beyond.
+\newblock \emph{Quantum}, 2:\penalty0 79, 2018.
+
+\bibitem[Regev(2005)]{regev2005lattices}
+Oded Regev.
+\newblock On lattices, learning with errors, random linear codes, and
+  cryptography.
+\newblock In \emph{Proceedings of the thirty-seventh annual ACM symposium on
+  Theory of computing}, pages 84--93, 2005.
+
+\bibitem[Shor(1994)]{shor1994algorithms}
+Peter~W Shor.
+\newblock Algorithms for quantum computation: discrete logarithms and
+  factoring.
+\newblock pages 124--134, 1994.
+
+\bibitem[Ziv and Lempel(1977)]{ziv1977universal}
+Jacob Ziv and Abraham Lempel.
+\newblock A universal algorithm for sequential data compression.
+\newblock \emph{IEEE Transactions on information theory}, 23\penalty0
+  (3):\penalty0 337--343, 1977.
+
+\bibitem[Ziv and Lempel(1978)]{ziv1978compression}
+Jacob Ziv and Abraham Lempel.
+\newblock Compression of individual sequences via variable-rate coding.
+\newblock \emph{IEEE transactions on Information Theory}, 24\penalty0
+  (5):\penalty0 530--536, 1978.
+
+\end{thebibliography}

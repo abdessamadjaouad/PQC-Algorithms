@@ -1,0 +1,16 @@
+\babel@toc {english}{}\relax 
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {1.1}{\ignorespaces The three main constraints of IoT devices}}{7}{figure.caption.16}%
+\contentsline {figure}{\numberline {1.2}{\ignorespaces Timeline of quantum computing development}}{9}{figure.caption.18}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Conceptual illustration of a 2-dimensional lattice}}{13}{figure.caption.21}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Trade-off between compression ratio and speed}}{36}{figure.caption.56}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces High-level system architecture}}{41}{figure.caption.58}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Software architecture overview}}{51}{figure.caption.67}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Bandwidth savings by payload size and compression algorithm}}{58}{figure.caption.75}%
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Compression ratio comparison across algorithms}}{61}{figure.caption.77}%
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Bandwidth savings with PQC + compression}}{61}{figure.caption.78}%
+\contentsline {figure}{\numberline {5.5}{\ignorespaces PQC key and ciphertext size comparison}}{62}{figure.caption.79}%

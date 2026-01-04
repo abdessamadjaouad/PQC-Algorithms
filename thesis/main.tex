@@ -1,0 +1,223 @@
+% ============================================================================
+% MASTER'S THESIS
+% Optimization of IoT Communications through Compression and 
+% Lightweight Post-Quantum Cryptography
+% ============================================================================
+% Author: Abdessamad JAOUAD
+% Program: M2 Big Data & IoT
+% Institution: ENSAM Casablanca
+% Supervisor: Prof. Ibrahim GUELZIM
+% Date: January 2026
+% ============================================================================
+
+\documentclass[12pt,a4paper,oneside]{book}
+
+% ============================================================================
+% PACKAGES
+% ============================================================================
+
+% Encoding and fonts
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+% Page layout
+\usepackage[top=2.5cm, bottom=2.5cm, left=3cm, right=2.5cm, headheight=15pt]{geometry}
+\usepackage{setspace}
+\onehalfspacing
+
+% Language
+\usepackage[english]{babel}
+
+% Mathematics
+\usepackage{amsmath, amssymb, amsfonts}
+
+% Graphics and figures
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{subcaption}
+\usepackage[table,xcdraw]{xcolor}
+
+% Tables
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{array}
+
+% Algorithms
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{listings}
+
+% Code listings style
+\lstset{
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue}\bfseries,
+    commentstyle=\color{gray}\itshape,
+    stringstyle=\color{red},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    stepnumber=1,
+    numbersep=8pt,
+    backgroundcolor=\color{gray!5},
+    frame=single,
+    rulecolor=\color{gray!30},
+    breaklines=true,
+    breakatwhitespace=true,
+    tabsize=4,
+    showstringspaces=false,
+    captionpos=b
+}
+
+% Hyperlinks
+\usepackage[colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue]{hyperref}
+
+% Bibliography
+\usepackage[numbers,sort&compress]{natbib}
+
+% Headers and footers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\leftmark}
+\fancyhead[R]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% Acronyms
+\usepackage[acronym,toc,nonumberlist]{glossaries}
+\makeglossaries
+
+% Caption formatting
+\usepackage{caption}
+\captionsetup{font=small, labelfont=bf}
+
+% PDF metadata
+\hypersetup{
+    pdftitle={Optimization of IoT Communications through Compression and Lightweight Post-Quantum Cryptography},
+    pdfauthor={Abdessamad JAOUAD},
+    pdfsubject={Master's Thesis - M2 Big Data and IoT},
+    pdfkeywords={IoT, Post-Quantum Cryptography, Compression, Kyber, ZLIB}
+}
+
+% ============================================================================
+% CUSTOM COMMANDS
+% ============================================================================
+
+\newcommand{\thesistitle}{Optimization of IoT Communications through Compression and Lightweight Post-Quantum Cryptography}
+\newcommand{\authorname}{Abdessamad JAOUAD}
+\newcommand{\supervisorname}{Prof. Ibrahim GUELZIM}
+\newcommand{\programname}{Master 2 Big Data \& IoT}
+\newcommand{\institutionname}{École Nationale Supérieure d'Arts et Métiers}
+\newcommand{\thesisyear}{2025-2026}
+
+% ============================================================================
+% ACRONYMS DEFINITIONS
+% ============================================================================
+
+\newacronym{iot}{IoT}{Internet of Things}
+\newacronym{pqc}{PQC}{Post-Quantum Cryptography}
+\newacronym{nist}{NIST}{National Institute of Standards and Technology}
+\newacronym{kem}{KEM}{Key Encapsulation Mechanism}
+\newacronym{dss}{DSS}{Digital Signature Scheme}
+\newacronym{rsa}{RSA}{Rivest-Shamir-Adleman}
+\newacronym{ecc}{ECC}{Elliptic Curve Cryptography}
+\newacronym{aes}{AES}{Advanced Encryption Standard}
+\newacronym{rle}{RLE}{Run-Length Encoding}
+\newacronym{lz}{LZ}{Lempel-Ziv}
+\newacronym{mqtt}{MQTT}{Message Queuing Telemetry Transport}
+\newacronym{coap}{CoAP}{Constrained Application Protocol}
+\newacronym{tls}{TLS}{Transport Layer Security}
+\newacronym{cpu}{CPU}{Central Processing Unit}
+\newacronym{gpu}{GPU}{Graphics Processing Unit}
+\newacronym{fpga}{FPGA}{Field-Programmable Gate Array}
+\newacronym{mlwe}{MLWE}{Module Learning With Errors}
+\newacronym{api}{API}{Application Programming Interface}
+
+% ============================================================================
+% DOCUMENT START
+% ============================================================================
+
+\begin{document}
+
+% ----------------------------------------------------------------------------
+% FRONT MATTER
+% ----------------------------------------------------------------------------
+
+\frontmatter
+\pagenumbering{roman}
+
+% Title Page
+\input{chapters/00_titlepage}
+
+% Abstract
+\input{chapters/00_abstract}
+
+% Acknowledgements
+\input{chapters/00_acknowledgements}
+
+% Table of Contents
+\tableofcontents
+\newpage
+
+% List of Figures
+\listoffigures
+\addcontentsline{toc}{chapter}{List of Figures}
+\newpage
+
+% List of Tables
+\listoftables
+\addcontentsline{toc}{chapter}{List of Tables}
+\newpage
+
+% List of Algorithms
+\listofalgorithms
+\addcontentsline{toc}{chapter}{List of Algorithms}
+\newpage
+
+% List of Acronyms
+\printglossary[type=\acronymtype, title=List of Acronyms]
+\addcontentsline{toc}{chapter}{List of Acronyms}
+\newpage
+
+% ----------------------------------------------------------------------------
+% MAIN MATTER
+% ----------------------------------------------------------------------------
+
+\mainmatter
+\pagenumbering{arabic}
+
+% General Introduction
+\input{chapters/00_introduction}
+
+% Chapter 1: IoT and Security Challenges
+\input{chapters/01_iot_security}
+
+% Chapter 2: Post-Quantum Cryptography
+\input{chapters/02_pqc}
+
+% Chapter 3: Compression Algorithms
+\input{chapters/03_compression}
+
+% Chapter 4: Combined Approach
+\input{chapters/04_combined_approach}
+
+% Chapter 5: Implementation and Benchmarks
+\input{chapters/05_implementation}
+
+% General Conclusion
+\input{chapters/06_conclusion}
+
+% ----------------------------------------------------------------------------
+% BACK MATTER
+% ----------------------------------------------------------------------------
+
+% Bibliography
+\bibliographystyle{plainnat}
+\bibliography{references}
+\addcontentsline{toc}{chapter}{References}
+
+% Appendices (if needed)
+% \appendix
+% \input{chapters/appendix}
+
+\end{document}
