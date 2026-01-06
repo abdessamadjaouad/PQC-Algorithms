@@ -7,49 +7,27 @@
 
 \section{Introduction}
 
-In the previous chapter, we saw that quantum computers will break the cryptographic algorithms we use today, especially RSA and ECC. Post-Quantum Cryptography (PQC) is the solution to this problem. PQC refers to cryptographic algorithms that are secure against both classical computers and quantum computers.
+Quantum computers will break RSA and ECC using Shor's algorithm (see Chapter 1). Post-Quantum Cryptography (PQC) uses mathematical problems that remain hard for both classical and quantum computers. This chapter examines PQC families and focuses on Kyber, the NIST-selected key encapsulation mechanism we implement.
 
-The key idea behind PQC is simple: instead of using mathematical problems that quantum computers can solve easily (like factoring or discrete logarithms), we use different mathematical problems that remain hard even for quantum computers.
+\section{History and NIST Standardization}
 
-In this chapter, we will explore the history of PQC, the different families of algorithms, and the standards selected by NIST. We will pay special attention to lattice-based cryptography, which is the foundation of Kyber and Dilithium, the most important PQC algorithms for our work.
-
-\section{History and Context}
-
-The field of post-quantum cryptography started in the 1990s, when researchers began to realize that quantum computers could become a real threat. Here are the key milestones:
-
+The NIST standardization process began in 2016, evaluating 69 initial submissions through multiple rounds of cryptanalysis. In 2024, NIST published the final standards \cite{nist2024pqc}:
 \begin{itemize}
-    \item \textbf{1994}: Peter Shor publishes his quantum algorithm that breaks RSA and ECC \cite{shor1994algorithms}
-    \item \textbf{1996}: First post-quantum proposals appear (McEliece, NTRU)
-    \item \textbf{2006}: The term ``post-quantum cryptography'' becomes widely used
-    \item \textbf{2016}: NIST launches the Post-Quantum Cryptography Standardization project
-    \item \textbf{2022}: NIST announces the first algorithms selected for standardization
-    \item \textbf{2024}: NIST publishes the final standards: FIPS 203 (Kyber), FIPS 204 (Dilithium), FIPS 205 (SPHINCS+)
+    \item \textbf{FIPS 203}: ML-KEM (based on Kyber)---Key Encapsulation Mechanism
+    \item \textbf{FIPS 204}: ML-DSA (based on Dilithium)---Digital Signature Algorithm
+    \item \textbf{FIPS 205}: SLH-DSA (based on SPHINCS+)---Stateless Hash-based Signatures
 \end{itemize}
-
-The NIST standardization process was very important. It evaluated 69 initial submissions through multiple rounds of public review and cryptanalysis. After 8 years of analysis, only a few algorithms were selected as standards \cite{nist2024pqc}.
-
-Figure \ref{fig:quantum_timeline} shows the timeline of quantum computing developments and the cryptographic response, highlighting the urgency of transitioning to post-quantum algorithms.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.95\textwidth]{figures/quantum_timeline.png}
-\caption{Timeline of quantum computing threat to cryptography, showing key milestones from Shor's algorithm (1994) to the estimated arrival of cryptographically relevant quantum computers (2030)}
+\caption{Timeline from Shor's algorithm (1994) to expected cryptographically relevant quantum computers (2030)}
 \label{fig:quantum_timeline}
 \end{figure}
 
-\section{Algorithm Families}
+\section{PQC Algorithm Families Overview}
 
-Post-quantum algorithms are based on different mathematical problems. Each family has its own strengths and weaknesses. The main families are:
-
-\begin{enumerate}
-    \item \textbf{Lattice-based cryptography}
-    \item \textbf{Hash-based cryptography}
-    \item \textbf{Code-based cryptography}
-    \item \textbf{Multivariate cryptography}
-    \item \textbf{Isogeny-based cryptography}
-\end{enumerate}
-
-Table \ref{tab:pqc_families} provides an overview of these families.
+Post-quantum algorithms are based on different mathematical problems. Each family has distinct trade-offs:
 
 \begin{table}[H]
 \centering
@@ -59,191 +37,45 @@ Table \ref{tab:pqc_families} provides an overview of these families.
 \toprule
 \textbf{Family} & \textbf{Hard Problem} & \textbf{Examples} & \textbf{Characteristics} \\
 \midrule
-Lattice-based & Learning With Errors (LWE), NTRU & Kyber, Dilithium, NTRU & Small keys, fast, versatile \\
-\midrule
-Hash-based & Hash function security & SPHINCS+, XMSS, LMS & Very conservative, large signatures \\
-\midrule
-Code-based & Decoding random linear codes & McEliece, BIKE, HQC & Large keys, fast encryption \\
-\midrule
-Multivariate & Solving polynomial equations & Rainbow, GeMSS & Small signatures, large keys \\
-\midrule
-Isogeny-based & Finding isogenies between curves & SIKE, CSIDH & Small keys, but slow and some broken \\
+Lattice-based & Learning With Errors & Kyber, Dilithium & Small keys, fast, NIST selected \\
+Hash-based & Hash function security & SPHINCS+ & Conservative, large signatures \\
+Code-based & Decoding random codes & McEliece, BIKE & Large keys, fast encryption \\
+Multivariate & Polynomial equations & Rainbow (broken) & Small signatures, large keys \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Figure \ref{fig:pqc_families} provides a visual comparison of these families across key metrics including key size efficiency, performance speed, security confidence, and implementation maturity.
-
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.95\textwidth]{figures/pqc_families_comparison.png}
-\caption{Comparison of post-quantum cryptography families across four key metrics. Lattice-based algorithms (highlighted) were selected by NIST due to their excellent balance of properties.}
+\caption{Comparison of PQC families. Lattice-based algorithms were selected by NIST for their excellent balance of properties.}
 \label{fig:pqc_families}
 \end{figure}
 
-\subsection{Lattice-Based Cryptography}
+Lattice-based cryptography emerged as the most practical option, forming the basis of NIST's primary standards. We focus on this family.
 
-Lattice-based cryptography is the most important family for our work. It is the foundation of Kyber (key exchange) and Dilithium (digital signatures), which are the main NIST standards.
+\section{Lattice-Based Cryptography}
 
-\subsubsection{What is a Lattice?}
+\subsection{Learning With Errors (LWE)}
 
-A lattice is a regular grid of points in n-dimensional space. Mathematically, a lattice $L$ is defined by a set of basis vectors $\{b_1, b_2, ..., b_n\}$. Every point in the lattice can be written as:
+Lattice-based cryptography uses problems on high-dimensional lattices. The Learning With Errors problem, introduced by Regev \cite{regev2005lattices}, is fundamental: given equations $b = A \cdot s + e$ where $s$ is secret and $e$ is small error, find $s$. This is provably as hard as worst-case lattice problems.
 
-\begin{equation}
-L = \left\{ \sum_{i=1}^{n} a_i \cdot b_i \mid a_i \in \mathbb{Z} \right\}
-\end{equation}
-
-Figure \ref{fig:lattice_2d} shows a conceptual illustration of a 2-dimensional lattice.
-
-\begin{figure}[H]
-\centering
-\begin{tabular}{|c|}
-\hline
-\\
-\textbf{2D Lattice Illustration} \\[0.3cm]
-A lattice is a regular grid of points. \\
-Each point can be reached by integer combinations \\
-of basis vectors $b_1$ and $b_2$. \\[0.3cm]
-\textit{Key Problem}: Given a high-dimensional lattice, \\
-finding the shortest non-zero vector is extremely hard. \\
-\\
-\hline
-\end{tabular}
-\caption{Conceptual illustration of a 2-dimensional lattice}
-\label{fig:lattice_2d}
-\end{figure}
-
-\subsubsection{Hard Problems on Lattices}
-
-Several problems on lattices are believed to be hard for both classical and quantum computers:
-
-\begin{itemize}
-    \item \textbf{Shortest Vector Problem (SVP)}: Find the shortest non-zero vector in the lattice. In high dimensions (hundreds or thousands), this is extremely difficult.
-    
-    \item \textbf{Closest Vector Problem (CVP)}: Given a target point not on the lattice, find the closest lattice point to it.
-    
-    \item \textbf{Learning With Errors (LWE)}: Given equations of the form $b = a \cdot s + e$, where $s$ is a secret and $e$ is a small error, find $s$. This is the basis of Kyber.
-\end{itemize}
-
-The Learning With Errors problem, introduced by Oded Regev in 2005 \cite{regev2005lattices}, is particularly important. It can be proven that solving LWE is as hard as solving worst-case lattice problems.
-
-\subsubsection{Why Lattices are Good for Cryptography}
-
-Lattice-based cryptography has several advantages:
-
-\begin{enumerate}
-    \item \textbf{Strong security}: Based on problems studied for decades
-    \item \textbf{Efficient}: Operations are mostly additions and multiplications
-    \item \textbf{Versatile}: Can build encryption, signatures, and even fully homomorphic encryption
-    \item \textbf{Reasonable key sizes}: Smaller than code-based alternatives
-\end{enumerate}
-
-\subsection{Hash-Based Cryptography}
-
-Hash-based signatures are the most conservative option. They rely only on the security of hash functions like SHA-256. Since hash functions are used everywhere and heavily studied, this gives high confidence in their security.
-
-The main idea is to use a hash function to build a one-time signature scheme, then combine many one-time signatures into a structure that allows multiple signatures.
-
-\textbf{SPHINCS+} is the NIST-selected hash-based signature scheme. Its main advantage is that it only requires a secure hash function. Its disadvantage is large signature sizes (up to 49 KB).
-
-\begin{algorithm}[H]
-\caption{Simplified Hash-Based Signature Concept}
-\label{alg:hash_signature}
-\begin{algorithmic}[1]
-\State Generate random secret key $SK$
-\State Compute public key $PK = Hash(SK)$
-\State To sign message $M$:
-\State \quad Compute $signature = Hash(SK || M)$
-\State \quad Reveal parts of $SK$ based on message bits
-\State To verify:
-\State \quad Check that revealed parts hash to $PK$
-\end{algorithmic}
-\end{algorithm}
-
-\subsection{Code-Based Cryptography}
-
-Code-based cryptography uses error-correcting codes. The main idea is:
-\begin{enumerate}
-    \item Create a code that can correct errors
-    \item Hide the structure of this code
-    \item Encryption adds errors that only the key holder can remove
-\end{enumerate}
-
-The \textbf{McEliece cryptosystem}, proposed in 1978, is the oldest post-quantum scheme. It has never been broken, but has very large public keys (hundreds of kilobytes to megabytes).
-
-Newer code-based schemes like BIKE and HQC have smaller keys but are still larger than lattice-based alternatives.
-
-\subsection{Multivariate Cryptography}
-
-Multivariate cryptography is based on the difficulty of solving systems of multivariate polynomial equations over finite fields. For example:
-
-\begin{align}
-x_1 \cdot x_2 + 3x_2 \cdot x_3 + x_1 &= 5 \mod 7 \\
-2x_1 \cdot x_3 + x_2^2 + 4x_3 &= 2 \mod 7 \\
-x_1 \cdot x_2 + x_2 \cdot x_3 + x_3 &= 6 \mod 7
-\end{align}
-
-Solving such systems is NP-hard in general. Multivariate schemes can have very small signatures, but typically have large public keys.
-
-\textbf{Note}: The Rainbow signature scheme, which was a NIST finalist, was broken in 2022 by a classical attack. This shows the importance of extensive cryptanalysis.
-
-\subsection{Isogeny-Based Cryptography}
-
-Isogeny-based cryptography uses mathematical structures called elliptic curves, but in a different way than ECC. Instead of the discrete logarithm problem, it uses the difficulty of finding paths (isogenies) between elliptic curves.
-
-\textbf{Important warning}: SIKE, the main isogeny-based candidate in NIST competition, was completely broken in 2022 by a mathematical attack. This family is now considered less trustworthy for practical use.
-
-\section{Lattice-Based Algorithms in Detail}
-
-Since Kyber and Dilithium are lattice-based, we will examine them in more detail.
-
-\subsection{Module Learning With Errors (MLWE)}
-
-Both Kyber and Dilithium use a variant called Module-LWE (MLWE). Instead of working with individual numbers, MLWE works with polynomials. This makes the algorithms more efficient.
-
-In MLWE, we work in a polynomial ring $R_q = \mathbb{Z}_q[X]/(X^n + 1)$, where:
-\begin{itemize}
-    \item $n$ is typically 256 (the polynomial degree)
-    \item $q$ is a prime number (3329 for Kyber)
-    \item Polynomials have $n$ coefficients
-\end{itemize}
-
-The MLWE problem is: given $(A, b = A \cdot s + e)$ where $A$ is a public matrix, $s$ is a secret vector of small polynomials, and $e$ is a small error vector, find $s$.
+Kyber uses Module-LWE (MLWE), working with polynomials in the ring $R_q = \mathbb{Z}_q[X]/(X^n + 1)$ where $n = 256$ and $q = 3329$. This provides efficiency without compromising security.
 
 \subsection{Number Theoretic Transform (NTT)}
 
-To make lattice operations fast, Kyber and Dilithium use the Number Theoretic Transform (NTT). NTT is similar to the Fast Fourier Transform but works over finite fields.
+For efficiency, Kyber uses NTT (similar to FFT but over finite fields), reducing polynomial multiplication from $O(n^2)$ to $O(n \log n)$---crucial for $n = 256$.
 
-Polynomial multiplication normally takes $O(n^2)$ operations. With NTT:
-\begin{enumerate}
-    \item Transform both polynomials to NTT domain: $O(n \log n)$
-    \item Multiply element-wise: $O(n)$
-    \item Transform back: $O(n \log n)$
-\end{enumerate}
+\section{Kyber: Our Chosen Algorithm}
 
-Total: $O(n \log n)$ instead of $O(n^2)$. This is a huge improvement for $n = 256$.
+Kyber \cite{avanzi2022crystals} is a Key Encapsulation Mechanism (KEM) that securely establishes a shared secret between two parties, which is then used for symmetric encryption.
 
-\section{NIST Standards: Kyber and Dilithium}
-
-In 2024, NIST published three post-quantum cryptography standards \cite{nist2024pqc}:
-\begin{itemize}
-    \item \textbf{FIPS 203}: ML-KEM (based on Kyber) - Key Encapsulation Mechanism
-    \item \textbf{FIPS 204}: ML-DSA (based on Dilithium) - Digital Signature Algorithm
-    \item \textbf{FIPS 205}: SLH-DSA (based on SPHINCS+) - Stateless Hash-based Signatures
-\end{itemize}
-
-\subsection{Kyber: Key Encapsulation Mechanism}
-
-Kyber \cite{avanzi2022crystals} is a Key Encapsulation Mechanism (KEM). A KEM is used to securely establish a shared secret between two parties. This shared secret can then be used for symmetric encryption (like AES).
-
-\subsubsection{How Kyber Works}
-
-Kyber has three main operations:
+\subsection{Kyber Operations}
 
 \begin{enumerate}
-    \item \textbf{Key Generation}: Create a public key and private key pair
-    \item \textbf{Encapsulation}: Use the public key to create a ciphertext and shared secret
-    \item \textbf{Decapsulation}: Use the private key to recover the shared secret from the ciphertext
+    \item \textbf{Key Generation}: Generate public/private key pair
+    \item \textbf{Encapsulation}: Use public key to create ciphertext and shared secret
+    \item \textbf{Decapsulation}: Use private key to recover shared secret from ciphertext
 \end{enumerate}
 
 \begin{algorithm}[H]
@@ -252,8 +84,7 @@ Kyber has three main operations:
 \begin{algorithmic}[1]
 \State Generate random seed $\rho$
 \State Generate matrix $A$ from $\rho$ (public)
-\State Sample secret vector $s$ with small coefficients
-\State Sample error vector $e$ with small coefficients
+\State Sample secret vector $s$ and error vector $e$ with small coefficients
 \State Compute $t = A \cdot s + e$
 \State \Return Public key $pk = (\rho, t)$, Secret key $sk = s$
 \end{algorithmic}
@@ -263,218 +94,80 @@ Kyber has three main operations:
 \caption{Kyber Encapsulation (Simplified)}
 \label{alg:kyber_encap}
 \begin{algorithmic}[1]
-\State Parse public key: $(\rho, t)$
-\State Regenerate matrix $A$ from $\rho$
+\State Parse public key: $(\rho, t)$, regenerate $A$ from $\rho$
 \State Sample random vectors $r$, $e_1$, $e_2$ with small coefficients
 \State Compute $u = A^T \cdot r + e_1$
-\State Compute $v = t^T \cdot r + e_2 + \lfloor q/2 \rfloor \cdot m$ \Comment{$m$ is the message}
-\State Compute shared secret $K = Hash(m, (u, v))$
-\State \Return Ciphertext $ct = (u, v)$, Shared secret $K$
+\State Compute $v = t^T \cdot r + e_2 + \lfloor q/2 \rfloor \cdot m$
+\State \Return Ciphertext $ct = (u, v)$, Shared secret $K = Hash(m, ct)$
 \end{algorithmic}
 \end{algorithm}
 
-\begin{algorithm}[H]
-\caption{Kyber Decapsulation (Simplified)}
-\label{alg:kyber_decap}
-\begin{algorithmic}[1]
-\State Parse ciphertext: $(u, v)$
-\State Compute $m' = v - s^T \cdot u$ \Comment{Errors cancel out approximately}
-\State Round $m'$ to recover message $m$
-\State Compute shared secret $K = Hash(m, (u, v))$
-\State \Return Shared secret $K$
-\end{algorithmic}
-\end{algorithm}
+\subsection{Why Kyber768}
 
-\subsubsection{Kyber Security Levels}
-
-Kyber comes in three variants with different security levels:
+We select \textbf{Kyber768} (NIST Security Level 3) for this thesis:
 
 \begin{table}[H]
 \centering
-\caption{Kyber variants and their parameters}
+\caption{Kyber variants---Kyber768 provides optimal balance for IoT}
 \label{tab:kyber_params}
-\begin{tabular}{lcccccc}
-\toprule
-\textbf{Variant} & \textbf{Security} & \textbf{$k$} & \textbf{Public Key} & \textbf{Secret Key} & \textbf{Ciphertext} \\
-\midrule
-Kyber512 & NIST Level 1 & 2 & 800 bytes & 1,632 bytes & 768 bytes \\
-Kyber768 & NIST Level 3 & 3 & 1,184 bytes & 2,400 bytes & 1,088 bytes \\
-Kyber1024 & NIST Level 5 & 4 & 1,568 bytes & 3,168 bytes & 1,568 bytes \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-The security levels correspond to:
-\begin{itemize}
-    \item \textbf{Level 1}: At least as hard to break as AES-128
-    \item \textbf{Level 3}: At least as hard to break as AES-192
-    \item \textbf{Level 5}: At least as hard to break as AES-256
-\end{itemize}
-
-For most applications, \textbf{Kyber768 (Level 3)} provides a good balance between security and performance.
-
-\subsection{Dilithium: Digital Signature Algorithm}
-
-Dilithium \cite{ducas2022crystals} is a digital signature scheme. It allows someone to sign a message, and anyone with the public key can verify that the signature is valid.
-
-\subsubsection{How Dilithium Works}
-
-Dilithium uses a technique called ``Fiat-Shamir with Aborts''. The signer:
-\begin{enumerate}
-    \item Generates a random commitment
-    \item Computes a challenge based on the message and commitment
-    \item Computes a response
-    \item If the response would leak information about the secret key, abort and try again
-\end{enumerate}
-
-\begin{algorithm}[H]
-\caption{Dilithium Signing (Simplified)}
-\label{alg:dilithium_sign}
-\begin{algorithmic}[1]
-\State Parse secret key: $(s_1, s_2, A)$
-\Repeat
-    \State Sample random vector $y$ with bounded coefficients
-    \State Compute $w = A \cdot y$
-    \State Compute challenge $c = Hash(message, w)$
-    \State Compute $z = y + c \cdot s_1$
-    \If{coefficients of $z$ are too large}
-        \State \textbf{abort and restart}
-    \EndIf
-\Until{signature is valid}
-\State \Return Signature $\sigma = (z, c)$
-\end{algorithmic}
-\end{algorithm}
-
-\subsubsection{Dilithium Security Levels}
-
-\begin{table}[H]
-\centering
-\caption{Dilithium variants and their parameters}
-\label{tab:dilithium_params}
 \begin{tabular}{lccccc}
 \toprule
-\textbf{Variant} & \textbf{Security} & \textbf{Public Key} & \textbf{Secret Key} & \textbf{Signature} \\
+\textbf{Variant} & \textbf{Security} & \textbf{Public Key} & \textbf{Ciphertext} & \textbf{Recommendation} \\
 \midrule
-Dilithium2 & NIST Level 2 & 1,312 bytes & 2,528 bytes & 2,420 bytes \\
-Dilithium3 & NIST Level 3 & 1,952 bytes & 4,000 bytes & 3,293 bytes \\
-Dilithium5 & NIST Level 5 & 2,592 bytes & 4,864 bytes & 4,595 bytes \\
+Kyber512 & Level 1 (AES-128) & 800 B & 768 B & Short-term only \\
+\rowcolor{green!10}
+Kyber768 & Level 3 (AES-192) & 1,184 B & 1,088 B & \textbf{Best for IoT} \\
+Kyber1024 & Level 5 (AES-256) & 1,568 B & 1,568 B & High-security only \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\section{PQC vs Classical: Size Comparison}
+\textbf{Justification}: Level 3 security is appropriate for data needing 10--20 year protection. Kyber768 balances security with reasonable overhead for IoT.
 
-One of the main challenges of PQC is the larger sizes of keys and ciphertexts. Table \ref{tab:size_comparison} compares PQC with classical algorithms.
+\section{PQC Size Overhead}
+
+The main challenge is larger key and ciphertext sizes compared to classical cryptography:
 
 \begin{table}[H]
 \centering
 \caption{Size comparison: Classical vs Post-Quantum Cryptography}
 \label{tab:size_comparison}
-\begin{tabular}{lccccc}
+\begin{tabular}{lcccc}
 \toprule
-\textbf{Algorithm} & \textbf{Type} & \textbf{Public Key} & \textbf{Private Key} & \textbf{Ciphertext/Sig} \\
+\textbf{Algorithm} & \textbf{Type} & \textbf{Public Key} & \textbf{Ciphertext/Sig} & \textbf{Overhead vs ECC} \\
 \midrule
-\multicolumn{5}{c}{\textit{Classical (Vulnerable to Quantum)}} \\
+ECDH P-256 & KEM & 64 B & 64 B & --- \\
+Kyber768 & KEM & 1,184 B & 1,088 B & \textbf{18x / 17x} \\
 \midrule
-RSA-2048 & KEM & 256 B & 1,024 B & 256 B \\
-RSA-3072 & KEM & 384 B & 1,536 B & 384 B \\
-ECDH P-256 & KEM & 64 B & 32 B & 64 B \\
-ECDSA P-256 & Signature & 64 B & 32 B & 64 B \\
-\midrule
-\multicolumn{5}{c}{\textit{Post-Quantum (Quantum-Resistant)}} \\
-\midrule
-Kyber512 & KEM & 800 B & 1,632 B & 768 B \\
-Kyber768 & KEM & 1,184 B & 2,400 B & 1,088 B \\
-Kyber1024 & KEM & 1,568 B & 3,168 B & 1,568 B \\
-Dilithium2 & Signature & 1,312 B & 2,528 B & 2,420 B \\
-Dilithium3 & Signature & 1,952 B & 4,000 B & 3,293 B \\
-SPHINCS+-128s & Signature & 32 B & 64 B & 7,856 B \\
+ECDSA P-256 & Signature & 64 B & 64 B & --- \\
+Dilithium3 & Signature & 1,952 B & 3,293 B & 31x / 51x \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Key observations:
-\begin{itemize}
-    \item \textbf{Kyber768 public key} (1,184 B) is about \textbf{18x larger} than ECDH P-256 (64 B)
-    \item \textbf{Kyber768 ciphertext} (1,088 B) is about \textbf{17x larger} than ECDH (64 B)
-    \item \textbf{Dilithium3 signature} (3,293 B) is about \textbf{51x larger} than ECDSA (64 B)
-\end{itemize}
+This size increase motivates combining PQC with compression, addressed in Chapter 3.
 
-This size increase is the main motivation for combining PQC with compression in our work.
+\section{PQC Performance on IoT}
 
-\section{PQC Challenges for IoT}
-
-Implementing PQC on IoT devices presents several challenges:
-
-\subsection{Bandwidth Overhead}
-
-As we saw, PQC keys and ciphertexts are much larger. For IoT devices using low-bandwidth protocols like LoRa (which may have payloads limited to 51-222 bytes), transmitting a single Kyber768 ciphertext (1,088 bytes) requires multiple transmissions.
+Despite larger sizes, Kyber operations are fast:
 
 \begin{table}[H]
 \centering
-\caption{Transmissions needed for PQC over LoRa (100-byte payload)}
-\label{tab:lora_transmissions}
-\begin{tabular}{lcc}
-\toprule
-\textbf{Data} & \textbf{Size} & \textbf{Transmissions Needed} \\
-\midrule
-ECC public key & 64 bytes & 1 \\
-Kyber768 public key & 1,184 bytes & 12 \\
-Kyber768 ciphertext & 1,088 bytes & 11 \\
-Dilithium3 signature & 3,293 bytes & 33 \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\subsection{Memory Requirements}
-
-IoT microcontrollers often have limited RAM (16-256 KB). PQC implementations need memory for:
-\begin{itemize}
-    \item Storing keys (up to 4 KB for Dilithium)
-    \item Working space for NTT operations
-    \item Stack space for function calls
-\end{itemize}
-
-Fortunately, optimized implementations of Kyber can run in less than 10 KB of RAM, which is feasible for most IoT devices.
-
-\subsection{Computational Cost}
-
-PQC operations require more computation than classical cryptography. Table \ref{tab:pqc_speed} shows typical operation times.
-
-\begin{table}[H]
-\centering
-\caption{PQC operation times on ARM Cortex-M4 (typical IoT processor)}
+\caption{Kyber768 operation times on ARM Cortex-M4}
 \label{tab:pqc_speed}
 \begin{tabular}{lccc}
 \toprule
-\textbf{Algorithm} & \textbf{KeyGen} & \textbf{Encap/Sign} & \textbf{Decap/Verify} \\
+\textbf{Operation} & \textbf{Time} & \textbf{Note} \\
 \midrule
-Kyber512 & 0.5 ms & 0.6 ms & 0.6 ms \\
-Kyber768 & 0.8 ms & 0.9 ms & 0.9 ms \\
-Kyber1024 & 1.1 ms & 1.3 ms & 1.3 ms \\
-\midrule
-Dilithium2 & 1.5 ms & 3.5 ms & 1.5 ms \\
-Dilithium3 & 2.5 ms & 5.5 ms & 2.5 ms \\
+Key Generation & 0.8 ms & Once per session \\
+Encapsulation & 0.9 ms & Per key exchange \\
+Decapsulation & 0.9 ms & Per key exchange \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-These times are fast enough for most IoT applications. The main bottleneck is bandwidth, not computation.
-
-\subsection{Energy Consumption}
-
-More computation and more data transmission mean more energy consumption. For battery-powered IoT devices, this is a concern. However, studies show that the energy overhead of PQC is acceptable for most applications, especially if we can reduce the amount of data transmitted through compression.
+The main bottleneck is \textbf{bandwidth, not computation}. Optimized implementations run in under 10 KB RAM, feasible for most IoT devices.
 
 \section{Chapter Conclusion}
 
-In this chapter, we explored Post-Quantum Cryptography in detail:
-
-\textbf{First}, we reviewed the different families of PQC algorithms. Lattice-based cryptography has emerged as the most practical option, offering good security, reasonable key sizes, and efficient operations.
-
-\textbf{Second}, we examined the NIST standards. Kyber (ML-KEM) provides post-quantum key exchange, while Dilithium (ML-DSA) provides post-quantum signatures. Both are based on the Module-LWE problem.
-
-\textbf{Third}, we compared PQC sizes with classical cryptography. The main challenge is clear: Kyber768 keys and ciphertexts are about 17-18 times larger than their ECC equivalents.
-
-\textbf{Fourth}, we identified the challenges of PQC for IoT. Bandwidth is the main concern, followed by memory. Computation and energy are manageable.
-
-The size overhead of PQC is a real problem for IoT. In the next chapter, we will study compression algorithms that can help reduce this overhead. Then, in Chapter 4, we will show how combining compression with PQC can achieve both security and efficiency.
+Lattice-based cryptography, specifically Kyber, offers the best PQC solution for IoT: NIST-standardized, efficient operations, and reasonable key sizes. However, Kyber768's 1,184-byte public key and 1,088-byte ciphertext are 17--18 times larger than ECC equivalents. Chapter 3 addresses this overhead through compression.

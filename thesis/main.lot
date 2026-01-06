@@ -1,34 +1,26 @@
 \babel@toc {english}{}\relax 
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {1.1}{\ignorespaces Energy consumption of common IoT operations}}{6}{table.caption.14}%
-\contentsline {table}{\numberline {1.2}{\ignorespaces Memory requirements: Classical vs Post-Quantum Cryptography}}{6}{table.caption.15}%
-\contentsline {table}{\numberline {1.3}{\ignorespaces Bandwidth of common IoT protocols}}{7}{table.caption.16}%
-\contentsline {table}{\numberline {1.4}{\ignorespaces Impact of quantum computing on cryptographic algorithms}}{10}{table.caption.18}%
+\contentsline {table}{\numberline {1.1}{\ignorespaces Energy consumption of common IoT operations}}{4}{table.caption.13}%
+\contentsline {table}{\numberline {1.2}{\ignorespaces Memory requirements: Classical vs Post-Quantum Cryptography}}{4}{table.caption.14}%
+\contentsline {table}{\numberline {1.3}{\ignorespaces Bandwidth of common IoT protocols}}{4}{table.caption.15}%
+\contentsline {table}{\numberline {1.4}{\ignorespaces Impact of quantum computing on cryptographic algorithms}}{5}{table.caption.17}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {2.1}{\ignorespaces Overview of post-quantum cryptography families}}{15}{table.caption.21}%
-\contentsline {table}{\numberline {2.2}{\ignorespaces Kyber variants and their parameters}}{20}{table.caption.29}%
-\contentsline {table}{\numberline {2.3}{\ignorespaces Dilithium variants and their parameters}}{22}{table.caption.32}%
-\contentsline {table}{\numberline {2.4}{\ignorespaces Size comparison: Classical vs Post-Quantum Cryptography}}{22}{table.caption.33}%
-\contentsline {table}{\numberline {2.5}{\ignorespaces Transmissions needed for PQC over LoRa (100-byte payload)}}{23}{table.caption.34}%
-\contentsline {table}{\numberline {2.6}{\ignorespaces PQC operation times on ARM Cortex-M4 (typical IoT processor)}}{24}{table.caption.35}%
+\contentsline {table}{\numberline {2.1}{\ignorespaces Overview of post-quantum cryptography families}}{8}{table.caption.20}%
+\contentsline {table}{\numberline {2.2}{\ignorespaces Kyber variants---Kyber768 provides optimal balance for IoT}}{10}{table.caption.22}%
+\contentsline {table}{\numberline {2.3}{\ignorespaces Size comparison: Classical vs Post-Quantum Cryptography}}{11}{table.caption.23}%
+\contentsline {table}{\numberline {2.4}{\ignorespaces Kyber768 operation times on ARM Cortex-M4}}{11}{table.caption.24}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {3.1}{\ignorespaces Huffman codes for example string}}{29}{table.caption.41}%
-\contentsline {table}{\numberline {3.2}{\ignorespaces Comparison of LZ77 and LZ78}}{33}{table.caption.47}%
-\contentsline {table}{\numberline {3.3}{\ignorespaces Zstandard compression levels}}{37}{table.caption.55}%
-\contentsline {table}{\numberline {3.4}{\ignorespaces Comparison of compression algorithms}}{39}{table.caption.59}%
-\contentsline {table}{\numberline {3.5}{\ignorespaces Compressibility of PQC data}}{40}{table.caption.61}%
+\contentsline {table}{\numberline {3.1}{\ignorespaces LZ4 characteristics for IoT applications}}{14}{table.caption.25}%
+\contentsline {table}{\numberline {3.2}{\ignorespaces Compression algorithm comparison for IoT}}{15}{table.caption.26}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {4.1}{\ignorespaces Message format structure}}{47}{table.caption.65}%
-\contentsline {table}{\numberline {4.2}{\ignorespaces Comparison of Kyber variants for IoT}}{48}{table.caption.66}%
-\contentsline {table}{\numberline {4.3}{\ignorespaces Compression algorithm recommendations}}{49}{table.caption.67}%
-\contentsline {table}{\numberline {4.4}{\ignorespaces Theoretical bandwidth savings by data size}}{50}{table.caption.68}%
-\contentsline {table}{\numberline {4.5}{\ignorespaces Comparison: Classical vs PQC with compression}}{50}{table.caption.69}%
-\contentsline {table}{\numberline {4.6}{\ignorespaces Effect of batching on efficiency}}{52}{table.caption.70}%
-\contentsline {table}{\numberline {4.7}{\ignorespaces Security considerations}}{53}{table.caption.71}%
+\contentsline {table}{\numberline {4.1}{\ignorespaces Message format with Kyber768}}{19}{table.caption.31}%
+\contentsline {table}{\numberline {4.2}{\ignorespaces Expected bandwidth savings with LZ4 (assuming 50\% compression)}}{20}{table.caption.32}%
+\contentsline {table}{\numberline {4.3}{\ignorespaces PQC + LZ4 vs classical cryptography}}{20}{table.caption.33}%
+\contentsline {table}{\numberline {4.4}{\ignorespaces Batching efficiency}}{21}{table.caption.34}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {5.1}{\ignorespaces Python libraries used in implementation}}{55}{table.caption.72}%
-\contentsline {table}{\numberline {5.2}{\ignorespaces Test datasets for benchmarks}}{58}{table.caption.77}%
-\contentsline {table}{\numberline {5.3}{\ignorespaces Compression results by algorithm and dataset}}{60}{table.caption.78}%
-\contentsline {table}{\numberline {5.4}{\ignorespaces Kyber performance measurements}}{61}{table.caption.79}%
-\contentsline {table}{\numberline {5.5}{\ignorespaces Combined approach: total transmission sizes}}{61}{table.caption.80}%
-\contentsline {table}{\numberline {5.6}{\ignorespaces Theoretical predictions vs experimental results}}{63}{table.caption.82}%
+\contentsline {table}{\numberline {5.1}{\ignorespaces Python libraries used}}{22}{table.caption.35}%
+\contentsline {table}{\numberline {5.2}{\ignorespaces Test datasets}}{25}{table.caption.36}%
+\contentsline {table}{\numberline {5.3}{\ignorespaces Compression results by algorithm (IoT JSON sensor data)}}{25}{table.caption.37}%
+\contentsline {table}{\numberline {5.4}{\ignorespaces Kyber768 measurements}}{26}{table.caption.38}%
+\contentsline {table}{\numberline {5.5}{\ignorespaces Combined approach: total transmission sizes with LZ4}}{26}{table.caption.39}%
+\contentsline {table}{\numberline {5.6}{\ignorespaces Processing speed comparison}}{27}{table.caption.42}%

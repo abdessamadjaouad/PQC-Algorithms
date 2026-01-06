@@ -7,18 +7,14 @@
 
 The Internet of Things (IoT) is growing rapidly, with billions of devices connected worldwide. However, these devices face two major challenges: they have limited resources (energy, memory, and bandwidth), and current security methods will become vulnerable when quantum computers become powerful enough.
 
-This thesis answers a key question: \textit{How can we protect IoT communications from quantum attacks while keeping bandwidth usage low?}
+This thesis addresses a key question: \textit{How can we protect IoT communications from quantum attacks while keeping bandwidth usage low?}
 
-We propose a solution that combines Post-Quantum Cryptography (PQC) with data compression. Our approach uses the Kyber768 algorithm, which is approved by NIST for post-quantum security, together with ZLIB compression to reduce the size of transmitted data.
+We propose a solution combining Post-Quantum Cryptography (PQC) with data compression. Our approach uses Kyber768, the NIST-approved post-quantum key encapsulation mechanism, together with LZ4 compression---chosen specifically for resource-constrained IoT devices due to its minimal memory footprint and energy efficiency.
 
-The main idea is simple: we compress the data first, then encrypt it with PQC. This order is important because compression works better on unencrypted data.
-
-Our tests on realistic IoT sensor data show that this combined approach achieves \textbf{86.9\% bandwidth savings} compared to sending uncompressed data, even when we include the extra bytes needed for PQC encryption. The total processing time is less than 5 milliseconds, which is fast enough for IoT devices.
-
-These results show that combining compression with PQC is not only possible but also beneficial. The compression more than compensates for the larger sizes of PQC keys and ciphertexts, making this approach practical for real IoT applications.
+The key insight is simple: compress data before encrypting it. Our benchmarks on realistic IoT sensor data demonstrate that this combined approach achieves significant bandwidth savings while maintaining sub-5ms processing times suitable for IoT devices. LZ4's extremely fast compression and decompression speeds make it ideal for battery-powered sensors where computational energy must be minimized.
 
 \vspace{1cm}
 
-\textbf{Keywords:} Internet of Things, Post-Quantum Cryptography, Compression, Kyber, ZLIB, Bandwidth Optimization, NIST Standards
+\textbf{Keywords:} Internet of Things, Post-Quantum Cryptography, Compression, Kyber, LZ4, Bandwidth Optimization, NIST Standards
 
 \newpage

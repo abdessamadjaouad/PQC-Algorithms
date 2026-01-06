@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2026/dev/Arch Linux) (preloaded format=pdflatex 2025.12.14)  4 JAN 2026 09:26
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2026/dev/Arch Linux) (preloaded format=pdflatex 2025.12.14)  6 JAN 2026 20:53
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -800,48 +800,53 @@ Package hyperref Info: Link coloring ON on input line 140.
 \openout6 = `main.out'.
 
  (./chapters/00_titlepage.tex
-<figures/ensam_logo.png, id=493, 943.72575pt x 340.8735pt>
+<figures/ensam_logo.png, id=356, 943.72575pt x 340.8735pt>
 File: figures/ensam_logo.png Graphic file (type png)
 <use figures/ensam_logo.png>
 Package pdftex.def Info: figures/ensam_logo.png  used on input line 9.
 (pdftex.def)             Requested size: 132.30666pt x 47.78438pt.
+<figures/pqc.png, id=358, 634.37pt x 396.48125pt>
+File: figures/pqc.png Graphic file (type png)
+<use figures/pqc.png>
+Package pdftex.def Info: figures/pqc.png  used on input line 36.
+(pdftex.def)             Requested size: 199.16928pt x 124.48087pt.
 LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 4
-0.
+5.
 
 (/usr/share/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OML+lmm on input line 4
-0.
+5.
 
 (/usr/share/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-40.
+45.
 
 (/usr/share/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-40.
+45.
 
 (/usr/share/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 40.
+(Font)              <12> on input line 45.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 40.
+(Font)              <8> on input line 45.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 40.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 40.
+(Font)              <6> on input line 45.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 45.
 
 
 (/usr/share/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 40.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 45.
 
 
 (/usr/share/texmf-dist/tex/latex/amsfonts/umsb.fd
@@ -855,7 +860,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texmf-dist/fonts
-/enc/dvips/lm/lm-ec.enc} <./figures/ensam_logo.png>]
+/enc/dvips/lm/lm-ec.enc} <./figures/ensam_logo.png> <./figures/pqc.png>]
 
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.i}) has 
@@ -864,6 +869,12 @@ been already used, duplicate ignored
                    \relax 
 l.65 \newpage
               [1]) (./chapters/00_abstract.tex
+Overfull \hbox (6.68695pt too wide) in paragraph at lines 12--13
+\T1/lmr/m/n/12 cap-su-la-tion mech-a-nism, to-gether with LZ4 compression---cho
+sen specif-i-cally for resource-
+ []
+
+
 
 [2
 
@@ -877,32 +888,19 @@ l.65 \newpage
 
 ]
 
-[5]
-LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 1
-00.
- (/usr/share/texmf-dist/tex/latex/lm/ts1lmr.fd
-File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
-
-[6{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}])
+[5])
 \tf@toc=\write7
 \openout7 = `main.toc'.
 
 
 
-[7] (./main.lof
-Overfull \hbox (1.13725pt too wide) in paragraph at lines 14--14
- [][] [][][]\T1/lmr/m/n/12 System ar-chi-tec-ture for com-bined com-pres-sion a
-nd PQC ap-proach, show- 
- []
-
-)
+[6] (./main.lof)
 \tf@lof=\write8
 \openout8 = `main.lof'.
 
 
 
-[8
+[7
 
 ] (./main.lot)
 \tf@lot=\write9
@@ -910,7 +908,7 @@ nd PQC ap-proach, show-
 
 
 
-[9
+[8
 
 ] (./main.loa)
 \tf@loa=\write10
@@ -918,400 +916,301 @@ nd PQC ap-proach, show-
 
 
 
-[10
+[9
 
 ]
 No file main.acr.
 
 
-[11] (./chapters/00_introduction.tex
+[10] (./chapters/00_introduction.tex
+Overfull \hbox (0.57173pt too wide) in paragraph at lines 14--15
+\T1/lmr/m/n/12 Post-Quantum Cryp-tog-ra-phy (PQC) of-fers quantum-resistant se-
+cu-rity, with NIST stan-
+ []
+
+
 
 [1
 
 
 ]
 
-[2]
-
-[3]) (./chapters/01_iot_security.tex
+[2]) (./chapters/01_iot_security.tex
 Chapter 1.
-<figures/iot_architecture.png, id=837, 857.8449pt x 568.7649pt>
+<figures/iot_architecture.png, id=594, 857.8449pt x 568.7649pt>
 File: figures/iot_architecture.png Graphic file (type png)
 <use figures/iot_architecture.png>
-Package pdftex.def Info: figures/iot_architecture.png  used on input line 27.
+Package pdftex.def Info: figures/iot_architecture.png  used on input line 14.
 (pdftex.def)             Requested size: 418.96548pt x 277.78598pt.
 
 
-[4
+[3
 
-]
-
-[5 <./figures/iot_architecture.png>]
-
-[6]
-<figures/iot_constraints.png, id=858, 701.019pt x 568.7649pt>
+ <./figures/iot_architecture.png>]
+<figures/iot_constraints.png, id=602, 712.5822pt x 575.751pt>
 File: figures/iot_constraints.png Graphic file (type png)
 <use figures/iot_constraints.png>
-Package pdftex.def Info: figures/iot_constraints.png  used on input line 141.
-(pdftex.def)             Requested size: 330.76329pt x 268.36098pt.
+Package pdftex.def Info: figures/iot_constraints.png  used on input line 81.
+(pdftex.def)             Requested size: 330.76329pt x 267.25583pt.
 
 
-[7]
+[4]
 
-[8 <./figures/iot_constraints.png>]
+[5 <./figures/iot_constraints.png>]) (./chapters/02_pqc.tex
 
-[9{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/texmf-dis
-t/fonts/enc/dvips/lm/lm-rm.enc}]
-
-[10]
-
-[11]) (./chapters/02_pqc.tex
-
-[12]
+[6]
 Chapter 2.
-
-Overfull \hbox (2.40106pt too wide) in paragraph at lines 10--11
-\T1/lmr/m/n/12 al-go-rithms we use to-day, es-pe-cially RSA and ECC. Post-Quant
-um Cryp-tog-ra-phy (PQC)
- []
-
-
-Overfull \hbox (12.5726pt too wide) in paragraph at lines 26--27
-[]\T1/lmr/bx/n/12 2024\T1/lmr/m/n/12 : NIST pub-lishes the fi-nal stan-dards: F
-IPS 203 (Ky-ber), FIPS 204 (Dilithium),
- []
-
-
-
-[13
-
-]
-<figures/quantum_timeline.png, id=907, 857.8449pt x 350.5095pt>
+LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 1
+6.
+(/usr/share/texmf-dist/tex/latex/lm/ts1lmr.fd
+File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+<figures/quantum_timeline.png, id=621, 857.8449pt x 350.5095pt>
 File: figures/quantum_timeline.png Graphic file (type png)
 <use figures/quantum_timeline.png>
-Package pdftex.def Info: figures/quantum_timeline.png  used on input line 35.
+Package pdftex.def Info: figures/quantum_timeline.png  used on input line 23.
 (pdftex.def)             Requested size: 418.96548pt x 171.18958pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 62--62
+
+[7
+
+{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}]
+Underfull \hbox (badness 10000) in paragraph at lines 40--40
 []|\T1/lmr/m/n/12 Learning With
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 62--62
-\T1/lmr/m/n/12 Er-rors (LWE),
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 62--62
+Underfull \hbox (badness 10000) in paragraph at lines 40--40
 []|\T1/lmr/m/n/12 Kyber,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 62--62
-\T1/lmr/m/n/12 Dilithium,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 64--64
+Underfull \hbox (badness 10000) in paragraph at lines 41--41
 []|\T1/lmr/m/n/12 Hash func-tion
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 64--64
-[]|\T1/lmr/m/n/12 SPHINCS+,
+Underfull \hbox (badness 10000) in paragraph at lines 41--42
+[]|\T1/lmr/m/n/12 Conservative, large
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 64--65
-[]|\T1/lmr/m/n/12 Very con-ser-va-tive,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 66--66
+Underfull \hbox (badness 10000) in paragraph at lines 42--42
 []|\T1/lmr/m/n/12 Decoding ran-
  []
 
 
-Underfull \hbox (badness 2080) in paragraph at lines 68--68
-[]|\T1/lmr/m/n/12 Solving poly-no-
+Underfull \hbox (badness 10000) in paragraph at lines 43--43
+[]|\T1/lmr/m/n/12 Polynomial
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 68--68
-[]|\T1/lmr/m/n/12 Rainbow,
+Underfull \hbox (badness 10000) in paragraph at lines 43--43
+[]|\T1/lmr/m/n/12 Rainbow (bro-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 68--69
+Underfull \hbox (badness 10000) in paragraph at lines 43--44
 []|\T1/lmr/m/n/12 Small sig-na-tures,
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 70--70
-[]|\T1/lmr/m/n/12 Finding iso-ge-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 70--70
-\T1/lmr/m/n/12 nies be-tween
- []
-
-
-
-[14 <./figures/quantum_timeline.png>]
-<figures/pqc_families_comparison.png, id=921, 856.3995pt x 494.8086pt>
+<figures/pqc_families_comparison.png, id=628, 856.3995pt x 496.254pt>
 File: figures/pqc_families_comparison.png Graphic file (type png)
 <use figures/pqc_families_comparison.png>
 Package pdftex.def Info: figures/pqc_families_comparison.png  used on input lin
-e 79.
-(pdftex.def)             Requested size: 418.96548pt x 242.07326pt.
+e 50.
+(pdftex.def)             Requested size: 418.96548pt x 242.7804pt.
 
 
-[15 <./figures/pqc_families_comparison.png>]
+[8 <./figures/quantum_timeline.png>]
 
-[16{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/share/texmf-di
-st/fonts/enc/dvips/lm/lm-mathex.enc}]
+[9{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/texmf-dis
+t/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-mat
+hsy.enc} <./figures/pqc_families_comparison.png>]
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
-put line 150.
+put line 82.
 
-
-[17]
-
-[18]
-
-[19]
-
-[20]
-
-[21]
-
-[22]
-
-[23]) (./chapters/03_compression.tex
-
-[24]
-Chapter 3.
-
-
-[25
-
-]
-<figures/compression_tradeoff.png, id=1014, 711.8595pt x 495.0495pt>
-File: figures/compression_tradeoff.png Graphic file (type png)
-<use figures/compression_tradeoff.png>
-Package pdftex.def Info: figures/compression_tradeoff.png  used on input line 6
-1.
-(pdftex.def)             Requested size: 374.86775pt x 260.69803pt.
-
-
-[26]
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 8
-8.
- (/usr/share/texmf-dist/tex/latex/lm/t1lmtt.fd
-File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
-
-[27 <./figures/compression_tradeoff.png>]
-
-[28]
-
-[29]
-
-[30]
-
-[31]
-
-[32]
-
-[33]
-
-[34]
-
-[35]
-
-[36]
-
-[37]
-
-[38]
-
-[39]
-
-[40]) (./chapters/04_combined_approach.tex
-
-[41]
-Chapter 4.
-<figures/system_architecture.png, id=1157, 1002.3849pt x 568.7649pt>
-File: figures/system_architecture.png Graphic file (type png)
-<use figures/system_architecture.png>
-Package pdftex.def Info: figures/system_architecture.png  used on input line 20
-.
-(pdftex.def)             Requested size: 418.96548pt x 237.72536pt.
-
-
-[42
-
-]
-
-[43 <./figures/system_architecture.png>]
-<figures/bandwidth_breakdown.png, id=1171, 711.8595pt x 423.984pt>
-File: figures/bandwidth_breakdown.png Graphic file (type png)
-<use figures/bandwidth_breakdown.png>
-Package pdftex.def Info: figures/bandwidth_breakdown.png  used on input line 78
-.
-(pdftex.def)             Requested size: 352.81552pt x 210.14119pt.
-
-
-[44]
-
-[45 <./figures/bandwidth_breakdown.png>]
-
-[46]
-
-[47]
-Overfull \hbox (29.6606pt too wide) in paragraph at lines 233--234
-[]\T1/lmr/bx/n/12 Implementation Avail-abil-ity\T1/lmr/m/n/12 : High-quality im
--ple-men-ta-tions ex-ist (li-boqs, pqcrypto,
+Overfull \hbox (1.66505pt too wide) in paragraph at lines 113--123
+ [][] 
  []
 
 
-
-[48]
-
-[49]
-Overfull \hbox (28.58635pt too wide) in paragraph at lines 370--380
+Overfull \hbox (3.22508pt too wide) in paragraph at lines 135--146
  [][] 
  []
 
 
 
-[50]
+[10]) (./chapters/03_compression.tex
 
-[51]
-Underfull \hbox (badness 10000) in paragraph at lines 486--486
-[]|\T1/lmr/m/n/12 Attacker ob-serves
- []
+[11]
+Chapter 3.
 
 
-Underfull \hbox (badness 1466) in paragraph at lines 487--487
-[]|\T1/lmr/m/n/12 Timing/power anal-y-
- []
-
-
-Underfull \hbox (badness 1742) in paragraph at lines 488--488
-[]|\T1/lmr/m/n/12 Same key for many
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 489--490
-[]|\T1/lmr/m/n/12 Include times-tam-p/se-
- []
-
-
-
-[52]) (./chapters/05_implementation.tex
-
-[53]
-Chapter 5.
-
-
-[54
+[12
 
 ]
 
-[55] (/usr/share/texmf-dist/tex/latex/listings/lstlang1.sty
+[13{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}]
+
+[14]
+Overfull \hbox (0.45717pt too wide) in paragraph at lines 120--121
+[]\T1/lmr/bx/n/12 Predictable ex-e-cu-tion\T1/lmr/m/n/12 : LZ4 has sim-ple, reg
+-u-lar ex-e-cu-tion pat-terns. ZLIB/Zstd
+ []
+
+<figures/compression_tradeoff.png, id=691, 707.2824pt x 495.0495pt>
+File: figures/compression_tradeoff.png Graphic file (type png)
+<use figures/compression_tradeoff.png>
+Package pdftex.def Info: figures/compression_tradeoff.png  used on input line 1
+50.
+(pdftex.def)             Requested size: 374.86775pt x 262.39009pt.
+
+
+[15]) (./chapters/04_combined_approach.tex
+
+[16 <./figures/compression_tradeoff.png>]
+Chapter 4.
+<figures/system_architecture.png, id=705, 1002.3849pt x 496.4949pt>
+File: figures/system_architecture.png Graphic file (type png)
+<use figures/system_architecture.png>
+Package pdftex.def Info: figures/system_architecture.png  used on input line 14
+.
+(pdftex.def)             Requested size: 418.96548pt x 207.51883pt.
+
+
+[17
+
+ <./figures/system_architecture.png>]
+<figures/bandwidth_breakdown.png, id=712, 711.8595pt x 423.984pt>
+File: figures/bandwidth_breakdown.png Graphic file (type png)
+<use figures/bandwidth_breakdown.png>
+Package pdftex.def Info: figures/bandwidth_breakdown.png  used on input line 31
+.
+(pdftex.def)             Requested size: 352.81552pt x 210.14119pt.
+
+
+[18 <./figures/bandwidth_breakdown.png>]
+
+[19]
+Overfull \hbox (33.08635pt too wide) in paragraph at lines 162--172
+ [][] 
+ []
+
+
+
+[20]) (./chapters/05_implementation.tex
+
+[21]
+Chapter 5.
+(/usr/share/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2024/09/23 1.10c listings language file
 )
+
+[22
+
+]
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 97.
+nput line 43.
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 4
+3.
+ (/usr/share/texmf-dist/tex/latex/lm/t1lmtt.fd
+File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10.95> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 98.
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 44.
 
 
-[56]
+[23]
 
-[57]
+[24]
+! Misplaced \noalign.
+<recently read> \noalign 
+                         
+l.150  & \rowcolor
+                  {green!10} LZ4 & 6,150 B & 177 B & 34.7x & 1371 MB/s \\
+I expect to see \noalign only after the \cr of
+an alignment. Proceed, and I'll ignore this case.
 
-[58]
 
-[59]
+Overfull \hbox (8.17845pt too wide) in paragraph at lines 145--155
+ [][] 
+ []
 
-[60]
 
-[61]
 
-[62]
-
-[63]
-<figures/compression_comparison.png, id=1458, 1003.1076pt x 354.123pt>
+[25]
+<figures/compression_comparison.png, id=817, 1000.9395pt x 349.305pt>
 File: figures/compression_comparison.png Graphic file (type png)
 <use figures/compression_comparison.png>
 Package pdftex.def Info: figures/compression_comparison.png  used on input line
- 510.
-(pdftex.def)             Requested size: 374.86775pt x 132.33649pt.
+ 197.
+(pdftex.def)             Requested size: 374.86775pt x 130.82382pt.
 
 
-[64]
-<figures/combined_comparison.png, id=1474, 1003.1076pt x 423.2613pt>
+[26 <./figures/compression_comparison.png>]
+<figures/combined_comparison.png, id=824, 711.8595pt x 423.984pt>
 File: figures/combined_comparison.png Graphic file (type png)
 <use figures/combined_comparison.png>
-Package pdftex.def Info: figures/combined_comparison.png  used on input line 52
-1.
-(pdftex.def)             Requested size: 374.86775pt x 158.17361pt.
-<figures/pqc_sizes.png, id=1476, 714.0276pt x 424.9476pt>
-File: figures/pqc_sizes.png Graphic file (type png)
-<use figures/pqc_sizes.png>
-Package pdftex.def Info: figures/pqc_sizes.png  used on input line 532.
-(pdftex.def)             Requested size: 374.86775pt x 223.1073pt.
+Package pdftex.def Info: figures/combined_comparison.png  used on input line 24
+5.
+(pdftex.def)             Requested size: 374.86775pt x 223.27422pt.
 
 
-[65 <./figures/compression_comparison.png> <./figures/combined_comparison.png>]
-) (./chapters/06_conclusion.tex
+[27 <./figures/combined_comparison.png>]) (./chapters/06_conclusion.tex
 
-[66 <./figures/pqc_sizes.png>]
-Overfull \hbox (3.26266pt too wide) in paragraph at lines 14--15
-\T1/lmr/m/n/12 pro-cess-ing power, re-stricted mem-ory, con-strained band-width
-, and bat-tery dependence---
+[28]
+Overfull \hbox (0.42136pt too wide) in paragraph at lines 16--17
+[]\T1/lmr/bx/n/12 Third\T1/lmr/m/n/12 , we de-vel-oped a com-bined ar-chi-tec-t
+ure us-ing Ky-ber768 for quantum-resistant
  []
 
 
-Overfull \hbox (6.25519pt too wide) in paragraph at lines 20--21
-[]\T1/lmr/bx/n/12 Fourth\T1/lmr/m/n/12 , we de-signed and im-ple-mented a com-p
-lete soft-ware ar-chi-tec-ture for quantum-
+Overfull \hbox (4.12825pt too wide) in paragraph at lines 16--17
+\T1/lmr/m/n/12 key ex-change with LZ4 com-pres-sion to off-set PQC's band-width
+ over-head. The compress-
  []
 
 
 
-[67
+[29
 
 ]
+Overfull \hbox (7.67181pt too wide) in paragraph at lines 45--46
+[]\T1/lmr/bx/n/12 Protocol in-te-gra-tion\T1/lmr/m/n/12 : In-te-grat-ing the ap
+-proach into MQTT, CoAP, and LwM2M
+ []
 
-[68]
 
-[69]) (./main.bbl
+Overfull \hbox (15.97633pt too wide) in paragraph at lines 46--47
+[]\T1/lmr/bx/n/12 Post-quantum sig-na-tures\T1/lmr/m/n/12 : Ex-tend-ing to in-c
+lude Dilithium for com-plete quantum-
+ []
 
-[70]
 
-[71
 
-])
+[30]) (./main.bbl
 
-[72] (./main.aux)
+[31])
+
+[32
+
+] (./main.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 51EF3301D40FA0813CE203327153AA84;21534.
+(rerunfilecheck)             Checksum: 7D7C9378DB34F8AF27B6B780AF3730DD;13925.
  ) 
 Here is how much of TeX's memory you used:
- 25296 strings out of 475171
- 437152 string characters out of 5767094
- 1192166 words of memory out of 5000000
- 47327 multiletter control sequences out of 15000+600000
- 636090 words of font info for 80 fonts, out of 8000000 for 9000
+ 24862 strings out of 475171
+ 431656 string characters out of 5767094
+ 1186737 words of memory out of 5000000
+ 47208 multiletter control sequences out of 15000+600000
+ 635714 words of font info for 79 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 75i,18n,79p,2365b,2093s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,18n,79p,2365b,1389s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/share/texmf-dis
 t/fonts/type1/public/lm/lmbx12.pfb></usr/share/texmf-dist/fonts/type1/public/lm
 /lmbxi10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmcsc10.pfb></usr/sha
@@ -1321,15 +1220,14 @@ e1/public/lm/lmmi12.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi8.pfb>
 onts/type1/public/lm/lmr12.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmr
 6.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf-d
 ist/fonts/type1/public/lm/lmri12.pfb></usr/share/texmf-dist/fonts/type1/public/
-lm/lmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></usr/shar
-e/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></usr/share/texmf-dist/fonts/type
-1/public/lm/lmtt10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmtt12.pfb>
-</usr/share/texmf-dist/fonts/type1/public/lm/lmtti10.pfb></usr/share/texmf-dist
-/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (84 pages, 2486398 bytes).
+lm/lmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></usr/sha
+re/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></usr/share/texmf-dist/fonts/typ
+e1/public/lm/lmtt12.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmtti10.pf
+b></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on main.pdf (43 pages, 2249419 bytes).
 PDF statistics:
- 1745 PDF objects out of 2073 (max. 8388607)
- 1579 compressed objects within 16 object streams
- 585 named destinations out of 1000 (max. 500000)
- 1032 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1017 PDF objects out of 1200 (max. 8388607)
+ 901 compressed objects within 10 object streams
+ 271 named destinations out of 1000 (max. 500000)
+ 760 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -365,9 +365,9 @@ def run_full_benchmark():
     # Benchmark 1: Compression algorithms
     print_header("BENCHMARK 1: COMPRESSION ALGORITHMS")
     
-    compression_algos = ['zlib']
-    if HAS_LZ4:
-        compression_algos.append('lz4')
+    compression_algos = ['lz4'] if HAS_LZ4 else ['zlib']
+    if HAS_LZ4 and 'zlib' not in compression_algos:
+        compression_algos.append('zlib')
     if HAS_ZSTD:
         compression_algos.append('zstd')
     
@@ -439,9 +439,9 @@ def run_quick_benchmark():
     # Single test with medium IoT data
     data = generate_iot_data(10)
     
-    print("Testing: Kyber768 + ZLIB")
+    print("Testing: Kyber768 + LZ4")
     print("-" * 60)
-    result = benchmark_combined(data, 'Kyber768', 'zlib')
+    result = benchmark_combined(data, 'Kyber768', 'lz4' if HAS_LZ4 else 'zlib')
     print_combined_results(result)
 
 # ============================================

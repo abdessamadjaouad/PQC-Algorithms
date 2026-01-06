@@ -7,425 +7,57 @@
 
 \section{Introduction}
 
-In the previous chapter, we saw that Post-Quantum Cryptography produces larger keys and ciphertexts than classical cryptography. For IoT devices with limited bandwidth, this is a serious problem. Data compression can help solve this problem by reducing the size of data before transmission.
-
-Compression is the process of encoding information using fewer bits than the original representation. It has been used in computing for decades, from file archiving to video streaming. In the context of IoT and PQC, compression can reduce the bandwidth overhead caused by larger cryptographic data.
-
-In this chapter, we will study both classical and modern compression algorithms. For each algorithm, we will explain how it works and provide its implementation. We will then compare these algorithms and discuss their relevance for IoT applications.
+PQC produces larger keys and ciphertexts than classical cryptography (see Chapter 2). Data compression can offset this overhead by reducing payload size before transmission. This chapter examines compression fundamentals and justifies LZ4 as the optimal algorithm for resource-constrained IoT devices.
 
 \section{Fundamentals of Data Compression}
 
-Before studying specific algorithms, we need to understand the basic concepts of data compression.
-
 \subsection{Lossless vs Lossy Compression}
 
-There are two main types of compression:
-
-\begin{itemize}
-    \item \textbf{Lossless compression}: The original data can be perfectly reconstructed from the compressed data. No information is lost. Examples: ZIP, GZIP, PNG.
-    
-    \item \textbf{Lossy compression}: Some information is permanently removed to achieve higher compression ratios. The original data cannot be perfectly recovered. Examples: JPEG, MP3, H.264.
-\end{itemize}
-
-For cryptographic data, we \textbf{must use lossless compression}. If we lose even one bit of a cryptographic key or ciphertext, the decryption will fail completely. Therefore, all algorithms in this chapter are lossless.
+\textbf{Lossless compression} perfectly reconstructs original data (ZIP, GZIP, PNG). \textbf{Lossy compression} permanently removes information for higher ratios (JPEG, MP3). For cryptographic data, we \textbf{must use lossless compression}---losing even one bit causes decryption failure.
 
 \subsection{Compression Metrics}
 
-We use several metrics to evaluate compression algorithms:
-
 \begin{itemize}
-    \item \textbf{Compression ratio}: The ratio of original size to compressed size.
-    \begin{equation}
-    \text{Compression Ratio} = \frac{\text{Original Size}}{\text{Compressed Size}}
-    \end{equation}
-    A ratio of 2.0 means the compressed data is half the size of the original.
-    
-    \item \textbf{Space savings}: The percentage of size reduction.
-    \begin{equation}
-    \text{Space Savings} = \left(1 - \frac{\text{Compressed Size}}{\text{Original Size}}\right) \times 100\%
-    \end{equation}
-    
-    \item \textbf{Compression speed}: How fast the algorithm can compress data (MB/s).
-    
-    \item \textbf{Decompression speed}: How fast the algorithm can decompress data (MB/s).
-    
-    \item \textbf{Memory usage}: How much RAM the algorithm needs during compression/decompression.
+    \item \textbf{Compression ratio}: $\frac{\text{Original Size}}{\text{Compressed Size}}$ (ratio of 2.0 = 50\% reduction)
+    \item \textbf{Speed}: Compression/decompression throughput (MB/s)
+    \item \textbf{Memory usage}: RAM required during operation
 \end{itemize}
 
-For IoT applications, all these metrics matter. We want good compression ratios to save bandwidth, but we also need fast speeds and low memory usage because IoT devices have limited resources.
+For IoT, all metrics matter. We prioritize speed and low memory over maximum compression ratio.
 
-Figure \ref{fig:compression_tradeoff} illustrates the fundamental trade-off between compression ratio and speed for different algorithms, helping to identify suitable candidates for IoT applications.
+\subsection{Information Theory}
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.85\textwidth]{figures/compression_tradeoff.png}
-\caption{Compression algorithm trade-offs: ratio vs speed. ZLIB (circled) offers an excellent balance of compression ratio and acceptable speed for IoT applications.}
-\label{fig:compression_tradeoff}
-\end{figure}
+Entropy $H = -\sum_{i} p_i \log_2(p_i)$ sets the theoretical compression limit \cite{huffman1952method}. No lossless algorithm can compress below entropy on average.
 
-\subsection{Information Theory Basics}
+\section{Compression Algorithm Families}
 
-The theoretical foundation of compression comes from Claude Shannon's information theory \cite{huffman1952method}. The key concept is \textbf{entropy}, which measures the minimum number of bits needed to represent information.
+\subsection{Classical Algorithms}
 
-For a source with symbols $s_1, s_2, ..., s_n$ with probabilities $p_1, p_2, ..., p_n$, the entropy $H$ is:
+\textbf{Run-Length Encoding (RLE)} replaces repeated values with count-value pairs. Simple and fast but only effective for data with many repetitions.
 
-\begin{equation}
-H = -\sum_{i=1}^{n} p_i \log_2(p_i)
-\end{equation}
+\textbf{Huffman Coding} \cite{huffman1952method} assigns shorter codes to frequent symbols. Optimal prefix-free codes, used in JPEG/MP3/ZIP.
 
-Entropy sets a theoretical limit on compression. No lossless compression algorithm can compress data below its entropy on average.
+\textbf{Lempel-Ziv (LZ77/LZ78)} \cite{ziv1977universal, ziv1978compression} encode references to previously seen data. Foundation of modern compression.
 
-\section{Classical Compression Algorithms}
+\subsection{Modern Algorithms}
 
-Classical compression algorithms were developed in the 1950s-1980s. They form the foundation for understanding modern compression.
+\textbf{ZLIB/DEFLATE} \cite{deutsch1996zlib} combines LZ77 with Huffman coding. Universally supported but requires 32KB RAM and offers moderate speed.
 
-\subsection{Run-Length Encoding (RLE)}
+\textbf{Zstandard (Zstd)} \cite{collet2016zstandard} achieves excellent compression with configurable levels. Requires significant RAM (64KB+) and uses complex entropy coding.
 
-Run-Length Encoding is the simplest compression algorithm. It replaces sequences of repeated values (called ``runs'') with a count and the value.
+\textbf{Brotli} optimizes for web content with excellent text compression but slow compression speed.
 
-\subsubsection{How RLE Works}
+\section{LZ4: Our Chosen Algorithm}
 
-Consider the string: \texttt{AAAAAABBBCCCCCCCCDD}
+LZ4 \cite{collet2013lz4} is designed for extreme speed with acceptable compression ratios. We select LZ4 for IoT because it minimizes total system cost (compression energy + transmission energy + memory pressure).
 
-RLE encodes this as: \texttt{6A3B8C2D}
+\subsection{How LZ4 Works}
 
-The original string has 19 characters, while the encoded version has only 8 characters. This gives a compression ratio of $19/8 = 2.375$.
-
-\subsubsection{RLE Algorithm}
-
-\begin{algorithm}[H]
-\caption{Run-Length Encoding (Compression)}
-\label{alg:rle_compress}
-\begin{algorithmic}[1]
-\Require Input data array $D$ of length $n$
-\Ensure Compressed data $C$
-\State $C \gets$ empty array
-\State $i \gets 0$
-\While{$i < n$}
-    \State $currentValue \gets D[i]$
-    \State $runLength \gets 1$
-    \While{$i + runLength < n$ \textbf{and} $D[i + runLength] = currentValue$}
-        \State $runLength \gets runLength + 1$
-    \EndWhile
-    \State Append $(runLength, currentValue)$ to $C$
-    \State $i \gets i + runLength$
-\EndWhile
-\State \Return $C$
-\end{algorithmic}
-\end{algorithm}
-
-\begin{algorithm}[H]
-\caption{Run-Length Decoding (Decompression)}
-\label{alg:rle_decompress}
-\begin{algorithmic}[1]
-\Require Compressed data $C$ as pairs $(count, value)$
-\Ensure Original data $D$
-\State $D \gets$ empty array
-\For{each pair $(count, value)$ in $C$}
-    \For{$j \gets 1$ to $count$}
-        \State Append $value$ to $D$
-    \EndFor
-\EndFor
-\State \Return $D$
-\end{algorithmic}
-\end{algorithm}
-
-\subsubsection{RLE Characteristics}
-
+LZ4 is based on LZ77 with simplifications for speed:
 \begin{itemize}
-    \item \textbf{Strengths}: Very simple, very fast, no memory overhead
-    \item \textbf{Weaknesses}: Only effective for data with many repeated values
-    \item \textbf{Best for}: Simple images, sensor data with stable readings
-    \item \textbf{Worst for}: Random data, text, most real-world data
-\end{itemize}
-
-RLE can actually \textbf{increase} the size of data that has few repetitions. For example, ``ABCDEF'' becomes ``1A1B1C1D1E1F'', which is longer!
-
-\subsection{Huffman Coding}
-
-Huffman coding, invented by David Huffman in 1952 \cite{huffman1952method}, is one of the most important compression algorithms. It assigns shorter codes to more frequent symbols and longer codes to less frequent symbols.
-
-\subsubsection{How Huffman Coding Works}
-
-The algorithm builds a binary tree based on symbol frequencies:
-
-\begin{enumerate}
-    \item Count the frequency of each symbol
-    \item Create a leaf node for each symbol
-    \item Repeatedly combine the two nodes with lowest frequencies
-    \item Assign 0 to left branches and 1 to right branches
-    \item Read the code for each symbol by following the path from root to leaf
-\end{enumerate}
-
-\textbf{Example}: For the string ``AAAAABBC'' with frequencies A=5, B=2, C=1:
-
-\begin{table}[H]
-\centering
-\caption{Huffman codes for example string}
-\label{tab:huffman_example}
-\begin{tabular}{lccc}
-\toprule
-\textbf{Symbol} & \textbf{Frequency} & \textbf{Huffman Code} & \textbf{Bits Used} \\
-\midrule
-A & 5 & 0 & $5 \times 1 = 5$ \\
-B & 2 & 10 & $2 \times 2 = 4$ \\
-C & 1 & 11 & $1 \times 2 = 2$ \\
-\midrule
-\multicolumn{3}{l}{\textbf{Total}} & 11 bits \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-Without compression, using 8 bits per character, we would need $8 \times 8 = 64$ bits. With Huffman coding, we only need 11 bits (plus the code table). This is a significant improvement.
-
-\subsubsection{Huffman Coding Algorithm}
-
-\begin{algorithm}[H]
-\caption{Build Huffman Tree}
-\label{alg:huffman_tree}
-\begin{algorithmic}[1]
-\Require Frequency table $F$ where $F[s]$ is frequency of symbol $s$
-\Ensure Root of Huffman tree
-\State Create a priority queue $Q$ (min-heap by frequency)
-\For{each symbol $s$ with frequency $F[s] > 0$}
-    \State Create leaf node $N$ with symbol $s$ and frequency $F[s]$
-    \State Insert $N$ into $Q$
-\EndFor
-\While{$|Q| > 1$}
-    \State $left \gets$ extract minimum from $Q$
-    \State $right \gets$ extract minimum from $Q$
-    \State Create internal node $parent$ with:
-    \State \quad $parent.frequency \gets left.frequency + right.frequency$
-    \State \quad $parent.left \gets left$
-    \State \quad $parent.right \gets right$
-    \State Insert $parent$ into $Q$
-\EndWhile
-\State \Return extract minimum from $Q$ \Comment{This is the root}
-\end{algorithmic}
-\end{algorithm}
-
-\begin{algorithm}[H]
-\caption{Generate Huffman Codes}
-\label{alg:huffman_codes}
-\begin{algorithmic}[1]
-\Require Root of Huffman tree
-\Ensure Code table mapping symbols to binary codes
-\State $codes \gets$ empty dictionary
-\State \Call{GenerateCodes}{$root$, ``'', $codes$}
-\State \Return $codes$
-\Procedure{GenerateCodes}{$node$, $currentCode$, $codes$}
-    \If{$node$ is a leaf}
-        \State $codes[node.symbol] \gets currentCode$
-    \Else
-        \State \Call{GenerateCodes}{$node.left$, $currentCode + $``0'', $codes$}
-        \State \Call{GenerateCodes}{$node.right$, $currentCode + $``1'', $codes$}
-    \EndIf
-\EndProcedure
-\end{algorithmic}
-\end{algorithm}
-
-\subsubsection{Huffman Coding Characteristics}
-
-\begin{itemize}
-    \item \textbf{Strengths}: Optimal prefix-free code, no ambiguity in decoding
-    \item \textbf{Weaknesses}: Requires two passes (counting then encoding), must store code table
-    \item \textbf{Complexity}: $O(n \log n)$ for building the tree
-    \item \textbf{Used in}: JPEG, MP3, ZIP (as part of DEFLATE)
-\end{itemize}
-
-\subsection{Lempel-Ziv Algorithms (LZ77/LZ78)}
-
-The Lempel-Ziv algorithms, developed by Abraham Lempel and Jacob Ziv in 1977-1978 \cite{ziv1977universal, ziv1978compression}, introduced a revolutionary idea: instead of coding individual symbols, code \textbf{references to previously seen data}.
-
-\subsubsection{LZ77: Sliding Window}
-
-LZ77 uses a ``sliding window'' that contains recently processed data. When it finds a repeated sequence, it outputs a reference (offset, length) instead of the actual data.
-
-\textbf{Example}: Compressing ``ABCABCABC''
-
-\begin{enumerate}
-    \item Output A (literal)
-    \item Output B (literal)
-    \item Output C (literal)
-    \item See ``ABC'' again, output (3, 3) meaning ``go back 3, copy 3''
-    \item See ``ABC'' again, output (3, 3)
-\end{enumerate}
-
-Result: A, B, C, (3,3), (3,3) instead of 9 characters.
-
-\begin{algorithm}[H]
-\caption{LZ77 Compression}
-\label{alg:lz77}
-\begin{algorithmic}[1]
-\Require Input data $D$, window size $W$, lookahead buffer size $L$
-\Ensure Compressed output as sequence of (offset, length, next) or (0, 0, char)
-\State $pos \gets 0$
-\State $output \gets$ empty list
-\While{$pos < length(D)$}
-    \State $bestOffset \gets 0$
-    \State $bestLength \gets 0$
-    \State $searchStart \gets \max(0, pos - W)$
-    \For{$i \gets searchStart$ to $pos - 1$}
-        \State $matchLength \gets 0$
-        \While{$matchLength < L$ \textbf{and} $pos + matchLength < length(D)$}
-            \If{$D[i + matchLength] = D[pos + matchLength]$}
-                \State $matchLength \gets matchLength + 1$
-            \Else
-                \State \textbf{break}
-            \EndIf
-        \EndWhile
-        \If{$matchLength > bestLength$}
-            \State $bestLength \gets matchLength$
-            \State $bestOffset \gets pos - i$
-        \EndIf
-    \EndFor
-    \If{$bestLength > 0$}
-        \State Append $(bestOffset, bestLength, D[pos + bestLength])$ to $output$
-        \State $pos \gets pos + bestLength + 1$
-    \Else
-        \State Append $(0, 0, D[pos])$ to $output$
-        \State $pos \gets pos + 1$
-    \EndIf
-\EndWhile
-\State \Return $output$
-\end{algorithmic}
-\end{algorithm}
-
-\subsubsection{LZ78: Dictionary-Based}
-
-LZ78 builds a dictionary of phrases during compression. Each new phrase extends an existing dictionary entry.
-
-\begin{algorithm}[H]
-\caption{LZ78 Compression}
-\label{alg:lz78}
-\begin{algorithmic}[1]
-\Require Input data $D$
-\Ensure Compressed output as sequence of (dictionary index, next character)
-\State $dictionary \gets \{0: \text{empty}\}$ \Comment{Index 0 is empty string}
-\State $nextIndex \gets 1$
-\State $output \gets$ empty list
-\State $current \gets$ empty string
-\State $pos \gets 0$
-\While{$pos < length(D)$}
-    \State $current \gets current + D[pos]$
-    \If{$current$ not in $dictionary$ values}
-        \State Find $prefix$ and $lastChar$ where $current = prefix + lastChar$
-        \State Find $prefixIndex$ such that $dictionary[prefixIndex] = prefix$
-        \State Append $(prefixIndex, lastChar)$ to $output$
-        \State $dictionary[nextIndex] \gets current$
-        \State $nextIndex \gets nextIndex + 1$
-        \State $current \gets$ empty string
-    \EndIf
-    \State $pos \gets pos + 1$
-\EndWhile
-\If{$current$ is not empty}
-    \State Output remaining $current$
-\EndIf
-\State \Return $output$
-\end{algorithmic}
-\end{algorithm}
-
-\subsubsection{LZ Algorithm Characteristics}
-
-\begin{table}[H]
-\centering
-\caption{Comparison of LZ77 and LZ78}
-\label{tab:lz_comparison}
-\begin{tabular}{lcc}
-\toprule
-\textbf{Feature} & \textbf{LZ77} & \textbf{LZ78} \\
-\midrule
-Memory usage & Fixed (window size) & Grows with input \\
-Compression ratio & Good & Good \\
-Speed & Slower (searching) & Faster (dictionary lookup) \\
-Used in & GZIP, DEFLATE, LZ4 & GIF, early Unix compress \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\section{Modern Compression Algorithms}
-
-Modern compression algorithms build on the classical foundations but add optimizations for better compression ratios and/or faster speeds.
-
-\subsection{ZLIB and DEFLATE}
-
-DEFLATE is the compression algorithm used in ZLIB, GZIP, and ZIP. It combines LZ77 with Huffman coding for excellent compression.
-
-\subsubsection{How DEFLATE Works}
-
-DEFLATE works in two stages:
-
-\begin{enumerate}
-    \item \textbf{LZ77 stage}: Find repeated sequences and encode them as (distance, length) pairs
-    \item \textbf{Huffman stage}: Encode the LZ77 output using Huffman coding
-\end{enumerate}
-
-This combination is powerful because:
-\begin{itemize}
-    \item LZ77 removes repetitive patterns
-    \item Huffman coding optimizes the encoding of what remains
-\end{itemize}
-
-\begin{algorithm}[H]
-\caption{DEFLATE Compression (Simplified)}
-\label{alg:deflate}
-\begin{algorithmic}[1]
-\Require Input data $D$
-\Ensure Compressed data $C$
-\State \Comment{Stage 1: LZ77 compression}
-\State $lz77Output \gets$ empty list
-\State $pos \gets 0$
-\While{$pos < length(D)$}
-    \State $(offset, length) \gets$ \Call{FindBestMatch}{$D$, $pos$}
-    \If{$length \geq 3$} \Comment{Minimum match length is 3}
-        \State Append $(length, offset)$ to $lz77Output$ \Comment{Back-reference}
-        \State $pos \gets pos + length$
-    \Else
-        \State Append $D[pos]$ to $lz77Output$ \Comment{Literal byte}
-        \State $pos \gets pos + 1$
-    \EndIf
-\EndWhile
-\State \Comment{Stage 2: Huffman encoding}
-\State Build Huffman tree for literals and lengths
-\State Build Huffman tree for distances
-\State $C \gets$ Huffman encode $lz77Output$ using both trees
-\State \Return $C$
-\end{algorithmic}
-\end{algorithm}
-
-\subsubsection{ZLIB Format}
-
-ZLIB \cite{deutsch1996zlib} adds a header and checksum to DEFLATE:
-
-\begin{itemize}
-    \item 2-byte header (compression method, flags)
-    \item DEFLATE compressed data
-    \item 4-byte Adler-32 checksum
-\end{itemize}
-
-The checksum allows detection of data corruption, which is important for IoT communications.
-
-\subsubsection{ZLIB Characteristics}
-
-\begin{itemize}
-    \item \textbf{Compression ratio}: Very good (typically 60-80\% reduction)
-    \item \textbf{Speed}: Moderate
-    \item \textbf{Memory}: Moderate (32KB window)
-    \item \textbf{Universality}: Excellent---supported everywhere
-\end{itemize}
-
-\subsection{LZ4}
-
-LZ4 \cite{collet2013lz4} is designed for speed. It sacrifices some compression ratio for extremely fast compression and decompression.
-
-\subsubsection{How LZ4 Works}
-
-LZ4 is based on LZ77 but with simplifications for speed:
-
-\begin{itemize}
-    \item Uses a simple hash table instead of extensive searching
+    \item Simple hash table instead of extensive searching
     \item Fixed match length encoding
-    \item No entropy coding (no Huffman)
+    \item No entropy coding (no Huffman overhead)
     \item Designed for modern CPU caches
 \end{itemize}
 
@@ -436,19 +68,16 @@ LZ4 is based on LZ77 but with simplifications for speed:
 \Require Input data $D$
 \Ensure Compressed data $C$
 \State $hashTable \gets$ empty hash table (maps 4-byte sequences to positions)
-\State $pos \gets 0$
-\State $anchor \gets 0$ \Comment{Start of unmatched literals}
+\State $pos \gets 0$, $anchor \gets 0$
 \While{$pos < length(D) - 4$}
     \State $hash \gets$ hash of $D[pos:pos+4]$
     \State $matchPos \gets hashTable[hash]$
     \State $hashTable[hash] \gets pos$
     \If{$matchPos$ exists \textbf{and} $D[matchPos:matchPos+4] = D[pos:pos+4]$}
-        \State \Comment{Found a match}
         \State Output literals from $anchor$ to $pos$
         \State $matchLength \gets$ extend match forward
         \State Output match token: $(length, offset)$
-        \State $pos \gets pos + matchLength$
-        \State $anchor \gets pos$
+        \State $pos \gets pos + matchLength$, $anchor \gets pos$
     \Else
         \State $pos \gets pos + 1$
     \EndIf
@@ -458,273 +87,82 @@ LZ4 is based on LZ77 but with simplifications for speed:
 \end{algorithmic}
 \end{algorithm}
 
-\subsubsection{LZ4 Characteristics}
-
-\begin{itemize}
-    \item \textbf{Compression ratio}: Moderate (typically 40-60\% reduction)
-    \item \textbf{Compression speed}: Extremely fast (500+ MB/s)
-    \item \textbf{Decompression speed}: Extremely fast (2000+ MB/s)
-    \item \textbf{Memory}: Very low
-    \item \textbf{Best for}: Real-time applications, when speed matters more than size
-\end{itemize}
-
-\subsection{Zstandard (Zstd)}
-
-Zstandard \cite{collet2016zstandard}, developed by Yann Collet at Facebook, achieves both excellent compression ratios and high speeds. It represents the state of the art in general-purpose compression.
-
-\subsubsection{How Zstandard Works}
-
-Zstandard combines several advanced techniques:
-
-\begin{enumerate}
-    \item \textbf{LZ77 variant}: Uses a larger window (up to 128 MB) for better matches
-    \item \textbf{Finite State Entropy (FSE)}: A modern alternative to Huffman coding
-    \item \textbf{Dictionary support}: Can use pre-trained dictionaries for small data
-    \item \textbf{Multi-threading}: Can use multiple CPU cores
-\end{enumerate}
-
-\begin{algorithm}[H]
-\caption{Zstandard Compression (High-Level)}
-\label{alg:zstd}
-\begin{algorithmic}[1]
-\Require Input data $D$, compression level $L$
-\Ensure Compressed data $C$
-\State \Comment{Step 1: Configure based on compression level}
-\State $(windowSize, searchDepth, strategy) \gets$ \Call{GetConfig}{$L$}
-\State \Comment{Step 2: LZ77-style matching with configured parameters}
-\State $sequences \gets$ empty list
-\For{each block in $D$}
-    \State Find matches using $strategy$ (fast, lazy, optimal, etc.)
-    \State Add literals and match references to $sequences$
-\EndFor
-\State \Comment{Step 3: Entropy encoding with FSE}
-\State Build FSE tables for literals, match lengths, and offsets
-\State $C \gets$ FSE encode $sequences$
-\State \Comment{Step 4: Add frame header and checksums}
-\State Prepend frame header to $C$
-\State Append checksum to $C$
-\State \Return $C$
-\end{algorithmic}
-\end{algorithm}
-
-\subsubsection{Zstandard Compression Levels}
-
-Zstandard offers 22 compression levels (1-22):
+\subsection{LZ4 Advantages for IoT}
 
 \begin{table}[H]
 \centering
-\caption{Zstandard compression levels}
-\label{tab:zstd_levels}
-\begin{tabular}{lccc}
+\caption{LZ4 characteristics for IoT applications}
+\label{tab:lz4_characteristics}
+\begin{tabular}{ll}
 \toprule
-\textbf{Level} & \textbf{Ratio} & \textbf{Compress Speed} & \textbf{Use Case} \\
+\textbf{Property} & \textbf{Value} \\
 \midrule
-1-3 & Lower & Very fast & Real-time, streaming \\
-4-9 & Medium & Fast & General purpose \\
-10-15 & High & Moderate & Archival \\
-16-22 & Very high & Slow & Maximum compression \\
+Compression speed & 500+ MB/s \\
+Decompression speed & 2000+ MB/s \\
+Memory (compression) & 16 KB \\
+Memory (decompression) & Minimal (buffer only) \\
+Compression ratio & 40-60\% reduction typical \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-For IoT, levels 1-5 are typically best, balancing compression with speed and memory.
+\subsection{Why LZ4 over ZLIB/Zstd for IoT Endpoints}
 
-\subsubsection{Zstandard Characteristics}
-
-\begin{itemize}
-    \item \textbf{Compression ratio}: Excellent (comparable to or better than ZLIB)
-    \item \textbf{Compression speed}: Very fast at low levels
-    \item \textbf{Decompression speed}: Always very fast (independent of level)
-    \item \textbf{Memory}: Configurable
-    \item \textbf{Dictionary mode}: Excellent for small, similar data (perfect for PQC!)
-\end{itemize}
-
-\subsection{Brotli}
-
-Brotli, developed by Google, is optimized for web content. It achieves higher compression ratios than ZLIB but with slower compression.
-
-\subsubsection{How Brotli Works}
-
-Brotli uses:
+For resource-constrained IoT devices, LZ4 is superior:
 
 \begin{enumerate}
-    \item \textbf{LZ77 with large window}: Up to 16 MB window
-    \item \textbf{Context modeling}: Uses context to predict next bytes
-    \item \textbf{Static dictionary}: Built-in dictionary of common words and phrases
-    \item \textbf{Second-order context}: Models probabilities based on previous symbols
+    \item \textbf{Energy efficiency}: Below ~500-1000 byte payloads, stronger compression does not amortize CPU cost. Most IoT telemetry falls below this threshold.
+    
+    \item \textbf{Total system cost}: The relevant metric is \textit{compression energy + transmission energy + memory pressure}. ZLIB/Zstd reduce bytes more but consume more total energy on MCUs.
+    
+    \item \textbf{Memory footprint}: LZ4 needs 16 KB; ZLIB needs 32 KB sliding window plus Huffman tables; Zstd needs 64 KB+ with FSE tables. This conflicts with Kyber's 8-10 KB stack usage on constrained devices.
+    
+    \item \textbf{Predictable execution}: LZ4 has simple, regular execution patterns. ZLIB/Zstd have data-dependent entropy coding, increasing side-channel risk in secure systems.
+    
+    \item \textbf{Radio overhead}: PHY/MAC overhead dominates for small packets. 20-30\% extra compression often yields negligible airtime savings.
 \end{enumerate}
 
-\begin{algorithm}[H]
-\caption{Brotli Compression (High-Level)}
-\label{alg:brotli}
-\begin{algorithmic}[1]
-\Require Input data $D$, quality level $Q$
-\Ensure Compressed data $C$
-\State \Comment{Step 1: LZ77 matching with static dictionary}
-\State $matches \gets$ find matches in $D$ and static dictionary
-\State \Comment{Step 2: Context modeling}
-\For{each position in $D$}
-    \State Compute context from previous 2 bytes
-    \State Update context-dependent probability model
-\EndFor
-\State \Comment{Step 3: Entropy coding}
-\State Encode literals using context-dependent Huffman codes
-\State Encode matches using separate Huffman codes
-\State \Return $C$
-\end{algorithmic}
-\end{algorithm}
+\textbf{Note}: ZLIB/Zstd remain appropriate for \textit{gateways} where resources are abundant and data can be batched.
 
-\subsubsection{Brotli Characteristics}
-
-\begin{itemize}
-    \item \textbf{Compression ratio}: Best-in-class for text
-    \item \textbf{Compression speed}: Slow at high quality levels
-    \item \textbf{Decompression speed}: Fast
-    \item \textbf{Best for}: Web content, text, HTML, CSS, JavaScript
-    \item \textbf{Static dictionary}: 120 KB built-in dictionary
-\end{itemize}
-
-\section{Compression Ratio vs Speed Comparison}
-
-Table \ref{tab:compression_comparison} compares the algorithms discussed in this chapter.
+\section{Algorithm Comparison}
 
 \begin{table}[H]
 \centering
-\caption{Comparison of compression algorithms}
+\caption{Compression algorithm comparison for IoT}
 \label{tab:compression_comparison}
 \begin{tabular}{lccccc}
 \toprule
-\textbf{Algorithm} & \textbf{Ratio} & \textbf{Compress} & \textbf{Decompress} & \textbf{Memory} \\
+\textbf{Algorithm} & \textbf{Ratio} & \textbf{Speed} & \textbf{RAM} & \textbf{IoT Suitability} \\
 \midrule
-RLE & Poor* & Very Fast & Very Fast & Very Low \\
-Huffman & Fair & Fast & Fast & Low \\
-LZ77 & Good & Slow & Fast & Low \\
-ZLIB/DEFLATE & Very Good & Moderate & Fast & 32 KB \\
-LZ4 & Fair & Very Fast & Very Fast & 16 KB \\
-Zstandard & Excellent & Fast & Very Fast & Configurable \\
-Brotli & Excellent & Slow & Fast & Large \\
+RLE & Poor* & Very Fast & Very Low & Limited use \\
+ZLIB & Very Good & Moderate & 32 KB & Gateway only \\
+\rowcolor{green!10}
+LZ4 & Good & Very Fast & 16 KB & \textbf{Optimal for endpoints} \\
+Zstd & Excellent & Fast & 64 KB+ & Gateway only \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-*RLE can be excellent for specific data types with many repetitions.
-
-Figure \ref{fig:compression_tradeoff} illustrates the trade-off between compression ratio and speed.
+*RLE can be excellent for specific data with many repetitions.
 
 \begin{figure}[H]
 \centering
-\begin{tabular}{|c|}
-\hline
-\\
-\textbf{Compression Trade-off Space} \\[0.3cm]
-\begin{tabular}{l|ccc}
- & \textit{Low Ratio} & \textit{Medium} & \textit{High Ratio} \\
-\hline
-\textit{Fast} & LZ4 & Zstd (level 1-3) & -- \\
-\textit{Medium} & -- & ZLIB & Zstd (level 10+) \\
-\textit{Slow} & -- & -- & Brotli (quality 11) \\
-\end{tabular}
-\\[0.3cm]
-\textbf{For IoT: Zstandard levels 1-5 offer the best balance}
-\\
-\hline
-\end{tabular}
-\caption{Trade-off between compression ratio and speed}
-\label{tab:compression_tradeoff}
+\includegraphics[width=0.85\textwidth]{figures/compression_tradeoff.png}
+\caption{Compression trade-offs: ratio vs speed. LZ4 offers the best balance for IoT endpoints.}
+\label{fig:compression_tradeoff}
 \end{figure}
 
-\section{Relevance for IoT Data}
+\section{IoT Data Characteristics}
 
-Now let us consider which algorithms are most suitable for IoT applications, particularly for compressing PQC data.
-
-\subsection{IoT Data Characteristics}
-
-IoT data has specific characteristics:
-
+IoT sensor data has specific properties affecting compression:
 \begin{itemize}
-    \item \textbf{Small payloads}: Often only 10-1000 bytes
-    \item \textbf{Structured data}: Sensor readings, JSON, protocol headers
-    \item \textbf{Repetitive patterns}: Similar data sent repeatedly
+    \item \textbf{Small payloads}: 10-1000 bytes typical
+    \item \textbf{Structured data}: JSON sensor readings with repeated field names
     \item \textbf{Real-time requirements}: Cannot wait for slow compression
 \end{itemize}
 
-\subsection{Compressibility of Cryptographic Data}
-
-Cryptographic data is special:
-
-\begin{itemize}
-    \item \textbf{Encrypted data}: Nearly random, almost incompressible
-    \item \textbf{Keys and ciphertexts}: Some structure, moderately compressible
-    \item \textbf{PQC data}: Contains polynomial coefficients, more compressible than random
-\end{itemize}
-
-Table \ref{tab:pqc_compressibility} shows typical compression results for PQC data.
-
-\begin{table}[H]
-\centering
-\caption{Compressibility of PQC data}
-\label{tab:pqc_compressibility}
-\begin{tabular}{lccc}
-\toprule
-\textbf{Data Type} & \textbf{Original} & \textbf{ZLIB} & \textbf{Zstd} \\
-\midrule
-Kyber768 public key & 1,184 B & 920 B & 890 B \\
-Kyber768 ciphertext & 1,088 B & 850 B & 820 B \\
-Dilithium3 signature & 3,293 B & 2,800 B & 2,700 B \\
-IoT sensor + Kyber768 & 1,200 B & 780 B & 750 B \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\subsection{Algorithm Recommendations for IoT}
-
-Based on our analysis, we recommend:
-
-\begin{enumerate}
-    \item \textbf{For maximum bandwidth savings}: Zstandard with dictionary mode
-    \item \textbf{For very constrained devices}: ZLIB (widely supported, moderate resources)
-    \item \textbf{For real-time applications}: LZ4 (fastest)
-    \item \textbf{Avoid}: RLE (ineffective for cryptographic data), Brotli (too slow to compress)
-\end{enumerate}
-
-\subsection{Dictionary-Based Compression for PQC}
-
-A key insight is that PQC data is highly structured. Kyber and Dilithium use fixed polynomial rings, which means certain patterns repeat. By training a compression dictionary on PQC data, we can achieve much better compression.
-
-Zstandard's dictionary mode is particularly effective:
-
-\begin{enumerate}
-    \item Train a dictionary on sample PQC outputs
-    \item Share the dictionary between sender and receiver (one-time cost)
-    \item Use the dictionary to compress each message
-\end{enumerate}
-
-This can improve compression by 20-30\% for small payloads.
+PQC data (Kyber keys/ciphertexts) contains polynomial coefficients with some structure, achieving moderate compression.
 
 \section{Chapter Conclusion}
 
-In this chapter, we studied compression algorithms from the simplest (RLE) to the most advanced (Zstandard, Brotli).
-
-\textbf{Key findings}:
-
-\begin{enumerate}
-    \item \textbf{Classical algorithms} (RLE, Huffman, LZ77/78) provide the foundation for understanding compression.
-    
-    \item \textbf{ZLIB/DEFLATE} combines LZ77 and Huffman coding effectively and is universally supported.
-    
-    \item \textbf{LZ4} prioritizes speed over compression ratio, ideal for real-time applications.
-    
-    \item \textbf{Zstandard} achieves the best balance of compression ratio and speed, with excellent dictionary support.
-    
-    \item \textbf{Brotli} achieves the best compression for text but is too slow for IoT use cases.
-\end{enumerate}
-
-\textbf{For our work}, Zstandard emerges as the most promising algorithm for compressing PQC data in IoT applications. It offers:
-\begin{itemize}
-    \item Excellent compression ratios
-    \item Fast compression and decompression
-    \item Dictionary mode for small, structured data
-    \item Configurable memory usage
-\end{itemize}
-
-In the next chapter, we will combine compression with PQC to create an optimized solution for IoT communications. We will show how to integrate these algorithms into a practical system that achieves both security and efficiency.
+For PQC-enabled IoT \textit{endpoints}, LZ4 minimizes total system cost and risk. Its 16 KB memory footprint coexists with Kyber's stack requirements, and its extreme speed ensures compression energy stays below transmission savings. ZLIB/Zstd are appropriate for gateways where resources are abundant. Chapter 4 presents our combined architecture using Kyber768 with LZ4.

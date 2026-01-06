@@ -220,10 +220,10 @@ def compare_approaches():
     print(f"Original size: {len(sensor_data)} bytes")
     
     algorithms = ['Kyber512', 'Kyber768', 'Kyber1024']
-    compressions = ['zlib']
+    compressions = ['lz4'] if HAS_LZ4 else ['zlib']
     
-    if HAS_LZ4:
-        compressions.append('lz4')
+    if HAS_LZ4 and 'zlib' not in compressions:
+        compressions.append('zlib')
     if HAS_ZSTD:
         compressions.append('zstd')
     
@@ -273,7 +273,7 @@ if __name__ == "__main__":
     
     # Simple example
     simple_message = b"IoT Sensor Data: Temperature=25.5C, Humidity=60%, Pressure=1013hPa" * 10
-    pqc_encrypt_decrypt(simple_message, 'Kyber768', 'zlib')
+    pqc_encrypt_decrypt(simple_message, 'Kyber768', 'lz4' if HAS_LZ4 else 'zlib')
     
     # Comprehensive comparison
     print("\n\n")

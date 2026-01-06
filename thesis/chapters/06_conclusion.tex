@@ -5,72 +5,52 @@
 \chapter*{General Conclusion}
 \addcontentsline{toc}{chapter}{General Conclusion}
 
-This thesis has addressed a critical challenge facing the Internet of Things ecosystem: how to secure resource-constrained devices against the emerging threat of quantum computing while maintaining the efficiency required for practical deployment. Through comprehensive theoretical analysis and practical implementation, we have demonstrated that the combination of data compression with lightweight post-quantum cryptography offers a viable path toward quantum-resistant IoT communications.
+This thesis addressed a critical challenge: securing resource-constrained IoT devices against quantum computing threats while maintaining the efficiency required for practical deployment.
 
 \section*{Summary of Contributions}
 
-This research has produced five principal contributions to the field of IoT security:
+\textbf{First}, we analyzed IoT security requirements in the quantum threat context, establishing criteria that quantum-resistant solutions must satisfy for devices with limited processing power, memory, bandwidth, and battery life.
 
-\textbf{First}, we conducted a systematic analysis of IoT security requirements in the context of quantum threats. By examining the constraints of typical IoT devices---limited processing power, restricted memory, constrained bandwidth, and battery dependence---we established the criteria that any quantum-resistant solution must satisfy. This analysis revealed that traditional post-quantum cryptographic implementations, while secure, impose overhead that exceeds the capabilities of many IoT devices.
+\textbf{Second}, we evaluated compression algorithms for IoT, identifying LZ4 as optimal for resource-constrained endpoints due to its 16 KB memory footprint, extreme speed (500+ MB/s), and acceptable compression ratios---factors critical for battery-powered sensors where computational energy must be minimized.
 
-\textbf{Second}, we performed a comprehensive evaluation of compression algorithms for IoT applications. Our analysis of ten compression methods, ranging from simple Run-Length Encoding to sophisticated dictionary-based approaches like Zstandard, identified ZLIB as the optimal choice for IoT environments. ZLIB achieves compression ratios of 65--85\% while maintaining low computational overhead, making it suitable for resource-constrained devices.
+\textbf{Third}, we developed a combined architecture using Kyber768 for quantum-resistant key exchange with LZ4 compression to offset PQC's bandwidth overhead. The compress-before-encrypt approach reduces payload size while maintaining NIST Level 3 security.
 
-\textbf{Third}, we developed a theoretical framework for combining compression and post-quantum cryptography. This framework establishes the mathematical foundation for understanding how compression can offset the bandwidth overhead introduced by PQC algorithms. The key insight is that compressing data before encryption reduces the payload size, effectively compensating for the larger key and ciphertext sizes inherent in lattice-based cryptography.
-
-\textbf{Fourth}, we designed and implemented a complete software architecture for quantum-resistant IoT communication. The modular design separates compression, key encapsulation, and symmetric encryption into independent components, facilitating algorithm substitution as standards evolve. The implementation demonstrates that Kyber768 key encapsulation combined with ZLIB compression and AES-256-GCM symmetric encryption provides NIST Level 3 security while remaining practical for IoT deployment.
-
-\textbf{Fifth}, we validated our approach through extensive benchmarking on representative IoT data. The experimental results demonstrate that our combined approach achieves an \textbf{86.9\% reduction in bandwidth consumption} compared to uncompressed, unencrypted transmission. This remarkable efficiency gain proves that quantum-resistant security does not require sacrificing performance---in fact, the intelligent combination of compression and PQC can improve overall system efficiency.
+\textbf{Fourth}, we implemented and benchmarked this architecture, demonstrating practical viability with significant bandwidth savings for batched payloads while maintaining sub-millisecond processing times.
 
 \section*{Answer to the Research Question}
 
-The central research question of this thesis was: \textit{Can compression algorithms effectively offset the overhead of post-quantum cryptography to enable practical quantum-resistant IoT communications?}
+The central question was: \textit{Can compression effectively offset PQC overhead for practical quantum-resistant IoT communications?}
 
-Our findings provide a definitive affirmative answer. The experimental results demonstrate that:
-
+Our findings provide an affirmative answer:
 \begin{itemize}
-    \item ZLIB compression alone reduces typical IoT sensor data by 70--85\%, depending on data characteristics
-    \item Kyber768 key encapsulation adds approximately 2,400 bytes of overhead per session (public key + ciphertext)
-    \item The combined approach yields net bandwidth savings of 86.9\% for typical IoT workloads
+    \item LZ4 compression reduces typical IoT sensor data by 50-75\%
+    \item Combined with Kyber768, bandwidth savings exceed 60\% for batched payloads
     \item Processing overhead remains within acceptable bounds for microcontroller-class devices
+    \item LZ4's low memory footprint (16 KB) coexists with Kyber's stack requirements
 \end{itemize}
-
-The mathematical relationship we established---$\text{Efficiency} = \text{Compression Ratio} \times (1 - \text{PQC Overhead Fraction})$---accurately predicts the observed results. For sessions transmitting more than approximately 20 KB of data, the bandwidth savings from compression exceed the PQC overhead, resulting in net efficiency gains.
 
 \section*{Limitations}
 
-While our results are encouraging, this research has several limitations that warrant acknowledgment:
-
-\textbf{Simulation of PQC Operations}: Due to the unavailability of the liboqs library in our testing environment, PQC operations were simulated rather than executed using actual cryptographic implementations. While our simulations accurately model the computational complexity and data sizes of Kyber768, real-world performance may vary based on specific hardware and software implementations.
-
-\textbf{Limited Hardware Testing}: Our benchmarks were conducted on general-purpose computing hardware rather than actual IoT microcontrollers. The relative performance of different algorithms may differ on ARM Cortex-M or similar embedded processors.
-
-\textbf{Single Protocol Focus}: We focused exclusively on Kyber for key encapsulation. While Kyber represents the NIST-selected standard, alternative algorithms like NTRU or FrodoKEM may offer different trade-offs that could be advantageous in specific scenarios.
-
-\textbf{Static Configuration}: Our implementation uses fixed algorithm choices. Adaptive systems that dynamically select compression and security parameters based on data characteristics and network conditions could potentially achieve better results.
+\begin{itemize}
+    \item \textbf{Simulated PQC}: Due to liboqs library availability, some PQC operations were simulated
+    \item \textbf{Desktop benchmarks}: Testing on general-purpose hardware rather than actual IoT microcontrollers
+    \item \textbf{Single KEM focus}: Concentrated on Kyber; alternatives like NTRU may offer different trade-offs
+\end{itemize}
 
 \section*{Future Work}
 
-This research opens several promising directions for future investigation:
-
-\textbf{Hardware Implementation}: Developing optimized implementations for specific IoT microcontrollers (ESP32, STM32, nRF52) would provide more accurate performance data and demonstrate practical deployability. Hardware acceleration for lattice operations could further reduce computational overhead.
-
-\textbf{Hybrid Protocols}: Investigating hybrid classical/post-quantum protocols could provide backward compatibility during the transition period while ensuring quantum resistance. Such protocols would allow interoperability with legacy systems.
-
-\textbf{Adaptive Compression}: Developing machine learning-based approaches to automatically select optimal compression algorithms based on data characteristics could improve efficiency. Different IoT applications generate data with varying statistical properties that respond differently to compression.
-
-\textbf{Energy Analysis}: Comprehensive energy consumption measurements on battery-powered devices would quantify the impact of our approach on device lifetime. This is critical for applications like environmental monitoring where devices must operate for years without battery replacement.
-
-\textbf{Network Protocol Integration}: Integrating our compression-PQC approach into standard IoT protocols (MQTT, CoAP, LwM2M) would facilitate adoption. Protocol-level integration could optimize the placement of compression and encryption operations.
-
-\textbf{Post-Quantum Signatures}: Extending our framework to include Dilithium or SPHINCS+ for authentication would provide complete quantum-resistant security. The larger signature sizes of these algorithms present additional challenges for bandwidth optimization.
+\begin{itemize}
+    \item \textbf{Hardware implementation}: Optimized implementations for ESP32, STM32, nRF52 microcontrollers
+    \item \textbf{Energy analysis}: Comprehensive power consumption measurements on battery-powered devices
+    \item \textbf{Protocol integration}: Integrating the approach into MQTT, CoAP, and LwM2M protocols
+    \item \textbf{Post-quantum signatures}: Extending to include Dilithium for complete quantum-resistant security
+\end{itemize}
 
 \section*{Final Remarks}
 
-The quantum threat to current cryptographic infrastructure is not a distant theoretical concern but an approaching reality that demands proactive preparation. The ``harvest now, decrypt later'' strategy employed by adversaries means that data transmitted today using classical cryptography may be compromised once sufficiently powerful quantum computers become available. For IoT systems with long operational lifetimes, particularly those in critical infrastructure, healthcare, and industrial automation, the transition to quantum-resistant cryptography is urgent.
+The quantum threat to current cryptography is an approaching reality requiring proactive preparation. The ``harvest now, decrypt later'' strategy means data transmitted today using classical cryptography may be compromised once quantum computers arrive.
 
-This thesis demonstrates that this transition need not come at the cost of efficiency. By intelligently combining data compression with post-quantum cryptography, we can achieve security levels that will remain robust against quantum attacks while simultaneously reducing bandwidth consumption. The 86.9\% bandwidth savings achieved by our implementation proves that quantum-resistant IoT security is not only possible but can actually improve system performance compared to naive implementations.
-
-As the NIST post-quantum standards mature and hardware implementations become available, the approaches developed in this thesis provide a blueprint for securing the billions of IoT devices that will be deployed in the coming decades. The future of IoT security lies not in choosing between efficiency and security, but in the intelligent integration of complementary technologies to achieve both.
+This thesis demonstrates that the transition to quantum-resistant security need not sacrifice efficiency. By combining LZ4 compression with Kyber768, we achieve practical quantum-resistant IoT security with acceptable overhead. LZ4's minimal memory footprint and extreme speed make it ideal for the resource-constrained endpoints that characterize IoT deployments.
 
 \vspace{1cm}
 

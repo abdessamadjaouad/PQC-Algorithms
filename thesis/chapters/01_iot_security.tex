@@ -7,44 +7,22 @@
 
 \section{Introduction}
 
-The Internet of Things (IoT) refers to the network of physical devices that connect to the internet and exchange data. These devices include sensors, actuators, wearables, smart home appliances, industrial machines, and many more. The number of IoT devices is growing very fast. According to recent estimates, there will be over 75 billion connected devices by 2025 \cite{lin2017survey}.
-
-IoT devices are used in many important areas:
-\begin{itemize}
-    \item \textbf{Smart homes}: thermostats, security cameras, lighting systems
-    \item \textbf{Healthcare}: patient monitors, wearable devices, medical sensors
-    \item \textbf{Agriculture}: soil sensors, weather stations, irrigation systems
-    \item \textbf{Industry}: factory sensors, predictive maintenance, supply chain tracking
-    \item \textbf{Smart cities}: traffic management, pollution monitoring, public safety
-\end{itemize}
-
-However, IoT devices have significant limitations that make security difficult to implement. At the same time, a new threat is emerging: quantum computers that will be able to break current encryption methods. This chapter examines both of these challenges.
-
-Figure \ref{fig:iot_architecture} illustrates the typical three-layer architecture of IoT systems, showing the flow of data from perception devices through network gateways to cloud services.
+The Internet of Things (IoT) connects billions of devices worldwide, from sensors to industrial machines. These devices face severe resource constraints and an emerging quantum computing threat that will break current encryption. This chapter examines both challenges.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.95\textwidth]{figures/iot_architecture.png}
-\caption{Three-layer IoT architecture showing the perception, network, and application layers with their respective security concerns}
+\caption{Three-layer IoT architecture showing the perception, network, and application layers}
 \label{fig:iot_architecture}
 \end{figure}
 
 \section{IoT Device Constraints}
 
-IoT devices are designed to be small, cheap, and energy-efficient. These design goals create several important constraints that affect how we can secure them.
+IoT devices are designed to be small, cheap, and energy-efficient, creating significant constraints for security implementation.
 
 \subsection{Energy Constraints}
 
-Many IoT devices run on batteries or harvest energy from the environment (like solar panels). They must operate for months or even years without changing the battery. This creates strict limits on how much computation they can perform.
-
-Every operation uses energy:
-\begin{itemize}
-    \item \textbf{Computation}: Running encryption algorithms requires processor cycles, which consume power
-    \item \textbf{Communication}: Sending data over wireless networks is very energy-intensive
-    \item \textbf{Memory access}: Reading and writing data also uses energy
-\end{itemize}
-
-Table \ref{tab:energy_operations} shows typical energy consumption for different operations on an IoT device.
+Many IoT devices run on batteries for months or years. Every operation consumes energy: computation, communication, and memory access. Communication is particularly expensive, making data compression essential.
 
 \begin{table}[H]
 \centering
@@ -58,29 +36,13 @@ Send 1 KB over WiFi & 0.1 - 1.0 & High \\
 Send 1 KB over LoRa & 0.01 - 0.1 & Medium \\
 AES-128 encryption (1 KB) & 0.001 - 0.01 & Low \\
 RSA-2048 signature & 0.1 - 1.0 & High \\
-Sensor reading & 0.0001 - 0.001 & Very Low \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-As we can see, communication is one of the most expensive operations. This is why reducing the amount of data we send (through compression) is so important for IoT devices.
+\subsection{Memory and Bandwidth Limitations}
 
-\subsection{Memory Limitations}
-
-IoT devices have very limited memory compared to computers or smartphones. A typical IoT microcontroller might have:
-\begin{itemize}
-    \item \textbf{RAM}: 16 KB to 256 KB (for running programs)
-    \item \textbf{Flash}: 128 KB to 1 MB (for storing programs and data)
-\end{itemize}
-
-This is a problem for cryptography because:
-\begin{itemize}
-    \item Encryption keys must be stored in memory
-    \item Cryptographic algorithms need working space for calculations
-    \item Post-quantum algorithms often require larger keys and more memory
-\end{itemize}
-
-Table \ref{tab:memory_comparison} compares the memory requirements of classical and post-quantum cryptography.
+Typical IoT microcontrollers have 16--256 KB RAM and 128 KB--1 MB flash. This constrains cryptographic implementation since keys and working space must fit in limited memory.
 
 \begin{table}[H]
 \centering
@@ -90,28 +52,13 @@ Table \ref{tab:memory_comparison} compares the memory requirements of classical 
 \toprule
 \textbf{Algorithm} & \textbf{Public Key} & \textbf{Private Key} & \textbf{Ciphertext} \\
 \midrule
-RSA-2048 & 256 bytes & 1,024 bytes & 256 bytes \\
 ECC P-256 & 64 bytes & 32 bytes & 64 bytes \\
-\midrule
-Kyber512 & 800 bytes & 1,632 bytes & 768 bytes \\
 Kyber768 & 1,184 bytes & 2,400 bytes & 1,088 bytes \\
-Kyber1024 & 1,568 bytes & 3,168 bytes & 1,568 bytes \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-As we can see, Kyber keys are significantly larger than ECC keys. However, they are still manageable for most IoT devices.
-
-\subsection{Bandwidth Constraints}
-
-Bandwidth refers to the amount of data that can be transmitted over a network in a given time. IoT networks often have limited bandwidth because:
-\begin{itemize}
-    \item Many devices share the same network
-    \item Low-power wireless protocols (like LoRa, Zigbee) have low data rates
-    \item Network congestion can slow down communication
-\end{itemize}
-
-Table \ref{tab:iot_protocols} shows the bandwidth of common IoT communication protocols.
+Low-power protocols like LoRa offer only 0.3--50 Kbps, making every byte critical.
 
 \begin{table}[H]
 \centering
@@ -125,65 +72,24 @@ WiFi (802.11n) & 150 Mbps & 50 m \\
 Bluetooth LE & 1 Mbps & 10 m \\
 Zigbee & 250 Kbps & 100 m \\
 LoRa & 0.3 - 50 Kbps & 15 km \\
-NB-IoT & 200 Kbps & 10 km \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-For long-range, low-power applications (like smart agriculture or city-wide sensor networks), protocols like LoRa are commonly used. With data rates as low as 300 bits per second, every byte counts. This is why compression is essential for IoT communications.
-
-\subsection{Summary of IoT Constraints}
-
-Figure \ref{fig:iot_constraints} illustrates how different IoT device classes vary in their resource capabilities. Class 0 devices (8-bit microcontrollers) are the most constrained, while Class 2 devices (Linux-capable) have more resources but still face limitations compared to traditional computing platforms.
-
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.75\textwidth]{figures/iot_constraints.png}
-\caption{Radar chart comparing resource capabilities across IoT device classes: Class 0 (8-bit MCU), Class 1 (32-bit MCU), and Class 2 (Linux-capable devices)}
+\caption{Resource capabilities across IoT device classes}
 \label{fig:iot_constraints}
 \end{figure}
 
-These constraints mean that any security solution for IoT must be:
-\begin{itemize}
-    \item \textbf{Lightweight}: Using minimal computation and memory
-    \item \textbf{Efficient}: Minimizing the amount of data transmitted
-    \item \textbf{Fast}: Completing operations quickly to save energy
-\end{itemize}
+Any security solution must be lightweight, efficient, and fast.
 
 \section{The Quantum Threat}
 
-While IoT faces resource constraints today, there is a future threat that will affect all secure communications: quantum computing. In this section, we explain what quantum computers are, how they threaten current cryptography, and why we need to prepare now.
+\subsection{Quantum Computing and Cryptography}
 
-\subsection{Quantum Computing Fundamentals}
-
-Classical computers (the ones we use today) process information using bits. A bit can be either 0 or 1. Quantum computers use quantum bits, called \textbf{qubits}. Thanks to a quantum property called superposition, a qubit can be in both states (0 and 1) at the same time.
-
-Another quantum property, called \textbf{entanglement}, allows qubits to be connected in special ways. When qubits are entangled, measuring one qubit instantly affects the other, no matter how far apart they are.
-
-These properties allow quantum computers to solve certain problems much faster than classical computers. While a classical computer might need to try every possible solution one by one, a quantum computer can explore many solutions simultaneously.
-
-However, quantum computers are not faster at everything. They are only faster for specific types of problems. Unfortunately, some of these problems are exactly the ones that protect our current cryptography.
-
-\subsection{Shor's Algorithm and Cryptographic Implications}
-
-In 1994, mathematician Peter Shor discovered a quantum algorithm that can efficiently solve two mathematical problems \cite{shor1994algorithms}:
-
-\begin{enumerate}
-    \item \textbf{Integer factorization}: Finding the prime factors of a large number
-    \item \textbf{Discrete logarithm}: Finding the exponent in equations like $g^x = h \mod p$
-\end{enumerate}
-
-These two problems are the foundation of most current public-key cryptography:
-
-\begin{itemize}
-    \item \textbf{RSA} relies on the difficulty of factoring large numbers. If you multiply two large prime numbers, it is easy to get the result. But given the result, finding the original primes is extremely hard for classical computers. RSA keys with 2048 bits would take billions of years to break with today's computers. But Shor's algorithm could break them in hours or days.
-    
-    \item \textbf{ECC (Elliptic Curve Cryptography)} relies on the discrete logarithm problem on elliptic curves. It is also vulnerable to Shor's algorithm.
-    
-    \item \textbf{Diffie-Hellman key exchange} uses the discrete logarithm problem and is equally vulnerable.
-\end{itemize}
-
-Table \ref{tab:quantum_impact} shows the impact of quantum computers on common cryptographic algorithms.
+Quantum computers use qubits that can be in superposition, allowing them to explore many solutions simultaneously. Shor's algorithm \cite{shor1994algorithms} can efficiently solve integer factorization and discrete logarithm problems---the foundations of RSA, ECC, and Diffie-Hellman.
 
 \begin{table}[H]
 \centering
@@ -193,82 +99,36 @@ Table \ref{tab:quantum_impact} shows the impact of quantum computers on common c
 \toprule
 \textbf{Algorithm} & \textbf{Type} & \textbf{Quantum Security} \\
 \midrule
-RSA & Asymmetric encryption & \textcolor{red}{Broken} \\
-ECC / ECDSA & Asymmetric encryption / Signatures & \textcolor{red}{Broken} \\
-Diffie-Hellman & Key exchange & \textcolor{red}{Broken} \\
-\midrule
-AES-128 & Symmetric encryption & Weakened (use AES-256) \\
-AES-256 & Symmetric encryption & \textcolor{green}{Secure} \\
-SHA-256 & Hash function & Weakened (use SHA-384) \\
+RSA / ECC / ECDSA & Asymmetric & \textcolor{red}{Broken} \\
+AES-256 & Symmetric & \textcolor{green}{Secure} \\
 SHA-384 & Hash function & \textcolor{green}{Secure} \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-As we can see, asymmetric (public-key) cryptography is completely broken by quantum computers. Symmetric cryptography (like AES) is weakened but can be fixed by using larger key sizes. This is because quantum computers can use Grover's algorithm to speed up brute-force attacks, but only by a square root factor. So AES-256 becomes equivalent to AES-128 against quantum attacks, which is still secure.
-
 \subsection{Timeline and Urgency}
 
-A common question is: ``When will quantum computers be powerful enough to break encryption?'' The honest answer is: we do not know exactly. But experts estimate that it could happen within 10 to 20 years \cite{preskill2018quantum}.
-
-However, there are important reasons to act now:
-
-\begin{enumerate}
-    \item \textbf{Harvest Now, Decrypt Later}: Attackers can collect encrypted data today and store it. When quantum computers become available, they can decrypt all this stored data. Sensitive information that needs to stay secret for many years (medical records, government secrets, business plans) is already at risk.
-    
-    \item \textbf{Long deployment cycles}: IoT devices often operate for 10 to 15 years. Devices deployed today might still be in use when quantum computers arrive. If they use RSA or ECC, they will become vulnerable.
-    
-    \item \textbf{Standardization takes time}: Developing, testing, and standardizing new cryptographic algorithms takes many years. NIST started their post-quantum standardization process in 2016 and only finalized the first standards in 2024.
-\end{enumerate}
-
-Figure \ref{fig:quantum_timeline} shows a possible timeline for the quantum threat.
+Cryptographically relevant quantum computers are expected within 10--20 years \cite{preskill2018quantum}. However, the ``harvest now, decrypt later'' threat means data encrypted today may be compromised once quantum computers arrive. IoT devices with 10--15 year operational lifetimes are already at risk.
 
 \begin{figure}[H]
 \centering
 \fbox{
 \begin{minipage}{0.9\textwidth}
 \centering
-\vspace{0.5cm}
-\textbf{Quantum Computing Timeline}\\[0.5cm]
+\vspace{0.3cm}
+\textbf{Quantum Computing Timeline}\\[0.3cm]
 \begin{tabular}{cl}
-\textbf{2019} & Google achieves ``quantum supremacy'' (53 qubits) \\
-\textbf{2023} & IBM releases 1,000+ qubit processor \\
 \textbf{2024} & NIST finalizes PQC standards (Kyber, Dilithium) \\
-\textbf{2025} & Today - Transition to PQC should begin \\
+\textbf{2025} & Transition to PQC should begin \\
 \textbf{2030-2040} & Cryptographically relevant quantum computers expected \\
 \end{tabular}
-\vspace{0.5cm}
-
-\textcolor{red}{\textbf{Warning:}} Data encrypted with RSA/ECC today may be decrypted in 2035+
-\vspace{0.5cm}
+\vspace{0.3cm}
 \end{minipage}
 }
 \caption{Timeline of quantum computing development}
 \label{fig:quantum_timeline_text}
 \end{figure}
 
-\subsection{The Need for Post-Quantum Cryptography}
-
-Given the quantum threat, we need new cryptographic algorithms that are secure against both classical and quantum computers. This is called \textbf{Post-Quantum Cryptography (PQC)} or sometimes \textbf{quantum-resistant cryptography}.
-
-PQC algorithms are based on mathematical problems that quantum computers cannot solve efficiently. These include:
-\begin{itemize}
-    \item \textbf{Lattice problems}: Finding short vectors in high-dimensional lattices
-    \item \textbf{Hash-based signatures}: Based on the security of hash functions
-    \item \textbf{Code-based cryptography}: Based on error-correcting codes
-    \item \textbf{Multivariate equations}: Based on solving systems of polynomial equations
-\end{itemize}
-
-We will explore these in detail in Chapter 2.
-
 \section{Chapter Conclusion}
 
-In this chapter, we examined the two main challenges for securing IoT communications:
-
-\textbf{First}, IoT devices have severe resource constraints. They have limited energy (often running on batteries), limited memory (kilobytes instead of gigabytes), and limited bandwidth (especially for long-range protocols like LoRa). Any security solution must be lightweight and efficient.
-
-\textbf{Second}, quantum computers will break current public-key cryptography. RSA and ECC, which protect most of today's secure communications, will become useless against quantum attacks. The ``harvest now, decrypt later'' threat means that sensitive data encrypted today is already at risk.
-
-The combination of these challenges creates our research problem: we need to implement quantum-resistant security (PQC) on resource-constrained IoT devices. PQC algorithms have larger keys and ciphertexts, which conflicts with IoT bandwidth constraints.
-
-In the next chapter, we will study Post-Quantum Cryptography in detail, examining the different algorithm families and the NIST standards that will replace RSA and ECC.
+IoT devices face severe resource constraints: limited energy, memory (kilobytes), and bandwidth (especially for LoRa). Simultaneously, quantum computers will break RSA and ECC. The combination creates our research problem: implementing quantum-resistant security on constrained devices while managing PQC's larger key and ciphertext sizes. Chapter 2 explores Post-Quantum Cryptography solutions.

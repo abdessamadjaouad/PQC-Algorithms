@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """
 Compression Algorithms Demonstration
-Demonstrates RLE, Huffman, and modern compression (LZ4, Zstandard)
+Demonstrates RLE, Huffman, and modern compression with LZ4 as primary choice
 For IoT PQC Project - Abdessamad JAOUAD
+Updated: January 2026 - LZ4 focus for resource-constrained IoT devices
 """
 
 import zlib
@@ -10,6 +11,19 @@ import gzip
 import time
 from collections import Counter
 import heapq
+
+# Check for optional libraries
+try:
+    import lz4.frame as lz4
+    HAS_LZ4 = True
+except ImportError:
+    HAS_LZ4 = False
+
+try:
+    import zstandard as zstd
+    HAS_ZSTD = True
+except ImportError:
+    HAS_ZSTD = False
 
 # ============================================
 # 1. RUN-LENGTH ENCODING (RLE)
@@ -109,144 +123,138 @@ def huffman_encode(data):
     return encoded_bytes, codes
 
 # ============================================
-# 3. MODERN COMPRESSION (using libraries)
+# 3. MODERN COMPRESSION
 # ============================================
 
-def compress_with_library(data, algorithm='zlib'):
-    """Compress using standard libraries"""
-    if algorithm == 'zlib':
-        return zlib.compress(data, level=9)
-    elif algorithm == 'gzip':
-        return gzip.compress(data, compresslevel=9)
-    else:
-        raise ValueError(f"Unknown algorithm: {algorithm}")
+def compress_lz4(data):
+    """Compress using LZ4 (primary algorithm for IoT)"""
+    if HAS_LZ4:
+        return lz4.compress(data)
+    return data
 
-def decompress_with_library(data, algorithm='zlib'):
-    """Decompress using standard libraries"""
-    if algorithm == 'zlib':
-        return zlib.decompress(data)
-    elif algorithm == 'gzip':
-        return gzip.decompress(data)
-    else:
-        raise ValueError(f"Unknown algorithm: {algorithm}")
+def decompress_lz4(data):
+    """Decompress LZ4 data"""
+    if HAS_LZ4:
+        return lz4.decompress(data)
+    return data
+
+def compress_zlib(data, level=6):
+    """Compress using ZLIB (comparison)"""
+    return zlib.compress(data, level=level)
+
+def decompress_zlib(data):
+    """Decompress ZLIB data"""
+    return zlib.decompress(data)
+
+def compress_zstd(data, level=3):
+    """Compress using Zstandard (comparison)"""
+    if HAS_ZSTD:
+        cctx = zstd.ZstdCompressor(level=level)
+        return cctx.compress(data)
+    return data
+
+def decompress_zstd(data):
+    """Decompress Zstandard data"""
+    if HAS_ZSTD:
+        dctx = zstd.ZstdDecompressor()
+        return dctx.decompress(data)
+    return data
 
 # ============================================
 # DEMONSTRATION
 # ============================================
 
 def demonstrate_compression():
-    """Demonstrate different compression algorithms"""
+    """Demonstrate compression algorithms with LZ4 as primary focus"""
     
     print("=" * 70)
     print("COMPRESSION ALGORITHMS DEMONSTRATION")
+    print("Focus: LZ4 for Resource-Constrained IoT Devices")
     print("=" * 70)
     
-    # Test data
+    # Check library availability
+    print(f"\n📦 Library Status:")
+    print(f"   LZ4:       {'✓ Available' if HAS_LZ4 else '✗ Not installed (pip install lz4)'}")
+    print(f"   Zstandard: {'✓ Available' if HAS_ZSTD else '✗ Not installed (pip install zstandard)'}")
+    
+    # Test data - IoT sensor JSON
     test_cases = {
-        "Repetitive data": b"AAAAAABBBBBBCCCCCCDDDDDD" * 10,
-        "JSON-like data": b'{"sensor":"temp","value":25.5,"unit":"C"}' * 20,
-        "Random data": bytes(range(256)) * 2,
+        "IoT JSON (500 B)": b'{"sensor":"temp_001","timestamp":"2026-01-06T10:30:00","readings":{"temperature":25.5,"humidity":60.2,"pressure":1013.25}}' * 4,
+        "IoT Batch (5 KB)": b'{"sensor":"temp_001","value":25.5,"unit":"C"}' * 100,
+        "Repetitive data": b"AAAAAABBBBBBCCCCCCDDDDDD" * 20,
     }
+    
+    results = []
     
     for name, data in test_cases.items():
         print(f"\n{'=' * 70}")
-        print(f"Test Case: {name}")
-        print(f"Original size: {len(data)} bytes")
+        print(f"Test: {name}")
+        print(f"Original size: {len(data):,} bytes")
         print(f"{'=' * 70}")
         
-        # 1. RLE
-        try:
-            start = time.time()
-            rle_compressed = rle_encode(data)
-            rle_time = time.time() - start
-            rle_decoded = rle_decode(rle_compressed)
+        # LZ4 (PRIMARY - highlighted)
+        if HAS_LZ4:
+            start = time.perf_counter()
+            lz4_compressed = compress_lz4(data)
+            lz4_time = time.perf_counter() - start
+            lz4_decompressed = decompress_lz4(lz4_compressed)
             
-            print(f"\n1. Run-Length Encoding (RLE)")
-            print(f"   Compressed size: {len(rle_compressed)} bytes")
-            print(f"   Compression ratio: {len(data)/len(rle_compressed):.2f}x")
-            print(f"   Time: {rle_time*1000:.2f} ms")
-            print(f"   Correct: {rle_decoded == data}")
-        except Exception as e:
-            print(f"\n1. RLE failed: {e}")
-        
-        # 2. Huffman
-        try:
-            start = time.time()
-            huffman_compressed, codes = huffman_encode(data)
-            huffman_time = time.time() - start
+            ratio = len(data) / len(lz4_compressed)
+            savings = (1 - len(lz4_compressed) / len(data)) * 100
             
-            print(f"\n2. Huffman Coding")
-            print(f"   Compressed size: {len(huffman_compressed)} bytes")
-            print(f"   Compression ratio: {len(data)/len(huffman_compressed):.2f}x")
-            print(f"   Time: {huffman_time*1000:.2f} ms")
-            print(f"   Unique symbols: {len(codes)}")
-        except Exception as e:
-            print(f"\n2. Huffman failed: {e}")
-        
-        # 3. ZLIB (DEFLATE)
-        try:
-            start = time.time()
-            zlib_compressed = compress_with_library(data, 'zlib')
-            zlib_time = time.time() - start
-            zlib_decompressed = decompress_with_library(zlib_compressed, 'zlib')
+            print(f"\n⭐ LZ4 (PRIMARY - Recommended for IoT)")
+            print(f"   Compressed:   {len(lz4_compressed):,} bytes")
+            print(f"   Ratio:        {ratio:.2f}x")
+            print(f"   Savings:      {savings:.1f}%")
+            print(f"   Time:         {lz4_time*1000:.3f} ms")
+            print(f"   Memory:       ~16 KB (compression)")
+            print(f"   Integrity:    {'✓ OK' if lz4_decompressed == data else '✗ FAILED'}")
             
-            print(f"\n3. ZLIB (DEFLATE)")
-            print(f"   Compressed size: {len(zlib_compressed)} bytes")
-            print(f"   Compression ratio: {len(data)/len(zlib_compressed):.2f}x")
-            print(f"   Time: {zlib_time*1000:.2f} ms")
-            print(f"   Correct: {zlib_decompressed == data}")
-        except Exception as e:
-            print(f"\n3. ZLIB failed: {e}")
+            results.append(('LZ4', len(data), len(lz4_compressed), lz4_time))
         
-        # 4. GZIP
-        try:
-            start = time.time()
-            gzip_compressed = compress_with_library(data, 'gzip')
-            gzip_time = time.time() - start
+        # ZLIB (comparison)
+        start = time.perf_counter()
+        zlib_compressed = compress_zlib(data)
+        zlib_time = time.perf_counter() - start
+        
+        ratio = len(data) / len(zlib_compressed)
+        print(f"\n   ZLIB (comparison)")
+        print(f"   Compressed:   {len(zlib_compressed):,} bytes")
+        print(f"   Ratio:        {ratio:.2f}x")
+        print(f"   Time:         {zlib_time*1000:.3f} ms")
+        print(f"   Memory:       ~32 KB (sliding window)")
+        
+        results.append(('ZLIB', len(data), len(zlib_compressed), zlib_time))
+        
+        # Zstandard (comparison)
+        if HAS_ZSTD:
+            start = time.perf_counter()
+            zstd_compressed = compress_zstd(data)
+            zstd_time = time.perf_counter() - start
             
-            print(f"\n4. GZIP")
-            print(f"   Compressed size: {len(gzip_compressed)} bytes")
-            print(f"   Compression ratio: {len(data)/len(gzip_compressed):.2f}x")
-            print(f"   Time: {gzip_time*1000:.2f} ms")
-        except Exception as e:
-            print(f"\n4. GZIP failed: {e}")
-        
-        print()
+            ratio = len(data) / len(zstd_compressed)
+            print(f"\n   Zstandard (comparison)")
+            print(f"   Compressed:   {len(zstd_compressed):,} bytes")
+            print(f"   Ratio:        {ratio:.2f}x")
+            print(f"   Time:         {zstd_time*1000:.3f} ms")
+            print(f"   Memory:       ~64 KB+ (FSE tables)")
+            
+            results.append(('Zstd', len(data), len(zstd_compressed), zstd_time))
     
-    # Optional: Try LZ4 and Zstandard if available
-    try:
-        import lz4.frame
-        import zstandard as zstd
-        
-        print(f"\n{'=' * 70}")
-        print("MODERN COMPRESSION (LZ4 & Zstandard)")
-        print(f"{'=' * 70}")
-        
-        test_data = b'{"sensor":"temperature","value":25.5}' * 100
-        print(f"\nTest data size: {len(test_data)} bytes")
-        
-        # LZ4
-        start = time.time()
-        lz4_compressed = lz4.frame.compress(test_data)
-        lz4_time = time.time() - start
-        print(f"\nLZ4:")
-        print(f"   Compressed: {len(lz4_compressed)} bytes")
-        print(f"   Ratio: {len(test_data)/len(lz4_compressed):.2f}x")
-        print(f"   Time: {lz4_time*1000:.2f} ms")
-        
-        # Zstandard
-        cctx = zstd.ZstdCompressor(level=3)
-        start = time.time()
-        zstd_compressed = cctx.compress(test_data)
-        zstd_time = time.time() - start
-        print(f"\nZstandard:")
-        print(f"   Compressed: {len(zstd_compressed)} bytes")
-        print(f"   Ratio: {len(test_data)/len(zstd_compressed):.2f}x")
-        print(f"   Time: {zstd_time*1000:.2f} ms")
-        
-    except ImportError:
-        print("\n[INFO] LZ4 and Zstandard not installed")
-        print("Install with: pip install lz4 zstandard")
+    # Summary: Why LZ4 for IoT
+    print(f"\n{'=' * 70}")
+    print("SUMMARY: Why LZ4 for IoT Endpoints")
+    print("=" * 70)
+    print("""
+✓ LOWEST MEMORY:     16 KB vs 32 KB (ZLIB) vs 64 KB+ (Zstd)
+✓ FASTEST SPEED:     500+ MB/s vs 50-100 MB/s (ZLIB)
+✓ ENERGY EFFICIENT:  Minimal CPU time = minimal battery drain
+✓ GOOD COMPRESSION:  50-75% reduction on JSON sensor data
+✓ PREDICTABLE:       Simple execution, no data-dependent branching
+
+Note: ZLIB/Zstd achieve better ratios but at higher memory/CPU cost.
+      Use them at gateways, not on constrained IoT endpoints.
+""")
 
 if __name__ == "__main__":
     demonstrate_compression()
