@@ -20,6 +20,15 @@ IoT devices are used in many important areas:
 
 However, IoT devices have significant limitations that make security difficult to implement. At the same time, a new threat is emerging: quantum computers that will be able to break current encryption methods. This chapter examines both of these challenges.
 
+Figure \ref{fig:iot_architecture} illustrates the typical three-layer architecture of IoT systems, showing the flow of data from perception devices through network gateways to cloud services.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/iot_architecture.png}
+\caption{Three-layer IoT architecture showing the perception, network, and application layers with their respective security concerns}
+\label{fig:iot_architecture}
+\end{figure}
+
 \section{IoT Device Constraints}
 
 IoT devices are designed to be small, cheap, and energy-efficient. These design goals create several important constraints that affect how we can secure them.
@@ -125,30 +134,12 @@ For long-range, low-power applications (like smart agriculture or city-wide sens
 
 \subsection{Summary of IoT Constraints}
 
-Figure \ref{fig:iot_constraints} illustrates the three main constraints that IoT devices face.
+Figure \ref{fig:iot_constraints} illustrates how different IoT device classes vary in their resource capabilities. Class 0 devices (8-bit microcontrollers) are the most constrained, while Class 2 devices (Linux-capable) have more resources but still face limitations compared to traditional computing platforms.
 
 \begin{figure}[H]
 \centering
-\fbox{
-\begin{minipage}{0.8\textwidth}
-\centering
-\vspace{0.5cm}
-\textbf{IoT Device Constraints}\\[0.5cm]
-\begin{tabular}{ccc}
-\textbf{Energy} & \textbf{Memory} & \textbf{Bandwidth} \\
-$\downarrow$ & $\downarrow$ & $\downarrow$ \\
-Battery life & Storage space & Data rate \\
-mW to $\mu$W & KB to MB & Kbps to Mbps \\
-\end{tabular}
-\vspace{0.5cm}
-
-$\Downarrow$
-
-\textbf{Challenge:} Implement security with minimal resource usage
-\vspace{0.5cm}
-\end{minipage}
-}
-\caption{The three main constraints of IoT devices}
+\includegraphics[width=0.75\textwidth]{figures/iot_constraints.png}
+\caption{Radar chart comparing resource capabilities across IoT device classes: Class 0 (8-bit MCU), Class 1 (32-bit MCU), and Class 2 (Linux-capable devices)}
 \label{fig:iot_constraints}
 \end{figure}
 
@@ -253,7 +244,7 @@ Figure \ref{fig:quantum_timeline} shows a possible timeline for the quantum thre
 \end{minipage}
 }
 \caption{Timeline of quantum computing development}
-\label{fig:quantum_timeline}
+\label{fig:quantum_timeline_text}
 \end{figure}
 
 \subsection{The Need for Post-Quantum Cryptography}

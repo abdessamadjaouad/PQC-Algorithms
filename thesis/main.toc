@@ -8,145 +8,145 @@
 \contentsline {chapter}{General Introduction}{1}{chapter*.7}%
 \contentsline {chapter}{\numberline {1}IoT and Security Challenges}{4}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Introduction}{4}{section.1.1}%
-\contentsline {section}{\numberline {1.2}IoT Device Constraints}{4}{section.1.2}%
+\contentsline {section}{\numberline {1.2}IoT Device Constraints}{5}{section.1.2}%
 \contentsline {subsection}{\numberline {1.2.1}Energy Constraints}{5}{subsection.1.2.1}%
-\contentsline {subsection}{\numberline {1.2.2}Memory Limitations}{5}{subsection.1.2.2}%
-\contentsline {subsection}{\numberline {1.2.3}Bandwidth Constraints}{6}{subsection.1.2.3}%
+\contentsline {subsection}{\numberline {1.2.2}Memory Limitations}{6}{subsection.1.2.2}%
+\contentsline {subsection}{\numberline {1.2.3}Bandwidth Constraints}{7}{subsection.1.2.3}%
 \contentsline {subsection}{\numberline {1.2.4}Summary of IoT Constraints}{7}{subsection.1.2.4}%
-\contentsline {section}{\numberline {1.3}The Quantum Threat}{7}{section.1.3}%
-\contentsline {subsection}{\numberline {1.3.1}Quantum Computing Fundamentals}{7}{subsection.1.3.1}%
-\contentsline {subsection}{\numberline {1.3.2}Shor's Algorithm and Cryptographic Implications}{8}{subsection.1.3.2}%
-\contentsline {subsection}{\numberline {1.3.3}Timeline and Urgency}{9}{subsection.1.3.3}%
-\contentsline {subsection}{\numberline {1.3.4}The Need for Post-Quantum Cryptography}{10}{subsection.1.3.4}%
-\contentsline {section}{\numberline {1.4}Chapter Conclusion}{10}{section.1.4}%
-\contentsline {chapter}{\numberline {2}Post-Quantum Cryptography}{11}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Introduction}{11}{section.2.1}%
-\contentsline {section}{\numberline {2.2}History and Context}{11}{section.2.2}%
-\contentsline {section}{\numberline {2.3}Algorithm Families}{12}{section.2.3}%
-\contentsline {subsection}{\numberline {2.3.1}Lattice-Based Cryptography}{13}{subsection.2.3.1}%
-\contentsline {subsubsection}{What is a Lattice?}{13}{section*.20}%
-\contentsline {subsubsection}{Hard Problems on Lattices}{13}{section*.22}%
-\contentsline {subsubsection}{Why Lattices are Good for Cryptography}{14}{section*.23}%
-\contentsline {subsection}{\numberline {2.3.2}Hash-Based Cryptography}{14}{subsection.2.3.2}%
-\contentsline {subsection}{\numberline {2.3.3}Code-Based Cryptography}{14}{subsection.2.3.3}%
-\contentsline {subsection}{\numberline {2.3.4}Multivariate Cryptography}{15}{subsection.2.3.4}%
-\contentsline {subsection}{\numberline {2.3.5}Isogeny-Based Cryptography}{15}{subsection.2.3.5}%
-\contentsline {section}{\numberline {2.4}Lattice-Based Algorithms in Detail}{15}{section.2.4}%
-\contentsline {subsection}{\numberline {2.4.1}Module Learning With Errors (MLWE)}{15}{subsection.2.4.1}%
-\contentsline {subsection}{\numberline {2.4.2}Number Theoretic Transform (NTT)}{16}{subsection.2.4.2}%
-\contentsline {section}{\numberline {2.5}NIST Standards: Kyber and Dilithium}{16}{section.2.5}%
-\contentsline {subsection}{\numberline {2.5.1}Kyber: Key Encapsulation Mechanism}{16}{subsection.2.5.1}%
-\contentsline {subsubsection}{How Kyber Works}{16}{section*.24}%
-\contentsline {subsubsection}{Kyber Security Levels}{17}{section*.25}%
-\contentsline {subsection}{\numberline {2.5.2}Dilithium: Digital Signature Algorithm}{18}{subsection.2.5.2}%
-\contentsline {subsubsection}{How Dilithium Works}{18}{section*.27}%
-\contentsline {subsubsection}{Dilithium Security Levels}{19}{section*.28}%
-\contentsline {section}{\numberline {2.6}PQC vs Classical: Size Comparison}{19}{section.2.6}%
-\contentsline {section}{\numberline {2.7}PQC Challenges for IoT}{20}{section.2.7}%
-\contentsline {subsection}{\numberline {2.7.1}Bandwidth Overhead}{20}{subsection.2.7.1}%
-\contentsline {subsection}{\numberline {2.7.2}Memory Requirements}{20}{subsection.2.7.2}%
-\contentsline {subsection}{\numberline {2.7.3}Computational Cost}{20}{subsection.2.7.3}%
-\contentsline {subsection}{\numberline {2.7.4}Energy Consumption}{21}{subsection.2.7.4}%
-\contentsline {section}{\numberline {2.8}Chapter Conclusion}{21}{section.2.8}%
-\contentsline {chapter}{\numberline {3}Compression Algorithms}{22}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Introduction}{22}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Fundamentals of Data Compression}{22}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}Lossless vs Lossy Compression}{22}{subsection.3.2.1}%
-\contentsline {subsection}{\numberline {3.2.2}Compression Metrics}{23}{subsection.3.2.2}%
-\contentsline {subsection}{\numberline {3.2.3}Information Theory Basics}{23}{subsection.3.2.3}%
-\contentsline {section}{\numberline {3.3}Classical Compression Algorithms}{24}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}Run-Length Encoding (RLE)}{24}{subsection.3.3.1}%
-\contentsline {subsubsection}{How RLE Works}{24}{section*.33}%
-\contentsline {subsubsection}{RLE Algorithm}{24}{section*.34}%
-\contentsline {subsubsection}{RLE Characteristics}{25}{section*.35}%
-\contentsline {subsection}{\numberline {3.3.2}Huffman Coding}{25}{subsection.3.3.2}%
-\contentsline {subsubsection}{How Huffman Coding Works}{25}{section*.36}%
-\contentsline {subsubsection}{Huffman Coding Algorithm}{26}{section*.38}%
-\contentsline {subsubsection}{Huffman Coding Characteristics}{27}{section*.39}%
-\contentsline {subsection}{\numberline {3.3.3}Lempel-Ziv Algorithms (LZ77/LZ78)}{27}{subsection.3.3.3}%
-\contentsline {subsubsection}{LZ77: Sliding Window}{27}{section*.40}%
-\contentsline {subsubsection}{LZ78: Dictionary-Based}{29}{section*.41}%
-\contentsline {subsubsection}{LZ Algorithm Characteristics}{29}{section*.42}%
-\contentsline {section}{\numberline {3.4}Modern Compression Algorithms}{30}{section.3.4}%
-\contentsline {subsection}{\numberline {3.4.1}ZLIB and DEFLATE}{30}{subsection.3.4.1}%
-\contentsline {subsubsection}{How DEFLATE Works}{30}{section*.44}%
-\contentsline {subsubsection}{ZLIB Format}{31}{section*.45}%
-\contentsline {subsubsection}{ZLIB Characteristics}{31}{section*.46}%
-\contentsline {subsection}{\numberline {3.4.2}LZ4}{32}{subsection.3.4.2}%
-\contentsline {subsubsection}{How LZ4 Works}{32}{section*.47}%
-\contentsline {subsubsection}{LZ4 Characteristics}{33}{section*.48}%
-\contentsline {subsection}{\numberline {3.4.3}Zstandard (Zstd)}{33}{subsection.3.4.3}%
-\contentsline {subsubsection}{How Zstandard Works}{33}{section*.49}%
-\contentsline {subsubsection}{Zstandard Compression Levels}{34}{section*.50}%
-\contentsline {subsubsection}{Zstandard Characteristics}{34}{section*.52}%
-\contentsline {subsection}{\numberline {3.4.4}Brotli}{35}{subsection.3.4.4}%
-\contentsline {subsubsection}{How Brotli Works}{35}{section*.53}%
-\contentsline {subsubsection}{Brotli Characteristics}{35}{section*.54}%
-\contentsline {section}{\numberline {3.5}Compression Ratio vs Speed Comparison}{36}{section.3.5}%
-\contentsline {section}{\numberline {3.6}Relevance for IoT Data}{36}{section.3.6}%
-\contentsline {subsection}{\numberline {3.6.1}IoT Data Characteristics}{36}{subsection.3.6.1}%
-\contentsline {subsection}{\numberline {3.6.2}Compressibility of Cryptographic Data}{37}{subsection.3.6.2}%
-\contentsline {subsection}{\numberline {3.6.3}Algorithm Recommendations for IoT}{37}{subsection.3.6.3}%
-\contentsline {subsection}{\numberline {3.6.4}Dictionary-Based Compression for PQC}{37}{subsection.3.6.4}%
-\contentsline {section}{\numberline {3.7}Chapter Conclusion}{38}{section.3.7}%
-\contentsline {chapter}{\numberline {4}Combined Approach: PQC with Compression}{39}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Introduction}{39}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Why Compress Before Encrypting}{39}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Theoretical Foundation}{39}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}Entropy and Encryption}{40}{subsection.4.2.2}%
-\contentsline {subsection}{\numberline {4.2.3}Security Considerations}{40}{subsection.4.2.3}%
-\contentsline {section}{\numberline {4.3}Proposed Architecture}{41}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}System Overview}{41}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}Workflow: Compress → Encrypt → Transmit}{41}{subsection.4.3.2}%
-\contentsline {subsection}{\numberline {4.3.3}Why Hybrid Encryption?}{42}{subsection.4.3.3}%
-\contentsline {subsection}{\numberline {4.3.4}Message Format}{43}{subsection.4.3.4}%
-\contentsline {section}{\numberline {4.4}Algorithm Selection and Justification}{43}{section.4.4}%
-\contentsline {subsection}{\numberline {4.4.1}Choice of Kyber768}{43}{subsection.4.4.1}%
-\contentsline {subsection}{\numberline {4.4.2}Choice of ZLIB}{44}{subsection.4.4.2}%
-\contentsline {section}{\numberline {4.5}Theoretical Analysis of Expected Gains}{45}{section.4.5}%
-\contentsline {subsection}{\numberline {4.5.1}Bandwidth Model}{45}{subsection.4.5.1}%
-\contentsline {subsection}{\numberline {4.5.2}Analysis by Data Size}{45}{subsection.4.5.2}%
-\contentsline {subsection}{\numberline {4.5.3}Break-Even Analysis}{46}{subsection.4.5.3}%
-\contentsline {subsection}{\numberline {4.5.4}Comparison with Classical Cryptography}{46}{subsection.4.5.4}%
-\contentsline {section}{\numberline {4.6}Optimization Strategies}{46}{section.4.6}%
-\contentsline {subsection}{\numberline {4.6.1}Session Keys}{46}{subsection.4.6.1}%
-\contentsline {subsection}{\numberline {4.6.2}Dictionary-Based Compression}{47}{subsection.4.6.2}%
-\contentsline {subsection}{\numberline {4.6.3}Batching}{47}{subsection.4.6.3}%
-\contentsline {section}{\numberline {4.7}Security Analysis}{48}{section.4.7}%
-\contentsline {subsection}{\numberline {4.7.1}Cryptographic Security}{48}{subsection.4.7.1}%
-\contentsline {subsection}{\numberline {4.7.2}Compression Security}{48}{subsection.4.7.2}%
-\contentsline {subsection}{\numberline {4.7.3}Potential Attacks and Mitigations}{49}{subsection.4.7.3}%
-\contentsline {section}{\numberline {4.8}Chapter Conclusion}{49}{section.4.8}%
-\contentsline {chapter}{\numberline {5}Implementation and Benchmarks}{50}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Introduction}{50}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Technical Environment}{50}{section.5.2}%
-\contentsline {subsection}{\numberline {5.2.1}Programming Language and Libraries}{50}{subsection.5.2.1}%
-\contentsline {subsection}{\numberline {5.2.2}Development Setup}{51}{subsection.5.2.2}%
-\contentsline {section}{\numberline {5.3}Software Architecture}{51}{section.5.3}%
-\contentsline {subsection}{\numberline {5.3.1}Core Implementation}{52}{subsection.5.3.1}%
-\contentsline {subsubsection}{Compression Module}{52}{section*.68}%
-\contentsline {subsubsection}{PQC Module}{52}{section*.69}%
-\contentsline {subsubsection}{Combined Pipeline}{53}{section*.70}%
-\contentsline {section}{\numberline {5.4}Benchmark Methodology}{54}{section.5.4}%
-\contentsline {subsection}{\numberline {5.4.1}Test Datasets}{54}{subsection.5.4.1}%
-\contentsline {subsection}{\numberline {5.4.2}Evaluation Metrics}{55}{subsection.5.4.2}%
-\contentsline {subsection}{\numberline {5.4.3}Benchmark Procedure}{56}{subsection.5.4.3}%
-\contentsline {section}{\numberline {5.5}Results}{56}{section.5.5}%
-\contentsline {subsection}{\numberline {5.5.1}Compression Performance}{56}{subsection.5.5.1}%
-\contentsline {subsection}{\numberline {5.5.2}PQC Performance}{57}{subsection.5.5.2}%
-\contentsline {subsection}{\numberline {5.5.3}Combined Approach Results}{57}{subsection.5.5.3}%
-\contentsline {subsection}{\numberline {5.5.4}Bandwidth Savings Analysis}{58}{subsection.5.5.4}%
-\contentsline {subsection}{\numberline {5.5.5}Overall Performance Summary}{58}{subsection.5.5.5}%
-\contentsline {section}{\numberline {5.6}Analysis and Discussion}{58}{section.5.6}%
-\contentsline {subsection}{\numberline {5.6.1}Key Findings}{58}{subsection.5.6.1}%
-\contentsline {subsection}{\numberline {5.6.2}Comparison with Theoretical Predictions}{59}{subsection.5.6.2}%
-\contentsline {subsection}{\numberline {5.6.3}Strengths of the Approach}{59}{subsection.5.6.3}%
-\contentsline {subsection}{\numberline {5.6.4}Limitations}{60}{subsection.5.6.4}%
-\contentsline {subsection}{\numberline {5.6.5}Recommendations for Deployment}{60}{subsection.5.6.5}%
-\contentsline {section}{\numberline {5.7}Visualizations}{60}{section.5.7}%
-\contentsline {subsection}{\numberline {5.7.1}Compression Ratio Comparison}{60}{subsection.5.7.1}%
-\contentsline {subsection}{\numberline {5.7.2}Bandwidth Savings Visualization}{61}{subsection.5.7.2}%
-\contentsline {subsection}{\numberline {5.7.3}PQC Size Comparison}{61}{subsection.5.7.3}%
-\contentsline {section}{\numberline {5.8}Chapter Conclusion}{62}{section.5.8}%
-\contentsline {chapter}{General Conclusion}{63}{chapter*.80}%
-\contentsline {chapter}{References}{68}{chapter*.86}%
+\contentsline {section}{\numberline {1.3}The Quantum Threat}{8}{section.1.3}%
+\contentsline {subsection}{\numberline {1.3.1}Quantum Computing Fundamentals}{8}{subsection.1.3.1}%
+\contentsline {subsection}{\numberline {1.3.2}Shor's Algorithm and Cryptographic Implications}{9}{subsection.1.3.2}%
+\contentsline {subsection}{\numberline {1.3.3}Timeline and Urgency}{10}{subsection.1.3.3}%
+\contentsline {subsection}{\numberline {1.3.4}The Need for Post-Quantum Cryptography}{11}{subsection.1.3.4}%
+\contentsline {section}{\numberline {1.4}Chapter Conclusion}{11}{section.1.4}%
+\contentsline {chapter}{\numberline {2}Post-Quantum Cryptography}{13}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Introduction}{13}{section.2.1}%
+\contentsline {section}{\numberline {2.2}History and Context}{13}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Algorithm Families}{14}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Lattice-Based Cryptography}{16}{subsection.2.3.1}%
+\contentsline {subsubsection}{What is a Lattice?}{16}{section*.23}%
+\contentsline {subsubsection}{Hard Problems on Lattices}{16}{section*.25}%
+\contentsline {subsubsection}{Why Lattices are Good for Cryptography}{17}{section*.26}%
+\contentsline {subsection}{\numberline {2.3.2}Hash-Based Cryptography}{17}{subsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.3.3}Code-Based Cryptography}{17}{subsection.2.3.3}%
+\contentsline {subsection}{\numberline {2.3.4}Multivariate Cryptography}{18}{subsection.2.3.4}%
+\contentsline {subsection}{\numberline {2.3.5}Isogeny-Based Cryptography}{18}{subsection.2.3.5}%
+\contentsline {section}{\numberline {2.4}Lattice-Based Algorithms in Detail}{18}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}Module Learning With Errors (MLWE)}{18}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.4.2}Number Theoretic Transform (NTT)}{19}{subsection.2.4.2}%
+\contentsline {section}{\numberline {2.5}NIST Standards: Kyber and Dilithium}{19}{section.2.5}%
+\contentsline {subsection}{\numberline {2.5.1}Kyber: Key Encapsulation Mechanism}{19}{subsection.2.5.1}%
+\contentsline {subsubsection}{How Kyber Works}{19}{section*.27}%
+\contentsline {subsubsection}{Kyber Security Levels}{20}{section*.28}%
+\contentsline {subsection}{\numberline {2.5.2}Dilithium: Digital Signature Algorithm}{21}{subsection.2.5.2}%
+\contentsline {subsubsection}{How Dilithium Works}{21}{section*.30}%
+\contentsline {subsubsection}{Dilithium Security Levels}{22}{section*.31}%
+\contentsline {section}{\numberline {2.6}PQC vs Classical: Size Comparison}{22}{section.2.6}%
+\contentsline {section}{\numberline {2.7}PQC Challenges for IoT}{23}{section.2.7}%
+\contentsline {subsection}{\numberline {2.7.1}Bandwidth Overhead}{23}{subsection.2.7.1}%
+\contentsline {subsection}{\numberline {2.7.2}Memory Requirements}{23}{subsection.2.7.2}%
+\contentsline {subsection}{\numberline {2.7.3}Computational Cost}{23}{subsection.2.7.3}%
+\contentsline {subsection}{\numberline {2.7.4}Energy Consumption}{24}{subsection.2.7.4}%
+\contentsline {section}{\numberline {2.8}Chapter Conclusion}{24}{section.2.8}%
+\contentsline {chapter}{\numberline {3}Compression Algorithms}{25}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Introduction}{25}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Fundamentals of Data Compression}{25}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Lossless vs Lossy Compression}{25}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Compression Metrics}{26}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3}Information Theory Basics}{27}{subsection.3.2.3}%
+\contentsline {section}{\numberline {3.3}Classical Compression Algorithms}{27}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Run-Length Encoding (RLE)}{27}{subsection.3.3.1}%
+\contentsline {subsubsection}{How RLE Works}{28}{section*.37}%
+\contentsline {subsubsection}{RLE Algorithm}{28}{section*.38}%
+\contentsline {subsubsection}{RLE Characteristics}{28}{section*.39}%
+\contentsline {subsection}{\numberline {3.3.2}Huffman Coding}{29}{subsection.3.3.2}%
+\contentsline {subsubsection}{How Huffman Coding Works}{29}{section*.40}%
+\contentsline {subsubsection}{Huffman Coding Algorithm}{30}{section*.42}%
+\contentsline {subsubsection}{Huffman Coding Characteristics}{30}{section*.43}%
+\contentsline {subsection}{\numberline {3.3.3}Lempel-Ziv Algorithms (LZ77/LZ78)}{31}{subsection.3.3.3}%
+\contentsline {subsubsection}{LZ77: Sliding Window}{31}{section*.44}%
+\contentsline {subsubsection}{LZ78: Dictionary-Based}{32}{section*.45}%
+\contentsline {subsubsection}{LZ Algorithm Characteristics}{33}{section*.46}%
+\contentsline {section}{\numberline {3.4}Modern Compression Algorithms}{33}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}ZLIB and DEFLATE}{34}{subsection.3.4.1}%
+\contentsline {subsubsection}{How DEFLATE Works}{34}{section*.48}%
+\contentsline {subsubsection}{ZLIB Format}{35}{section*.49}%
+\contentsline {subsubsection}{ZLIB Characteristics}{35}{section*.50}%
+\contentsline {subsection}{\numberline {3.4.2}LZ4}{35}{subsection.3.4.2}%
+\contentsline {subsubsection}{How LZ4 Works}{35}{section*.51}%
+\contentsline {subsubsection}{LZ4 Characteristics}{36}{section*.52}%
+\contentsline {subsection}{\numberline {3.4.3}Zstandard (Zstd)}{36}{subsection.3.4.3}%
+\contentsline {subsubsection}{How Zstandard Works}{37}{section*.53}%
+\contentsline {subsubsection}{Zstandard Compression Levels}{37}{section*.54}%
+\contentsline {subsubsection}{Zstandard Characteristics}{38}{section*.56}%
+\contentsline {subsection}{\numberline {3.4.4}Brotli}{38}{subsection.3.4.4}%
+\contentsline {subsubsection}{How Brotli Works}{38}{section*.57}%
+\contentsline {subsubsection}{Brotli Characteristics}{39}{section*.58}%
+\contentsline {section}{\numberline {3.5}Compression Ratio vs Speed Comparison}{39}{section.3.5}%
+\contentsline {section}{\numberline {3.6}Relevance for IoT Data}{40}{section.3.6}%
+\contentsline {subsection}{\numberline {3.6.1}IoT Data Characteristics}{40}{subsection.3.6.1}%
+\contentsline {subsection}{\numberline {3.6.2}Compressibility of Cryptographic Data}{40}{subsection.3.6.2}%
+\contentsline {subsection}{\numberline {3.6.3}Algorithm Recommendations for IoT}{40}{subsection.3.6.3}%
+\contentsline {subsection}{\numberline {3.6.4}Dictionary-Based Compression for PQC}{41}{subsection.3.6.4}%
+\contentsline {section}{\numberline {3.7}Chapter Conclusion}{41}{section.3.7}%
+\contentsline {chapter}{\numberline {4}Combined Approach: PQC with Compression}{42}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Introduction}{42}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Why Compress Before Encrypting}{43}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Theoretical Foundation}{43}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Entropy and Encryption}{44}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Security Considerations}{44}{subsection.4.2.3}%
+\contentsline {section}{\numberline {4.3}Proposed Architecture}{45}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}System Overview}{45}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Workflow: Compress → Encrypt → Transmit}{46}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3}Why Hybrid Encryption?}{47}{subsection.4.3.3}%
+\contentsline {subsection}{\numberline {4.3.4}Message Format}{47}{subsection.4.3.4}%
+\contentsline {section}{\numberline {4.4}Algorithm Selection and Justification}{47}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Choice of Kyber768}{47}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}Choice of ZLIB}{48}{subsection.4.4.2}%
+\contentsline {section}{\numberline {4.5}Theoretical Analysis of Expected Gains}{49}{section.4.5}%
+\contentsline {subsection}{\numberline {4.5.1}Bandwidth Model}{49}{subsection.4.5.1}%
+\contentsline {subsection}{\numberline {4.5.2}Analysis by Data Size}{49}{subsection.4.5.2}%
+\contentsline {subsection}{\numberline {4.5.3}Break-Even Analysis}{50}{subsection.4.5.3}%
+\contentsline {subsection}{\numberline {4.5.4}Comparison with Classical Cryptography}{50}{subsection.4.5.4}%
+\contentsline {section}{\numberline {4.6}Optimization Strategies}{51}{section.4.6}%
+\contentsline {subsection}{\numberline {4.6.1}Session Keys}{51}{subsection.4.6.1}%
+\contentsline {subsection}{\numberline {4.6.2}Dictionary-Based Compression}{51}{subsection.4.6.2}%
+\contentsline {subsection}{\numberline {4.6.3}Batching}{52}{subsection.4.6.3}%
+\contentsline {section}{\numberline {4.7}Security Analysis}{52}{section.4.7}%
+\contentsline {subsection}{\numberline {4.7.1}Cryptographic Security}{52}{subsection.4.7.1}%
+\contentsline {subsection}{\numberline {4.7.2}Compression Security}{52}{subsection.4.7.2}%
+\contentsline {subsection}{\numberline {4.7.3}Potential Attacks and Mitigations}{53}{subsection.4.7.3}%
+\contentsline {section}{\numberline {4.8}Chapter Conclusion}{53}{section.4.8}%
+\contentsline {chapter}{\numberline {5}Implementation and Benchmarks}{54}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Introduction}{54}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Technical Environment}{54}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Programming Language and Libraries}{54}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Development Setup}{55}{subsection.5.2.2}%
+\contentsline {section}{\numberline {5.3}Software Architecture}{55}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Core Implementation}{56}{subsection.5.3.1}%
+\contentsline {subsubsection}{Compression Module}{56}{section*.74}%
+\contentsline {subsubsection}{PQC Module}{56}{section*.75}%
+\contentsline {subsubsection}{Combined Pipeline}{57}{section*.76}%
+\contentsline {section}{\numberline {5.4}Benchmark Methodology}{58}{section.5.4}%
+\contentsline {subsection}{\numberline {5.4.1}Test Datasets}{58}{subsection.5.4.1}%
+\contentsline {subsection}{\numberline {5.4.2}Evaluation Metrics}{59}{subsection.5.4.2}%
+\contentsline {subsection}{\numberline {5.4.3}Benchmark Procedure}{60}{subsection.5.4.3}%
+\contentsline {section}{\numberline {5.5}Results}{60}{section.5.5}%
+\contentsline {subsection}{\numberline {5.5.1}Compression Performance}{60}{subsection.5.5.1}%
+\contentsline {subsection}{\numberline {5.5.2}PQC Performance}{61}{subsection.5.5.2}%
+\contentsline {subsection}{\numberline {5.5.3}Combined Approach Results}{61}{subsection.5.5.3}%
+\contentsline {subsection}{\numberline {5.5.4}Bandwidth Savings Analysis}{62}{subsection.5.5.4}%
+\contentsline {subsection}{\numberline {5.5.5}Overall Performance Summary}{62}{subsection.5.5.5}%
+\contentsline {section}{\numberline {5.6}Analysis and Discussion}{62}{section.5.6}%
+\contentsline {subsection}{\numberline {5.6.1}Key Findings}{62}{subsection.5.6.1}%
+\contentsline {subsection}{\numberline {5.6.2}Comparison with Theoretical Predictions}{63}{subsection.5.6.2}%
+\contentsline {subsection}{\numberline {5.6.3}Strengths of the Approach}{63}{subsection.5.6.3}%
+\contentsline {subsection}{\numberline {5.6.4}Limitations}{64}{subsection.5.6.4}%
+\contentsline {subsection}{\numberline {5.6.5}Recommendations for Deployment}{64}{subsection.5.6.5}%
+\contentsline {section}{\numberline {5.7}Visualizations}{64}{section.5.7}%
+\contentsline {subsection}{\numberline {5.7.1}Compression Ratio Comparison}{64}{subsection.5.7.1}%
+\contentsline {subsection}{\numberline {5.7.2}Bandwidth Savings Visualization}{65}{subsection.5.7.2}%
+\contentsline {subsection}{\numberline {5.7.3}PQC Size Comparison}{65}{subsection.5.7.3}%
+\contentsline {section}{\numberline {5.8}Chapter Conclusion}{66}{section.5.8}%
+\contentsline {chapter}{General Conclusion}{67}{chapter*.86}%
+\contentsline {chapter}{References}{72}{chapter*.92}%

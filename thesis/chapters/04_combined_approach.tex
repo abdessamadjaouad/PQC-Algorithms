@@ -13,6 +13,15 @@ The key insight is simple but powerful: \textbf{compress data before encrypting 
 
 In this chapter, we present our proposed architecture, explain the theoretical foundations, justify our algorithm choices, and analyze the expected performance gains.
 
+Figure \ref{fig:system_arch} provides a high-level overview of our combined approach, showing the data flow from raw IoT data through compression, key exchange, encryption, and transmission.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/system_architecture.png}
+\caption{System architecture for combined compression and PQC approach, showing the processing pipeline and resulting bandwidth savings of 86.9\%}
+\label{fig:system_arch}
+\end{figure}
+
 \section{Why Compress Before Encrypting}
 
 The order of operations matters significantly. We must compress \textit{before} encrypting, not after. This section explains why.
@@ -61,6 +70,15 @@ However, there is one caveat: \textbf{compression can leak information about pla
     \item The attacker already knows the general type of data (sensor readings, etc.)
     \item Padding can be added if length confidentiality is required
 \end{enumerate}
+
+Figure \ref{fig:bandwidth_breakdown} shows how bandwidth usage changes at each stage of our pipeline, demonstrating the effectiveness of the compress-before-encrypt approach.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{figures/bandwidth_breakdown.png}
+\caption{Bandwidth usage breakdown showing the reduction from original data (100 KB) through compression (15 KB), PQC overhead addition (2.4 KB), to final packet size (17.4 KB)}
+\label{fig:bandwidth_breakdown}
+\end{figure}
 
 \section{Proposed Architecture}
 

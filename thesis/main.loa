@@ -1,18 +1,18 @@
-\contentsline {algorithm}{\numberline {1}{\ignorespaces Simplified Hash-Based Signature Concept}}{14}{algorithm.1}%
-\contentsline {algorithm}{\numberline {2}{\ignorespaces Kyber Key Generation (Simplified)}}{17}{algorithm.2}%
-\contentsline {algorithm}{\numberline {3}{\ignorespaces Kyber Encapsulation (Simplified)}}{17}{algorithm.3}%
-\contentsline {algorithm}{\numberline {4}{\ignorespaces Kyber Decapsulation (Simplified)}}{17}{algorithm.4}%
-\contentsline {algorithm}{\numberline {5}{\ignorespaces Dilithium Signing (Simplified)}}{18}{algorithm.5}%
-\contentsline {algorithm}{\numberline {6}{\ignorespaces Run-Length Encoding (Compression)}}{24}{algorithm.6}%
-\contentsline {algorithm}{\numberline {7}{\ignorespaces Run-Length Decoding (Decompression)}}{25}{algorithm.7}%
-\contentsline {algorithm}{\numberline {8}{\ignorespaces Build Huffman Tree}}{26}{algorithm.8}%
-\contentsline {algorithm}{\numberline {9}{\ignorespaces Generate Huffman Codes}}{27}{algorithm.9}%
-\contentsline {algorithm}{\numberline {10}{\ignorespaces LZ77 Compression}}{28}{algorithm.10}%
-\contentsline {algorithm}{\numberline {11}{\ignorespaces LZ78 Compression}}{29}{algorithm.11}%
-\contentsline {algorithm}{\numberline {12}{\ignorespaces DEFLATE Compression (Simplified)}}{31}{algorithm.12}%
-\contentsline {algorithm}{\numberline {13}{\ignorespaces LZ4 Compression (Simplified)}}{32}{algorithm.13}%
-\contentsline {algorithm}{\numberline {14}{\ignorespaces Zstandard Compression (High-Level)}}{34}{algorithm.14}%
-\contentsline {algorithm}{\numberline {15}{\ignorespaces Brotli Compression (High-Level)}}{35}{algorithm.15}%
-\contentsline {algorithm}{\numberline {16}{\ignorespaces Sender Workflow: Compress and Encrypt}}{42}{algorithm.16}%
-\contentsline {algorithm}{\numberline {17}{\ignorespaces Receiver Workflow: Decrypt and Decompress}}{42}{algorithm.17}%
-\contentsline {algorithm}{\numberline {18}{\ignorespaces Session Key Optimization}}{47}{algorithm.18}%
+\contentsline {algorithm}{\numberline {1}{\ignorespaces Simplified Hash-Based Signature Concept}}{17}{algorithm.1}%
+\contentsline {algorithm}{\numberline {2}{\ignorespaces Kyber Key Generation (Simplified)}}{20}{algorithm.2}%
+\contentsline {algorithm}{\numberline {3}{\ignorespaces Kyber Encapsulation (Simplified)}}{20}{algorithm.3}%
+\contentsline {algorithm}{\numberline {4}{\ignorespaces Kyber Decapsulation (Simplified)}}{20}{algorithm.4}%
+\contentsline {algorithm}{\numberline {5}{\ignorespaces Dilithium Signing (Simplified)}}{21}{algorithm.5}%
+\contentsline {algorithm}{\numberline {6}{\ignorespaces Run-Length Encoding (Compression)}}{28}{algorithm.6}%
+\contentsline {algorithm}{\numberline {7}{\ignorespaces Run-Length Decoding (Decompression)}}{28}{algorithm.7}%
+\contentsline {algorithm}{\numberline {8}{\ignorespaces Build Huffman Tree}}{30}{algorithm.8}%
+\contentsline {algorithm}{\numberline {9}{\ignorespaces Generate Huffman Codes}}{30}{algorithm.9}%
+\contentsline {algorithm}{\numberline {10}{\ignorespaces LZ77 Compression}}{32}{algorithm.10}%
+\contentsline {algorithm}{\numberline {11}{\ignorespaces LZ78 Compression}}{33}{algorithm.11}%
+\contentsline {algorithm}{\numberline {12}{\ignorespaces DEFLATE Compression (Simplified)}}{34}{algorithm.12}%
+\contentsline {algorithm}{\numberline {13}{\ignorespaces LZ4 Compression (Simplified)}}{36}{algorithm.13}%
+\contentsline {algorithm}{\numberline {14}{\ignorespaces Zstandard Compression (High-Level)}}{37}{algorithm.14}%
+\contentsline {algorithm}{\numberline {15}{\ignorespaces Brotli Compression (High-Level)}}{38}{algorithm.15}%
+\contentsline {algorithm}{\numberline {16}{\ignorespaces Sender Workflow: Compress and Encrypt}}{46}{algorithm.16}%
+\contentsline {algorithm}{\numberline {17}{\ignorespaces Receiver Workflow: Decrypt and Decompress}}{46}{algorithm.17}%
+\contentsline {algorithm}{\numberline {18}{\ignorespaces Session Key Optimization}}{51}{algorithm.18}%

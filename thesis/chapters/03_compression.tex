@@ -54,6 +54,15 @@ We use several metrics to evaluate compression algorithms:
 
 For IoT applications, all these metrics matter. We want good compression ratios to save bandwidth, but we also need fast speeds and low memory usage because IoT devices have limited resources.
 
+Figure \ref{fig:compression_tradeoff} illustrates the fundamental trade-off between compression ratio and speed for different algorithms, helping to identify suitable candidates for IoT applications.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{figures/compression_tradeoff.png}
+\caption{Compression algorithm trade-offs: ratio vs speed. ZLIB (circled) offers an excellent balance of compression ratio and acceptable speed for IoT applications.}
+\label{fig:compression_tradeoff}
+\end{figure}
+
 \subsection{Information Theory Basics}
 
 The theoretical foundation of compression comes from Claude Shannon's information theory \cite{huffman1952method}. The key concept is \textbf{entropy}, which measures the minimum number of bits needed to represent information.
@@ -621,7 +630,7 @@ Figure \ref{fig:compression_tradeoff} illustrates the trade-off between compress
 \hline
 \end{tabular}
 \caption{Trade-off between compression ratio and speed}
-\label{fig:compression_tradeoff}
+\label{tab:compression_tradeoff}
 \end{figure}
 
 \section{Relevance for IoT Data}

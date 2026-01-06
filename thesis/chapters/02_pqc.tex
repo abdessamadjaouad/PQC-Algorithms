@@ -28,6 +28,15 @@ The field of post-quantum cryptography started in the 1990s, when researchers be
 
 The NIST standardization process was very important. It evaluated 69 initial submissions through multiple rounds of public review and cryptanalysis. After 8 years of analysis, only a few algorithms were selected as standards \cite{nist2024pqc}.
 
+Figure \ref{fig:quantum_timeline} shows the timeline of quantum computing developments and the cryptographic response, highlighting the urgency of transitioning to post-quantum algorithms.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/quantum_timeline.png}
+\caption{Timeline of quantum computing threat to cryptography, showing key milestones from Shor's algorithm (1994) to the estimated arrival of cryptographically relevant quantum computers (2030)}
+\label{fig:quantum_timeline}
+\end{figure}
+
 \section{Algorithm Families}
 
 Post-quantum algorithms are based on different mathematical problems. Each family has its own strengths and weaknesses. The main families are:
@@ -62,6 +71,15 @@ Isogeny-based & Finding isogenies between curves & SIKE, CSIDH & Small keys, but
 \bottomrule
 \end{tabular}
 \end{table}
+
+Figure \ref{fig:pqc_families} provides a visual comparison of these families across key metrics including key size efficiency, performance speed, security confidence, and implementation maturity.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/pqc_families_comparison.png}
+\caption{Comparison of post-quantum cryptography families across four key metrics. Lattice-based algorithms (highlighted) were selected by NIST due to their excellent balance of properties.}
+\label{fig:pqc_families}
+\end{figure}
 
 \subsection{Lattice-Based Cryptography}
 

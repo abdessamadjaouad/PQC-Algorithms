@@ -1,16 +1,22 @@
 \babel@toc {english}{}\relax 
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {1.1}{\ignorespaces The three main constraints of IoT devices}}{7}{figure.caption.16}%
-\contentsline {figure}{\numberline {1.2}{\ignorespaces Timeline of quantum computing development}}{9}{figure.caption.18}%
+\contentsline {figure}{\numberline {1.1}{\ignorespaces Three-layer IoT architecture showing the perception, network, and application layers with their respective security concerns}}{5}{figure.caption.13}%
+\contentsline {figure}{\numberline {1.2}{\ignorespaces Radar chart comparing resource capabilities across IoT device classes: Class 0 (8-bit MCU), Class 1 (32-bit MCU), and Class 2 (Linux-capable devices)}}{8}{figure.caption.17}%
+\contentsline {figure}{\numberline {1.3}{\ignorespaces Timeline of quantum computing development}}{11}{figure.caption.19}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Conceptual illustration of a 2-dimensional lattice}}{13}{figure.caption.21}%
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Timeline of quantum computing threat to cryptography, showing key milestones from Shor's algorithm (1994) to the estimated arrival of cryptographically relevant quantum computers (2030)}}{14}{figure.caption.20}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Comparison of post-quantum cryptography families across four key metrics. Lattice-based algorithms (highlighted) were selected by NIST due to their excellent balance of properties.}}{15}{figure.caption.22}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Conceptual illustration of a 2-dimensional lattice}}{16}{figure.caption.24}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Trade-off between compression ratio and speed}}{36}{figure.caption.56}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Compression algorithm trade-offs: ratio vs speed. ZLIB (circled) offers an excellent balance of compression ratio and acceptable speed for IoT applications.}}{27}{figure.caption.36}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Trade-off between compression ratio and speed}}{39}{figure.caption.60}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces High-level system architecture}}{41}{figure.caption.58}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces System architecture for combined compression and PQC approach, showing the processing pipeline and resulting bandwidth savings of 86.9\%}}{43}{figure.caption.62}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Bandwidth usage breakdown showing the reduction from original data (100 KB) through compression (15 KB), PQC overhead addition (2.4 KB), to final packet size (17.4 KB)}}{45}{figure.caption.63}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces High-level system architecture}}{45}{figure.caption.64}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Software architecture overview}}{51}{figure.caption.67}%
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Bandwidth savings by payload size and compression algorithm}}{58}{figure.caption.75}%
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Compression ratio comparison across algorithms}}{61}{figure.caption.77}%
-\contentsline {figure}{\numberline {5.4}{\ignorespaces Bandwidth savings with PQC + compression}}{61}{figure.caption.78}%
-\contentsline {figure}{\numberline {5.5}{\ignorespaces PQC key and ciphertext size comparison}}{62}{figure.caption.79}%
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Software architecture overview}}{55}{figure.caption.73}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Bandwidth savings by payload size and compression algorithm}}{62}{figure.caption.81}%
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Compression ratio comparison across algorithms}}{65}{figure.caption.83}%
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Bandwidth savings with PQC + compression}}{65}{figure.caption.84}%
+\contentsline {figure}{\numberline {5.5}{\ignorespaces PQC key and ciphertext size comparison}}{66}{figure.caption.85}%
