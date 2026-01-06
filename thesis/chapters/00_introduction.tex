@@ -7,11 +7,13 @@
 
 \section*{Context and Motivation}
 
-The Internet of Things (IoT) connects billions of devices worldwide, from sensors to industrial machines. However, these devices face severe resource constraints---limited energy, memory, and bandwidth---making strong security difficult to implement. Simultaneously, quantum computers pose an emerging threat: algorithms like Shor's can break current RSA and ECC encryption, potentially compromising all data encrypted today through ``harvest now, decrypt later'' attacks.
+The Internet of Things (IoT) connects billions of devices worldwide, from sensors to industrial machines. However, these devices face severe resource constraints---limited energy, memory, and bandwidth---making strong security difficult to implement. 
+
+A new threat compounds this challenge: quantum computers. Algorithms like Shor's can break current RSA and ECC encryption, potentially compromising all data encrypted today through ``harvest now, decrypt later'' attacks.
 
 \section*{Problem Statement}
 
-Post-Quantum Cryptography (PQC) offers quantum-resistant security, with NIST standardizing Kyber for key exchange in 2024. However, PQC algorithms produce significantly larger keys and ciphertexts than classical cryptography---Kyber768's public key (1,184 bytes) is 18 times larger than ECC P-256 (64 bytes). This size overhead conflicts directly with IoT bandwidth constraints.
+Post-Quantum Cryptography (PQC) offers quantum-resistant security. In 2024, NIST standardized Kyber for key exchange and Dilithium for signatures. However, PQC algorithms produce significantly larger keys---Kyber768's public key (1,184 bytes) is 4.6× larger than RSA-2048 (256 bytes). This size overhead conflicts with IoT bandwidth constraints.
 
 \begin{center}
 \textit{\textbf{How can we secure IoT communications against quantum threats while respecting bandwidth constraints?}}
@@ -19,16 +21,30 @@ Post-Quantum Cryptography (PQC) offers quantum-resistant security, with NIST sta
 
 \section*{Research Objectives and Contributions}
 
-This thesis makes the following contributions:
+This research aims to:
 \begin{enumerate}
-    \item Analysis of PQC algorithms for IoT, focusing on Kyber768 as the optimal choice
-    \item Evaluation of compression algorithms, selecting LZ4 for its energy efficiency and minimal memory footprint on constrained devices
-    \item A combined compress-then-encrypt architecture achieving significant bandwidth savings
-    \item Working implementation with benchmarks demonstrating practical viability
+    \item Analyze IoT constraints and evaluate PQC algorithms for suitability
+    \item Investigate compression techniques to reduce PQC overhead
+    \item Design a combined compress-then-encrypt architecture
+    \item Implement and benchmark the approach
 \end{enumerate}
+
+\noindent Key contributions include:
+\begin{itemize}
+    \item Selection of Kyber768 as optimal PQC for IoT (security level 3, balanced parameters)
+    \item Selection of LZ4 compression for minimal memory footprint (16 KB) and energy efficiency
+    \item A working implementation achieving significant bandwidth savings
+\end{itemize}
 
 \section*{Thesis Organization}
 
-\textbf{Chapter 1} examines IoT constraints and the quantum threat. \textbf{Chapter 2} presents Post-Quantum Cryptography, focusing on Kyber768. \textbf{Chapter 3} covers compression algorithms with emphasis on LZ4. \textbf{Chapter 4} presents our combined architecture. \textbf{Chapter 5} provides implementation and benchmarks. The \textbf{General Conclusion} summarizes findings and future directions.
+\begin{itemize} 
+    \item \textbf{Chapter 1} examines IoT constraints and the quantum threat.
+    \item \textbf{Chapter 2} presents PQC with focus on Kyber768.
+    \item \textbf{Chapter 3} covers compression algorithms, emphasizing LZ4.
+    \item \textbf{Chapter 4} presents our combined architecture.
+    \item \textbf{Chapter 5} provides implementation and benchmarks.
+    \item \textbf{General Conclusion} summarizes findings and future directions.
+\end{itemize}
 
 \newpage

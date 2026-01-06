@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2026/dev/Arch Linux) (preloaded format=pdflatex 2025.12.14)  6 JAN 2026 20:53
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2026/dev/Arch Linux) (preloaded format=pdflatex 2025.12.14)  6 JAN 2026 23:07
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -867,7 +867,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.i}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.65 \newpage
+l.73 \newpage
               [1]) (./chapters/00_abstract.tex
 Overfull \hbox (6.68695pt too wide) in paragraph at lines 12--13
 \T1/lmr/m/n/12 cap-su-la-tion mech-a-nism, to-gether with LZ4 compression---cho
@@ -898,46 +898,36 @@ sen specif-i-cally for resource-
 \tf@lof=\write8
 \openout8 = `main.lof'.
 
+ (./main.loa)
+\tf@loa=\write9
+\openout9 = `main.loa'.
+
+ (./main.lot
+
+[7])
+\tf@lot=\write10
+\openout10 = `main.lot'.
 
 
-[7
-
-] (./main.lot)
-\tf@lot=\write9
-\openout9 = `main.lot'.
-
-
-
-[8
-
-] (./main.loa)
-\tf@loa=\write10
-\openout10 = `main.loa'.
-
-
-
-[9
-
-]
 No file main.acr.
 
 
-[10] (./chapters/00_introduction.tex
-Overfull \hbox (0.57173pt too wide) in paragraph at lines 14--15
-\T1/lmr/m/n/12 Post-Quantum Cryp-tog-ra-phy (PQC) of-fers quantum-resistant se-
-cu-rity, with NIST stan-
- []
+[8] (./chapters/00_introduction.tex
+LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 1
+6.
 
-
+(/usr/share/texmf-dist/tex/latex/lm/ts1lmr.fd
+File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
 
 [1
 
 
-]
+{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}]
 
 [2]) (./chapters/01_iot_security.tex
 Chapter 1.
-<figures/iot_architecture.png, id=594, 857.8449pt x 568.7649pt>
+<figures/iot_architecture.png, id=586, 857.8449pt x 568.7649pt>
 File: figures/iot_architecture.png Graphic file (type png)
 <use figures/iot_architecture.png>
 Package pdftex.def Info: figures/iot_architecture.png  used on input line 14.
@@ -947,7 +937,7 @@ Package pdftex.def Info: figures/iot_architecture.png  used on input line 14.
 [3
 
  <./figures/iot_architecture.png>]
-<figures/iot_constraints.png, id=602, 712.5822pt x 575.751pt>
+<figures/iot_constraints.png, id=594, 712.5822pt x 575.751pt>
 File: figures/iot_constraints.png Graphic file (type png)
 <use figures/iot_constraints.png>
 Package pdftex.def Info: figures/iot_constraints.png  used on input line 81.
@@ -960,21 +950,16 @@ Package pdftex.def Info: figures/iot_constraints.png  used on input line 81.
 
 [6]
 Chapter 2.
-LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 1
-6.
-(/usr/share/texmf-dist/tex/latex/lm/ts1lmr.fd
-File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
-<figures/quantum_timeline.png, id=621, 857.8449pt x 350.5095pt>
+<figures/quantum_timeline.png, id=614, 1002.3849pt x 422.7795pt>
 File: figures/quantum_timeline.png Graphic file (type png)
 <use figures/quantum_timeline.png>
 Package pdftex.def Info: figures/quantum_timeline.png  used on input line 23.
-(pdftex.def)             Requested size: 418.96548pt x 171.18958pt.
+(pdftex.def)             Requested size: 441.01773pt x 186.01065pt.
 
 
 [7
 
-{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}]
+]
 Underfull \hbox (badness 10000) in paragraph at lines 40--40
 []|\T1/lmr/m/n/12 Learning With
  []
@@ -1014,7 +999,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 43--44
 []|\T1/lmr/m/n/12 Small sig-na-tures,
  []
 
-<figures/pqc_families_comparison.png, id=628, 856.3995pt x 496.254pt>
+<figures/pqc_families_comparison.png, id=620, 856.3995pt x 496.254pt>
 File: figures/pqc_families_comparison.png Graphic file (type png)
 <use figures/pqc_families_comparison.png>
 Package pdftex.def Info: figures/pqc_families_comparison.png  used on input lin
@@ -1059,19 +1044,19 @@ Overfull \hbox (0.45717pt too wide) in paragraph at lines 120--121
 -u-lar ex-e-cu-tion pat-terns. ZLIB/Zstd
  []
 
-<figures/compression_tradeoff.png, id=691, 707.2824pt x 495.0495pt>
+<figures/compression_tradeoff.png, id=682, 784.1295pt x 567.3195pt>
 File: figures/compression_tradeoff.png Graphic file (type png)
 <use figures/compression_tradeoff.png>
 Package pdftex.def Info: figures/compression_tradeoff.png  used on input line 1
 50.
-(pdftex.def)             Requested size: 374.86775pt x 262.39009pt.
+(pdftex.def)             Requested size: 374.86775pt x 271.21088pt.
 
 
 [15]) (./chapters/04_combined_approach.tex
 
 [16 <./figures/compression_tradeoff.png>]
 Chapter 4.
-<figures/system_architecture.png, id=705, 1002.3849pt x 496.4949pt>
+<figures/system_architecture.png, id=697, 1002.3849pt x 496.4949pt>
 File: figures/system_architecture.png Graphic file (type png)
 <use figures/system_architecture.png>
 Package pdftex.def Info: figures/system_architecture.png  used on input line 14
@@ -1082,12 +1067,12 @@ Package pdftex.def Info: figures/system_architecture.png  used on input line 14
 [17
 
  <./figures/system_architecture.png>]
-<figures/bandwidth_breakdown.png, id=712, 711.8595pt x 423.984pt>
+<figures/bandwidth_breakdown.png, id=704, 722.7pt x 433.62pt>
 File: figures/bandwidth_breakdown.png Graphic file (type png)
 <use figures/bandwidth_breakdown.png>
 Package pdftex.def Info: figures/bandwidth_breakdown.png  used on input line 31
 .
-(pdftex.def)             Requested size: 352.81552pt x 210.14119pt.
+(pdftex.def)             Requested size: 352.81552pt x 211.6883pt.
 
 
 [18 <./figures/bandwidth_breakdown.png>]
@@ -1140,21 +1125,21 @@ Overfull \hbox (8.17845pt too wide) in paragraph at lines 145--155
 
 
 [25]
-<figures/compression_comparison.png, id=817, 1000.9395pt x 349.305pt>
+<figures/compression_comparison.png, id=809, 1606.0pt x 573.14125pt>
 File: figures/compression_comparison.png Graphic file (type png)
 <use figures/compression_comparison.png>
 Package pdftex.def Info: figures/compression_comparison.png  used on input line
  197.
-(pdftex.def)             Requested size: 374.86775pt x 130.82382pt.
+(pdftex.def)             Requested size: 441.01773pt x 157.38257pt.
 
 
 [26 <./figures/compression_comparison.png>]
-<figures/combined_comparison.png, id=824, 711.8595pt x 423.984pt>
+<figures/combined_comparison.png, id=814, 1606.0pt x 936.49875pt>
 File: figures/combined_comparison.png Graphic file (type png)
 <use figures/combined_comparison.png>
 Package pdftex.def Info: figures/combined_comparison.png  used on input line 24
 5.
-(pdftex.def)             Requested size: 374.86775pt x 223.27422pt.
+(pdftex.def)             Requested size: 374.86775pt x 218.5911pt.
 
 
 [27 <./figures/combined_comparison.png>]) (./chapters/06_conclusion.tex
@@ -1201,13 +1186,13 @@ LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 7D7C9378DB34F8AF27B6B780AF3730DD;13925.
+(rerunfilecheck)             Checksum: 4675B1CA878C233F906B576CE9E12D5D;13925.
  ) 
 Here is how much of TeX's memory you used:
- 24862 strings out of 475171
- 431656 string characters out of 5767094
- 1186737 words of memory out of 5000000
- 47208 multiletter control sequences out of 15000+600000
+ 24861 strings out of 475171
+ 431655 string characters out of 5767094
+ 1186709 words of memory out of 5000000
+ 47209 multiletter control sequences out of 15000+600000
  635714 words of font info for 79 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  75i,18n,79p,2365b,1389s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1224,10 +1209,10 @@ lm/lmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></usr/sha
 re/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></usr/share/texmf-dist/fonts/typ
 e1/public/lm/lmtt12.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmtti10.pf
 b></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (43 pages, 2249419 bytes).
+Output written on main.pdf (41 pages, 2246220 bytes).
 PDF statistics:
- 1017 PDF objects out of 1200 (max. 8388607)
- 901 compressed objects within 10 object streams
- 271 named destinations out of 1000 (max. 500000)
+ 1004 PDF objects out of 1200 (max. 8388607)
+ 893 compressed objects within 9 object streams
+ 269 named destinations out of 1000 (max. 500000)
  760 words of extra memory for PDF output out of 10000 (max. 10000000)
 
