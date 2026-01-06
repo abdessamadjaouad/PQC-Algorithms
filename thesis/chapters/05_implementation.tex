@@ -147,7 +147,7 @@ Random Data & Pseudo-random bytes & 1 KB & Very Low \\
 \textbf{Dataset} & \textbf{Algorithm} & \textbf{Original} & \textbf{Compressed} & \textbf{Ratio} & \textbf{Speed} \\
 \midrule
 \multirow{3}{*}{Sensor JSON (6 KB)} 
- & \rowcolor{green!10} LZ4 & 6,150 B & 177 B & 34.7x & 1371 MB/s \\
+ & \rowcolor{green!10} LZ4 & 6,150 B & 177 B & 34.7x & 1371 MB/s\footnote{Benchmarks performed on desktop hardware (Section 5.2.2). Actual throughput on Cortex-M4 class microcontrollers is typically 10--20 MB/s.} \\
  & ZLIB & 6,150 B & 147 B & 41.8x & 128 MB/s \\
  & Zstandard & 6,150 B & 118 B & 52.1x & 377 MB/s \\
 \bottomrule
@@ -185,7 +185,7 @@ Decapsulation & 0.25 ms \\
 \toprule
 \textbf{Payload} & \textbf{Original} & \textbf{PQC+LZ4} & \textbf{Savings} \\
 \midrule
-6 KB JSON & 6,150 B & 1,265 B & 79.4\% \\
+6 KB JSON & 6,150 B & 1,293 B & 79.0\% \\
 \bottomrule
 \end{tabular}
 \end{table}

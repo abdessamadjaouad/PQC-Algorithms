@@ -30,15 +30,16 @@ Many IoT devices run on batteries for months or years. Every operation consumes 
 \label{tab:energy_operations}
 \begin{tabular}{lcc}
 \toprule
-\textbf{Operation} & \textbf{Energy (mJ)} & \textbf{Relative Cost} \\
+\textbf{Operation} & \textbf{Energy (mJ)} & \textbf{Relative Energy Cost} \\
 \midrule
-Send 1 KB over WiFi & 0.1 - 1.0 & High \\
-Send 1 KB over LoRa & 0.01 - 0.1 & Medium \\
-AES-128 encryption (1 KB) & 0.001 - 0.01 & Low \\
-RSA-2048 signature & 0.1 - 1.0 & High \\
+Send 1 KB over WiFi & 10--100 & Medium \\
+Send 1 KB over LoRa & 150--500 & High \\
+AES-128 encryption (1 KB) & 0.001--0.01 & Low \\
+RSA-2048 signature & 0.1--1.0 & Medium \\
 \bottomrule
 \end{tabular}
 \end{table}
+
 
 \subsection{Memory and Bandwidth Limitations}
 
@@ -110,21 +111,28 @@ SHA-384 & Hash function & \textcolor{green}{Secure} \\
 
 Cryptographically relevant quantum computers are expected within 10--20 years \cite{preskill2018quantum}. However, the ``harvest now, decrypt later'' threat means data encrypted today may be compromised once quantum computers arrive. IoT devices with 10--15 year operational lifetimes are already at risk.
 
+% \begin{figure}[H]
+% \centering
+% \fbox{
+% \begin{minipage}{0.9\textwidth}
+% \centering
+% \vspace{0.3cm}
+% \textbf{Quantum Computing Timeline}\\[0.3cm]
+% \begin{tabular}{cl}
+% \textbf{2024} & NIST finalizes PQC standards (Kyber, Dilithium) \\
+% \textbf{2025} & Transition to PQC should begin \\
+% \textbf{2030-2040} & Cryptographically relevant quantum computers expected \\
+% \end{tabular}
+% \vspace{0.3cm}
+% \end{minipage}
+% }
+% \caption{Timeline of quantum computing development}
+% \label{fig:quantum_timeline_text}
+% \end{figure}
+
 \begin{figure}[H]
 \centering
-\fbox{
-\begin{minipage}{0.9\textwidth}
-\centering
-\vspace{0.3cm}
-\textbf{Quantum Computing Timeline}\\[0.3cm]
-\begin{tabular}{cl}
-\textbf{2024} & NIST finalizes PQC standards (Kyber, Dilithium) \\
-\textbf{2025} & Transition to PQC should begin \\
-\textbf{2030-2040} & Cryptographically relevant quantum computers expected \\
-\end{tabular}
-\vspace{0.3cm}
-\end{minipage}
-}
+\includegraphics[width=1\textwidth]{figures/quamtum_history.png}
 \caption{Timeline of quantum computing development}
 \label{fig:quantum_timeline_text}
 \end{figure}
